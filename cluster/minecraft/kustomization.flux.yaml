@@ -3,6 +3,7 @@ kind: Kustomization
 metadata:
   name: infra-kubernetes
 spec:
+  interval: 5m
   path: cluster/minecraft
   prune: true
   sourceRef:
