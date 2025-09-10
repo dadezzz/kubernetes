@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - files:
+      - _generated/configs/Corefile
+    name: coredns-config
+kind: Kustomization
+namespace: coredns
+resources:
+  - cluster-role-bindings/coredns.yaml
+  - cluster-roles/coredns.yaml
+  - deployments/coredns.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - service-accounts/coredns.yaml
+  - service-accounts/default.yaml
+  - services/dns.yaml

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm-controller
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: helm-controller
+      apps.zarantonello.dev/namespace: fluxcd
+  template:
+    metadata:
+      annotations:
+        monitoring.zarantonello.dev/metrics-0-id: f66a4491-330d-4b1e-add2-af9a71f7ec54
+        monitoring.zarantonello.dev/metrics-0-port: "8080"
+      labels:
+        apps.zarantonello.dev/name: helm-controller
+        apps.zarantonello.dev/namespace: fluxcd
+    spec:
+      containers:
+        - args:
+            - --enable-leader-election
+          image: ghcr.io/fluxcd/helm-controller:v1.3.0@sha256:db55d9d9f9b5106acd8c21da6916b8e285fcfc5572f214361ececd1a8571a4f0
+          name: helm-controller
+          ports:
+            - containerPort: 8080
+              name: http-metrics
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+      enableServiceLinks: false
+      # Keep these pods close to the api server to reduce network errors.
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""
+      securityContext:
+        fsGroup: 4936
+        runAsGroup: 4936
+        runAsNonRoot: true
+        runAsUser: 4936
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: helm-controller
+      volumes:
+        - emptyDir: {}
+          name: tmp

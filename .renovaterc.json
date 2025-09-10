@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "assignees": ["dadezzz"],
+  "extends": [":semanticCommits", "config:best-practices"],
+  "kubernetes": {
+    "managerFilePatterns": ["/cluster/.+\\.yaml$/"]
+  },
+  "packageRules": [
+    {
+      "automerge": true,
+      "matchFileNames": [".devcontainer/**", ".forgejo/**"]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/nvme0n1"
+  maxSize: 40GiB
+  minSize: 40GiB
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: longhorn-0
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/nvme0n1"
+  grow: true
+  minSize: 1GiB

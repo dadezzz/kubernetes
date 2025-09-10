@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: source-controller
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: source-controller
+      apps.zarantonello.dev/namespace: fluxcd
+  template:
+    metadata:
+      annotations:
+        monitoring.zarantonello.dev/metrics-0-id: 2ecdc56b-e350-4c78-8cf7-8b32801343a4
+        monitoring.zarantonello.dev/metrics-0-port: "8080"
+      labels:
+        apps.zarantonello.dev/name: source-controller
+        apps.zarantonello.dev/namespace: fluxcd
+    spec:
+      containers:
+        - args:
+            - --enable-leader-election
+            - --storage-path=/data
+            - --storage-adv-addr=source-controller.fluxcd.svc.k8s.zarantonello.dev
+          image: ghcr.io/fluxcd/source-controller:v1.6.2@sha256:11c8e14df885eff86586533d9941293ec8a1e9fff71bacf119edc79fdf3c63e3
+          name: source-controller
+          ports:
+            - containerPort: 9090
+              name: http
+            - containerPort: 8080
+              name: http-metrics
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: /data
+              name: data
+      enableServiceLinks: false
+      # Keep these pods close to the api server to reduce network errors.
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""
+      securityContext:
+        fsGroup: 20791
+        runAsGroup: 20791
+        runAsNonRoot: true
+        runAsUser: 20791
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: source-controller
+      volumes:
+        - emptyDir: {}
+          name: tmp
+        - emptyDir: {}
+          name: data

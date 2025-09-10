@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: grafana
+      apps.zarantonello.dev/namespace: grafana
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        monitoring.zarantonello.dev/metrics-0-id: 19245d3e-d462-4107-a630-39e83f6c67e3
+        monitoring.zarantonello.dev/metrics-0-port: "3000"
+      labels:
+        apps.zarantonello.dev/name: grafana
+        apps.zarantonello.dev/namespace: grafana
+    spec:
+      containers:
+        - env:
+            - name: GF_INSTALL_PLUGINS
+              value: victoriametrics-logs-datasource,victoriametrics-metrics-datasource
+          envFrom:
+            - secretRef:
+                name: grafana-env
+          image: docker.io/grafana/grafana:12.1.1@sha256:a1701c2180249361737a99a01bc770db39381640e4d631825d38ff4535efa47d
+          name: grafana
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            httpGet:
+              httpHeaders:
+                - name: host
+                  value: grafana.zarantonello.net
+              port: 3000
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: data
+            - mountPath: /etc/grafana/grafana.ini
+              name: config
+              subPath: grafana.ini
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: provisioning
+            - mountPath: /tmp
+              name: tmp
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-cor-home
+      securityContext:
+        fsGroup: 56186
+        runAsGroup: 56186
+        runAsNonRoot: true
+        runAsUser: 56186
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+        - configMap:
+            name: grafana-config
+          name: config
+        - configMap:
+            name: grafana-provisioning-datasources
+          name: provisioning
+        - emptyDir: {}
+          name: tmp

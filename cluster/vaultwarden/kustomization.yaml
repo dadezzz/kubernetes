@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - envs:
+      - _generated/configs/vaultwarden.env
+    name: vaultwarden-env
+kind: Kustomization
+namespace: vaultwarden
+resources:
+  - deployments/vaultwarden.yaml
+  - http-routes/default.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - persistent-volume-claims/data.yaml
+  - service-accounts/default.yml
+  - services/http.yaml
+secretGenerator:
+  - envs:
+      - _generated/secrets/vaultwarden.env
+    name: vaultwarden-env

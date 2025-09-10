@@ -1,0 +1,32 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: srv-0-fsk-hetz-public-http
+spec:
+  gatewayClassName: cilium
+  infrastructure:
+    annotations:
+      lbipam.cilium.io/ips: "91.98.34.168,2a01:4f8:c013:315c::"
+      lbipam.cilium.io/sharing-cross-namespace: "*"
+      lbipam.cilium.io/sharing-key: srv-0-fsk-hetz-public
+  listeners:
+    - allowedRoutes: &allowedRoutes
+        namespaces:
+          from: All
+      hostname: "*.zarantonello.net"
+      name: https-zarantonello-net
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: zarantonello-net-tls
+    - allowedRoutes: *allowedRoutes
+      hostname: "*.zarantonello.dev"
+      name: https-zarantonello-dev
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: zarantonello-dev-tls

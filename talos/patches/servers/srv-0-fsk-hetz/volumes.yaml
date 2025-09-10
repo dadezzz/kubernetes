@@ -1,0 +1,31 @@
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/sda"
+  maxSize: 20GiB
+  minSize: 20GiB
+---
+apiVersion: v1alpha1
+kind: SwapVolumeConfig
+name: swap
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/sda"
+  maxSize: 2GiB
+  minSize: 2GiB
+---
+apiVersion: v1alpha1
+kind: ZswapConfig
+maxPoolPercent: 25
+shrinkerEnabled: true
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: longhorn-0
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/sda"
+  grow: true
+  minSize: 1GiB

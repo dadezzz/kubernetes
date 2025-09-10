@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: alloy
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: alloy
+      apps.zarantonello.dev/namespace: alloy
+  template:
+    metadata:
+      annotations:
+        monitoring.zarantonello.dev/metrics-0-id: db859f46-f76a-4ba7-9bf8-b023a2953a66
+        monitoring.zarantonello.dev/metrics-0-port: "12345"
+      labels:
+        apps.zarantonello.dev/name: alloy
+        apps.zarantonello.dev/namespace: alloy
+    spec:
+      containers:
+        - args:
+            - run
+            # Required to use the loki.enrich beta component.
+            - --stability.level=experimental
+            - --server.http.listen-addr=[::]:12345
+            - --storage.path=/var/tmp/alloy
+            - /etc/alloy/alloy.alloy
+          env:
+            - name: NODE_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: NODE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+          image: docker.io/grafana/alloy:v1.10.2@sha256:bcf27f18c4402869af112fb39e35e1db3804a404686f4caa20bdf77814219223
+          name: alloy
+          ports:
+            - containerPort: 12345
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /etc/alloy/alloy.alloy
+              name: config
+              subPath: alloy.alloy
+            # Data is stored here if alloy cannot send it to victoria{logs,metrics}.
+            - mountPath: /var/tmp/alloy
+              name: tmp
+            - mountPath: /rootfs
+              mountPropagation: HostToContainer
+              name: rootfs
+              readOnly: true
+      dnsPolicy: ClusterFirstWithHostNet
+      enableServiceLinks: false
+      hostNetwork: true
+      hostPID: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: alloy
+      volumes:
+        - configMap:
+            name: alloy-config
+          name: config
+        - emptyDir: {}
+          name: tmp
+        - hostPath:
+            path: /
+          name: rootfs

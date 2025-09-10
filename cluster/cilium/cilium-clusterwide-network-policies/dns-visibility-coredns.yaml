@@ -1,0 +1,30 @@
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: dns-visibility-coredns
+spec:
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            apps.zarantonello.dev/name: coredns
+            apps.zarantonello.dev/namespace: coredns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+  enableDefaultDeny:
+    egress: false
+    ingress: false
+  endpointSelector:
+    matchExpressions:
+      - key: apps.zarantonello.dev/name
+        operator: NotIn
+        values:
+          - coredns
+      - key: apps.zarantonello.dev/namespace
+        operator: NotIn
+        values:
+          - coredns

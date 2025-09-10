@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - files:
+      - _generated/configs/alloy.alloy
+    name: alloy-config
+kind: Kustomization
+namespace: alloy
+resources:
+  - cluster-role-bindings/alloy.yml
+  - cluster-roles/alloy.yml
+  - daemon-sets/alloy.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - service-accounts/alloy.yml
+  - service-accounts/default.yml

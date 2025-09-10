@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: forgejo
+      apps.zarantonello.dev/namespace: forgejo
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: forgejo
+        apps.zarantonello.dev/namespace: forgejo
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: forgejo-env
+            - secretRef:
+                name: forgejo-env
+          image: codeberg.org/forgejo/forgejo:12.0.2-rootless
+          name: forgejo
+          ports:
+            - containerPort: 3000
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /var/lib/gitea/custom/conf
+              name: tmp-config
+            - mountPath: /var/lib/gitea
+              name: data
+            - mountPath: /tmp
+              name: tmp
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-thi-home
+      securityContext:
+        # Forgejo expects to run as user git.
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - emptyDir: {}
+          name: tmp
+        - emptyDir: {}
+          name: tmp-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: data

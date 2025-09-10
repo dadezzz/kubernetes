@@ -1,0 +1,93 @@
+cluster:
+  # I don't have resources to run dedicated control plane nodes.
+  allowSchedulingOnControlPlanes: true
+  apiServer:
+    admissionControl:
+      - configuration:
+          apiVersion: pod-security.admission.config.k8s.io/v1alpha1
+          defaults:
+            audit: restricted
+            audit-version: latest
+            enforce: restricted
+            enforce-version: latest
+            warn: restricted
+            warn-version: latest
+          exemptions:
+            # kube-system is added automatically by talosctl gen config.
+            # I lost an afternoon trying to debug it ;).
+            namespaces: []
+          kind: PodSecurityConfiguration
+        name: PodSecurity
+    # For now this is disabled, until I configure alloy to collect logs and
+    # figure out how to rotate them so that they don't fill the disk.
+    auditPolicy:
+      apiVersion: audit.k8s.io/v1
+      kind: Policy
+      rules:
+        - level: None
+    # The default SAN for the endpoint will be added by `talosctl gen config`.
+    # These additional ones are used to connect to the API server via tailscale.
+    certSANs:
+      - 100.111.94.27
+  controllerManager:
+    extraArgs:
+      # Use same node subnet size for both IPv4 and IPv6 since pods would need
+      # both of them anyway.
+      node-cidr-mask-size-ipv4: "24"
+      node-cidr-mask-size-ipv6: "120"
+  # CoreDNS is deployed manually so that we can use Blocky as upstream.
+  coreDNS:
+    disabled: true
+  # Nodes should'n have problems to connect via Wireguard.
+  discovery:
+    enabled: false
+  network:
+    # Disable Flannel (the default CNI) to use Cilium.
+    cni:
+      name: none
+    dnsDomain: k8s.zarantonello.dev
+    # The default CIDRs don't assign IPv6 addresses. So we override them with
+    # ones of our choice.
+    podSubnets:
+      - 10.96.0.0/16
+      - fda9:b00c:8b29:33f9::1096:0/112
+    serviceSubnets:
+      - 10.97.0.0/16
+      - fda9:b00c:8b29:33f9::1097:0/112
+  # Disable kube-proxy as its provided by Cilium.
+  proxy:
+    disabled: true
+debug: false
+machine:
+  features:
+    apidCheckExtKeyUsage: true
+    diskQuotaSupport: false
+    hostDNS:
+      enabled: true
+    kubePrism:
+      enabled: false
+    rbac: true
+    stableHostname: true
+  kubelet:
+    # Points to the CoreDNS service.
+    clusterDNS:
+      - 10.97.0.10
+    # Reduces bandwidth a bit since some server are on residential ISP
+    # connections with uplink speeds below 10MBit/s.
+    extraConfig:
+      nodeStatusUpdateFrequency: 1m
+    # Force nodes to use the Wireguard network to communicate.
+    nodeIP:
+      validSubnets:
+        - 10.95.0.0/24
+        - fda9:b00c:8b29:33f9::1095:0/120
+  network:
+    # Causes issues in alpine pods.
+    disableSearchDomain: true
+    # Don't use Tailscale until we have an HA Blocky deployment because if the
+    # node that hosts the pod goes down, the node won't come up after a reboot.
+    nameservers:
+      - 1.1.1.1
+      - 1.0.0.1
+persist: true
+version: v1alpha1

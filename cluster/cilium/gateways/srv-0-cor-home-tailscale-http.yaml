@@ -1,0 +1,42 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: srv-0-cor-home-tailscale-http
+spec:
+  gatewayClassName: cilium
+  infrastructure:
+    annotations:
+      lbipam.cilium.io/ips: 100.73.66.84
+      lbipam.cilium.io/sharing-cross-namespace: "*"
+      lbipam.cilium.io/sharing-key: srv-0-cor-home-tailscale
+  listeners:
+    - allowedRoutes: &allowedRoutes
+        namespaces:
+          from: All
+      hostname: "*.zarantonello.net"
+      name: http-zarantonello-net
+      port: 80
+      protocol: HTTP
+    - allowedRoutes: *allowedRoutes
+      hostname: "*.zarantonello.dev"
+      name: http-zarantonello-dev
+      port: 80
+      protocol: HTTP
+    - allowedRoutes: *allowedRoutes
+      hostname: "*.zarantonello.net"
+      name: https-zarantonello-net
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: zarantonello-net-tls
+    - allowedRoutes: *allowedRoutes
+      hostname: "*.zarantonello.dev"
+      name: https-zarantonello-dev
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: zarantonello-dev-tls

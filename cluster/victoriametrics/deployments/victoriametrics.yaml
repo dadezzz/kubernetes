@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: victoriametrics
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: victoriametrics
+      apps.zarantonello.dev/namespace: victoriametrics
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        monitoring.zarantonello.dev/metrics-0-id: 30bcbe3b-90cf-483b-8706-3ad0deb0af5d
+        monitoring.zarantonello.dev/metrics-0-port: "8428"
+      labels:
+        apps.zarantonello.dev/name: victoriametrics
+        apps.zarantonello.dev/namespace: victoriametrics
+    spec:
+      containers:
+        - args:
+            - -retentionPeriod=180d
+          image: docker.io/victoriametrics/victoria-metrics:v1.125.1-scratch@sha256:77e91ca3a76af0a206e68ce00f060127f259a1232900db21a8c87846f0ce00f0
+          name: victoriametrics
+          ports:
+            - containerPort: 8428
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /victoria-metrics-data
+              name: data
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-cor-home
+      securityContext:
+        fsGroup: 29986
+        runAsGroup: 29986
+        runAsNonRoot: true
+        runAsUser: 29986
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data

@@ -1,0 +1,5 @@
+cluster:
+  etcd:
+    advertisedSubnets:
+      - 10.95.0.0/24
+      - fda9:b00c:8b29:33f9::1095:0/120

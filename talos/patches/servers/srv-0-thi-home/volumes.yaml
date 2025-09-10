@@ -1,0 +1,31 @@
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+provisioning:
+  diskSelector:
+    match: disk.bus_path == "/pci0000:00/0000:00:13.0/ata1/host1/target1:0:0/1:0:0:0"
+  maxSize: 40GiB
+  minSize: 40GiB
+---
+apiVersion: v1alpha1
+kind: SwapVolumeConfig
+name: swap
+provisioning:
+  diskSelector:
+    match: disk.bus_path == "/pci0000:00/0000:00:13.0/ata1/host1/target1:0:0/1:0:0:0"
+  maxSize: 4GiB
+  minSize: 4GiB
+---
+apiVersion: v1alpha1
+kind: ZswapConfig
+maxPoolPercent: 25
+shrinkerEnabled: true
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: longhorn-0
+provisioning:
+  diskSelector:
+    match: disk.bus_path == "/pci0000:00/0000:00:13.0/ata1/host1/target1:0:0/1:0:0:0"
+  grow: true
+  minSize: 1GiB

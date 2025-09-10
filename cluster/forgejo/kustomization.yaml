@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - envs:
+      - _generated/configs/forgejo.env
+    name: forgejo-env
+kind: Kustomization
+namespace: forgejo
+resources:
+  - deployments/forgejo.yaml
+  - http-routes/default.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - persistent-volume-claims/data.yaml
+  - service-accounts/default.yml
+  - services/http.yaml
+secretGenerator:
+  - envs:
+      - _generated/secrets/forgejo.env
+    name: forgejo-env

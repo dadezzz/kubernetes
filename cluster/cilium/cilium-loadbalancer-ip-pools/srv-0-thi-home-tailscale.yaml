@@ -1,0 +1,8 @@
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: srv-0-thi-home-tailscale
+spec:
+  blocks:
+    - cidr: 100.82.18.123/32
+    - cidr: fd7a:115c:a1e0::5b01:127e/128

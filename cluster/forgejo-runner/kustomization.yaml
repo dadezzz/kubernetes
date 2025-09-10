@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - files:
+      - _generated/configs/config.yaml
+    name: forgejo-runner-config
+kind: Kustomization
+namespace: forgejo-runner
+patches:
+  - path: deployments/_patches/shared.yaml
+    target:
+      kind: Deployment
+      name: forgejo-runner-.+
+resources:
+  - deployments/forgejo-runner-srv-0-cor-home.yaml
+  - deployments/forgejo-runner-srv-0-thi-home.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - service-accounts/default.yml
+secretGenerator:
+  - envs:
+      - _generated/secrets/forgejo-runner.env
+    name: forgejo-runner-env

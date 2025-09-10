@@ -1,0 +1,8 @@
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: srv-0-fsk-hetz-tailscale
+spec:
+  blocks:
+    - cidr: 100.111.94.27/32
+    - cidr: fd7a:115c:a1e0::2e01:5e1b/128

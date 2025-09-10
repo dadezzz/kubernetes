@@ -1,0 +1,9 @@
+services:
+  devcontainer:
+    build: .
+    environment:
+      # Tell sops where to find the secret key for age decryption.
+      SOPS_AGE_KEY_FILE: /workspace/.sops.key
+    volumes:
+      - ..:/workspace:cached
+      - $HOME/.kube:/root/.kube

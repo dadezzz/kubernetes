@@ -1,0 +1,10 @@
+apiVersion: 1
+
+datasources:
+  - access: proxy
+    isDefault: true
+    name: VictoriaMetrics
+    type: victoriametrics-metrics-datasource
+    url: http://http.victoriametrics.svc.k8s.zarantonello.dev
+
+prune: true

@@ -1,0 +1,14 @@
+concurrency:
+  cancel-in-progress: true
+  group: ${{ forge.ref }}-${{ forge.job }}
+
+jobs:
+  check-commitizen:
+    runs-on: srv-generic-amd64
+    steps:
+      - uses: https://git.zarantonello.dev/infra/ci/commitizen@main
+
+"on":
+  pull_request:
+    branches:
+      - main

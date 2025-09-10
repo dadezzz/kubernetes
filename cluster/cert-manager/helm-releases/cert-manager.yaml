@@ -1,0 +1,37 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager
+spec:
+  chart:
+    spec:
+      chart: cert-manager
+      interval: 5m
+      sourceRef:
+        kind: HelmRepository
+        name: cert-manager
+        namespace: cert-manager
+      version: 1.18.2
+  install:
+    crds: Create
+  interval: 5m
+  releaseName: cert-manager
+  upgrade:
+    crds: Create
+  values:
+    cainjector:
+      podAnnotations:
+        monitoring.zarantonello.dev/metrics-0-id: 3b225db7-4207-4e07-aa22-a639183fdf43
+        monitoring.zarantonello.dev/metrics-0-port: "9402"
+    crds:
+      enabled: true
+    podAnnotations:
+      monitoring.zarantonello.dev/metrics-0-id: 29c014e4-c77e-49a4-bb90-184bb1842750
+      monitoring.zarantonello.dev/metrics-0-port: "9402"
+    podLabels:
+      apps.zarantonello.dev/name: cert-manager
+      apps.zarantonello.dev/namespace: cert-manager
+    webhook:
+      podAnnotations:
+        monitoring.zarantonello.dev/metrics-0-id: a5b91afd-a3d7-4697-9027-81265eace60f
+        monitoring.zarantonello.dev/metrics-0-port: "9402"

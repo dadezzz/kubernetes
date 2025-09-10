@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dns
+spec:
+  clusterIP: 10.97.0.10
+  ports:
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+      targetPort: dns-tcp
+    - name: dns-udp
+      port: 53
+      protocol: UDP
+      targetPort: dns-udp
+  selector:
+    apps.zarantonello.dev/name: coredns
+    apps.zarantonello.dev/namespace: coredns

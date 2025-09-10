@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blocky
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: blocky
+      apps.zarantonello.dev/namespace: blocky
+  template:
+    metadata:
+      annotations:
+        monitoring.zarantonello.dev/metrics-0-id: 21335deb-93ec-4ef3-96fb-2b7684be02ea
+        monitoring.zarantonello.dev/metrics-0-port: "8080"
+      labels:
+        apps.zarantonello.dev/name: blocky
+        apps.zarantonello.dev/namespace: blocky
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            # Avoid having more than one blocky instance per node, replicas are
+            # meant to be distributed across regions.
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    apps.zarantonello.dev/name: blocky
+                    apps.zarantonello.dev/namespace: blocky
+                topologyKey: kubernetes.io/hostname
+              weight: 50
+      containers:
+        - image: ghcr.io/0xerr0r/blocky:0.26.2@sha256:46150ee0a8a414170ac861343ab7640eb0182a736f7d59f4c0c41383443932fd
+          name: blocky
+          ports:
+            - containerPort: 53
+              name: dns-tcp
+              protocol: TCP
+            - containerPort: 53
+              name: dns-udp
+              protocol: UDP
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            exec:
+              command:
+                - /app/blocky
+                - healthcheck
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /app/config.yml
+              name: config
+              subPath: blocky.yaml
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-fsk-hetz
+      securityContext:
+        runAsGroup: 21575
+        runAsNonRoot: true
+        runAsUser: 21575
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - configMap:
+            name: blocky-config
+          name: config

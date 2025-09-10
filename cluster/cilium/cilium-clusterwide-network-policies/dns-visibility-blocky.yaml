@@ -1,0 +1,30 @@
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: dns-visibility-blocky
+spec:
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            apps.zarantonello.dev/name: blocky
+            apps.zarantonello.dev/namespace: blocky
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+  enableDefaultDeny:
+    egress: false
+    ingress: false
+  endpointSelector:
+    matchExpressions:
+      - key: apps.zarantonello.dev/name
+        operator: NotIn
+        values:
+          - blocky
+      - key: apps.zarantonello.dev/namespace
+        operator: NotIn
+        values:
+          - blocky

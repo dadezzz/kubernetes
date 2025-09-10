@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kustomize-controller
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: kustomize-controller
+      apps.zarantonello.dev/namespace: fluxcd
+  template:
+    metadata:
+      annotations:
+        monitoring.zarantonello.dev/metrics-0-id: 66f37735-4434-4861-8309-04743f5ce562
+        monitoring.zarantonello.dev/metrics-0-port: "8080"
+      labels:
+        apps.zarantonello.dev/name: kustomize-controller
+        apps.zarantonello.dev/namespace: fluxcd
+    spec:
+      containers:
+        - args:
+            - --enable-leader-election
+          image: ghcr.io/fluxcd/kustomize-controller:v1.6.1@sha256:1a50730537bafb7827365b9af95c4eb71ca3d9b0bed9bc9bc765880e976972ef
+          name: kustomize-controller
+          ports:
+            - containerPort: 8080
+              name: http-metrics
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+      enableServiceLinks: false
+      # Keep these pods close to the api server to reduce network errors.
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""
+      securityContext:
+        fsGroup: 28700
+        runAsGroup: 28700
+        runAsNonRoot: true
+        runAsUser: 28700
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: kustomize-controller
+      volumes:
+        - emptyDir: {}
+          name: tmp

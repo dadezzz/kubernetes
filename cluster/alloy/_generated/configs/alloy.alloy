@@ -1,0 +1,272 @@
+// Pro tip: setting editor language to hcl works pretty well.
+
+livedebugging {
+  enabled = false
+}
+
+////////////////////////////////////////////////////
+/// Node exporter: metrics about the host system ///
+////////////////////////////////////////////////////
+
+prometheus.exporter.unix "unix_exporter" {
+  procfs_path = "/rootfs/proc"
+  sysfs_path = "/rootfs/sys"
+  rootfs_path = "/rootfs"
+}
+
+prometheus.scrape "unix_exporter" {
+  forward_to = [prometheus.relabel.unix_exporter.receiver]
+  targets = prometheus.exporter.unix.unix_exporter.targets
+}
+
+prometheus.relabel "unix_exporter" {
+  forward_to = [prometheus.relabel.victoriametrics.receiver]
+
+  rule {
+    action = "replace"
+    replacement = "node.unix-exporter"
+    target_label = "job"
+  }
+}
+
+///////////////
+/// Kubelet ///
+///////////////
+
+prometheus.scrape "kubelet_cadvisor" {
+  forward_to = [prometheus.relabel.victoriametrics.receiver]
+  targets = [
+    {
+       __address__ = "localhost:10250",
+       __metrics_path__ = "/metrics/cadvisor",
+       __scheme__ = "https",
+       job = "node.kubelet.cadvisor",
+       instance = sys.env("NODE_HOSTNAME"),
+    },
+  ]
+  bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+  tls_config {
+    insecure_skip_verify = true
+  }
+}
+
+prometheus.scrape "kubelet_metrics" {
+  forward_to = [prometheus.relabel.victoriametrics.receiver]
+  targets = [
+    {
+       __address__ = "localhost:10250",
+       __metrics_path__ = "/metrics",
+       __scheme__ = "https",
+       job = "node.kubelet",
+       instance = sys.env("NODE_HOSTNAME"),
+    },
+  ]
+  bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+  tls_config {
+    insecure_skip_verify = true
+  }
+}
+
+//////////////////////////////
+/// Kubelet pods discovery ///
+//////////////////////////////
+
+// Gets all pods running on the current node.
+discovery.kubelet "kubelet_pods" {
+  bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+  // Use longer interval than default (5s) to reduce system load a bit.
+  refresh_interval = "30s"
+  tls_config {
+    insecure_skip_verify = true
+  }
+  url = "https://localhost:10250"
+}
+
+// Common relabeling for targets. See below for specific further processing
+// depending on the type of data that is collected.
+discovery.relabel "kubelet_pods" {
+  targets = discovery.kubelet.kubelet_pods.targets
+
+  rule {
+    action = "replace"
+    replacement = "node.kubelet.pods"
+    target_label = "job"
+  }
+
+  // Keep some extra labels from kubernetes.
+  rule {
+    action = "labelmap"
+    regex = "__meta_kubernetes_pod_name"
+    replacement = "pod"
+  }
+}
+
+///////////////////////////
+/// Kubelet pod metrics ///
+///////////////////////////
+
+// Relabel targets for metrics collection.
+discovery.relabel "kubelet_pods_for_metrics" {
+  targets = discovery.relabel.kubelet_pods.output
+
+  // We can scrape metrics only from http and thus tcp endpoints. This removes
+  // the problem below where a service could have multiple ports exposed with
+  // same number but different protocols (for example DNS).
+  rule {
+    action = "keep"
+    source_labels = ["__meta_kubernetes_pod_container_port_protocol"]
+    regex = "TCP"
+  }
+
+  // Keep metrics only for running pods.
+  rule {
+    action = "keep"
+    source_labels = ["__meta_kubernetes_pod_phase"]
+    regex = "Running"
+  }
+}
+
+discovery.relabel "kubelet_pods_for_metrics_target_0" {
+  targets = discovery.relabel.kubelet_pods_for_metrics.output
+
+  // Each TCP port on a pod is unique. Each container that wants to be monitored
+  // must expose that port on the pod.
+  // Use the `monitoring.zarantonello.dev/metrics-0-port: number` annotation to
+  // specify which port should be kept.
+  rule {
+    action = "keepequal"
+    source_labels = ["__meta_kubernetes_pod_container_port_number"]
+    target_label = "__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_0_port"
+  }
+
+  // If pod specifies an unique id then it can be used to attest that metrics
+  // came from that pod.
+  // Useful for pods that emit metrics that have the same name, like the default
+  // golang resource usage ones.
+  rule {
+    action = "labelmap"
+    regex = "__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_0_id"
+    replacement = "podid"
+  }
+
+  // Use custom metrics path if provided.
+  rule {
+    action = "replace"
+    regex = "(.+)"
+    replacement = "$1"
+    source_labels = ["__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_0_path"]
+    target_label = "__metrics_path__"
+  }
+}
+
+// This is a copy of the config above, in case the pod has a second metrics
+// target that needs to be scraped.
+discovery.relabel "kubelet_pods_for_metrics_target_1" {
+  targets = discovery.relabel.kubelet_pods_for_metrics.output
+  rule {
+    action = "keepequal"
+    source_labels = ["__meta_kubernetes_pod_container_port_number"]
+    target_label = "__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_1_port"
+  }
+  rule {
+    action = "labelmap"
+    regex = "__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_1_id"
+    replacement = "podid"
+  }
+  rule {
+    action = "replace"
+    regex = "(.+)"
+    replacement = "$1"
+    source_labels = ["__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_1_path"]
+    target_label = "__metrics_path__"
+  }
+}
+
+prometheus.scrape "kubelet_pods" {
+  forward_to = [prometheus.relabel.victoriametrics.receiver]
+  // Add more entries if there is need to monitor more than 2 endpoints per pod.
+  targets = array.concat(
+    discovery.relabel.kubelet_pods_for_metrics_target_0.output,
+    discovery.relabel.kubelet_pods_for_metrics_target_1.output,
+  )
+}
+
+////////////////////////
+/// Kubelet pod logs ///
+////////////////////////
+
+// Relabel targets for logs collection.
+discovery.relabel "kubelet_pods_for_logs" {
+  targets = discovery.relabel.kubelet_pods.output
+
+  rule {
+    action = "replace"
+    replacement = "/rootfs/var/log/pods/*_$1/*.log"
+    source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+    separator = "/"
+    target_label = "__path__"
+  }
+}
+
+local.file_match "kubelet_pods" {
+  path_targets = discovery.relabel.kubelet_pods_for_logs.output
+}
+
+loki.source.file "kubelet_pods" {
+  targets = local.file_match.kubelet_pods.targets
+  forward_to = [loki.enrich.kubelet_pods.receiver]
+}
+
+// Re-add labels from discovery to log entries.
+loki.enrich "kubelet_pods" {
+  forward_to = [loki.process.kubelet_pods.receiver]
+  target_match_label = "__path__"
+  labels_to_copy = ["pod", "job"]
+  targets = local.file_match.kubelet_pods.targets
+  logs_match_label = "filename"
+}
+
+loki.process "kubelet_pods" {
+  forward_to = [loki.relabel.victorialogs.receiver]
+
+  stage.cri {}
+}
+
+//////////////////////
+/// Remote writers ///
+//////////////////////
+
+// Label all metrics as coming from the current node.
+prometheus.relabel "victoriametrics" {
+  forward_to = [prometheus.remote_write.victoriametrics.receiver]
+
+  rule {
+    action = "replace" 
+    replacement = sys.env("NODE_HOSTNAME")
+    target_label = "instance"
+  }
+}
+
+
+prometheus.remote_write "victoriametrics" {
+  endpoint {
+    url = "http://http.victoriametrics.svc.k8s.zarantonello.dev/api/v1/write"
+  }
+}
+
+// Label all logs as coming from the current node.
+loki.relabel "victorialogs" {
+  forward_to = [loki.write.victorialogs.receiver]
+
+  rule {
+    action = "replace"
+    replacement = sys.env("NODE_HOSTNAME")
+    target_label = "instance"
+  }
+}
+
+loki.write "victorialogs" {
+  endpoint {
+    url = "http://http.victorialogs.svc.k8s.zarantonello.dev/insert/loki/api/v1/push"
+  }
+}

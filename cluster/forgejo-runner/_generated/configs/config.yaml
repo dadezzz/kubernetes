@@ -1,0 +1,24 @@
+cache:
+  dir: /data/cache
+
+container:
+  network: host
+  options: -v /certs/client:/certs/client
+  valid_volumes:
+    - renovate
+    - /certs/client
+
+host:
+  workdir_parent: /data/job
+
+log:
+  job_level: info
+  level: info
+
+runner:
+  capacity: 1
+  envs:
+    DOCKER_CERT_PATH: /certs/client
+    DOCKER_HOST: tcp://localhost:2376
+    DOCKER_TLS_VERIFY: 1
+  file: /data/registration

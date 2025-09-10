@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: longhorn
+resources:
+  - helm-releases/longhorn.yaml
+  - helm-repositories/longhorn.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - service-accounts/default.yaml

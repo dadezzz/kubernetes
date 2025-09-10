@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Kustomize requires a name here, but it isn't used.
+  name: forgejo-runner
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: forgejo-runner
+      apps.zarantonello.dev/namespace: forgejo-runner
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: forgejo-runner
+        apps.zarantonello.dev/namespace: forgejo-runner
+    spec:
+      containers:
+        - command:
+            - forgejo-runner
+            - daemon
+            - --config=/etc/runner/config.yaml
+          env:
+            - name: DOCKER_HOST
+              value: tcp://127.0.0.1:2376
+            - name: DOCKER_CERT_PATH
+              value: /certs/client
+            - name: DOCKER_TLS_VERIFY
+              value: "1"
+          image: code.forgejo.org/forgejo/runner:10.0.1
+          name: runner
+          resources:
+            limits:
+              # Restart container if caches are too big.
+              ephemeral-storage: 5Gi
+          securityContext: &runnerSecurityContext
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            # Docker daemon has to run as root so we set custom user only for
+            # runner containers.
+            runAsGroup: 13486
+            runAsNonRoot: true
+            runAsUser: 13486
+          volumeMounts: &runnerVolumeMounts
+            - mountPath: /etc/runner
+              name: runner-config
+            - mountPath: /data
+              name: runner-data
+            - mountPath: /tmp
+              name: runner-tmp
+            - mountPath: /certs
+              name: docker-certs
+        - env:
+            # Network namespace is shared with job containers (they use host
+            # network) so the daemon should be protected.
+            - name: DOCKER_TLS_CERTDIR
+              value: /certs
+          image: docker.io/library/docker:28.4.0-dind
+          name: docker
+          resources:
+            limits:
+              # Restart container if caches are too big.
+              ephemeral-storage: 5Gi
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            privileged: true
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /certs
+              name: docker-certs
+            - mountPath: /var/lib/docker
+              name: docker-data
+            - mountPath: /var/run
+              name: docker-var-run
+      enableServiceLinks: false
+      initContainers:
+        - command:
+            - forgejo-runner
+            - register
+            - --no-interactive
+            - --config=/etc/runner/config.yaml
+            - --labels=$(NODE_NAME):docker://busybox,srv-generic-$(NODE_ARCH):docker://busybox
+            - --instance=http://http.forgejo.svc.k8s.zarantonello.dev
+            - --token=$(REGISTRATION_TOKEN)
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            # Each node has to set an annotation with its architecture.
+            - name: NODE_ARCH
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.annotations['node.zarantonello.dev/arch']
+          envFrom:
+            - secretRef:
+                name: forgejo-runner-env
+          image: code.forgejo.org/forgejo/runner:10.0.1
+          name: register
+          securityContext: *runnerSecurityContext
+          volumeMounts: *runnerVolumeMounts
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - configMap:
+            name: forgejo-runner-config
+          name: runner-config
+        - emptyDir: {}
+          name: runner-tmp
+        - emptyDir: {}
+          name: runner-data
+        - emptyDir: {}
+          name: docker-certs
+        - emptyDir: {}
+          name: docker-data
+        - emptyDir: {}
+          name: docker-var-run

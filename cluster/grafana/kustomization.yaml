@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - files:
+      - _generated/configs/grafana.ini
+    name: grafana-config
+  - files:
+      - _generated/configs/provisioning/datasources/victoriametrics.yml
+      - _generated/configs/provisioning/datasources/victorialogs.yml
+    name: grafana-provisioning-datasources
+kind: Kustomization
+namespace: grafana
+resources:
+  - deployments/grafana.yaml
+  - http-routes/default.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - persistent-volume-claims/data.yaml
+  - service-accounts/default.yaml
+  - services/http.yaml
+secretGenerator:
+  - envs:
+      - _generated/secrets/grafana.env
+    name: grafana-env
