@@ -61,9 +61,9 @@ upstreams:
     default:
       - tcp-tls:1.0.0.1:853#one.one.one.one
       - tcp-tls:1.1.1.1:853#one.one.one.one
-      - tcp-tls:149.112.112.112:853#dns.quad9.net
-      - tcp-tls:2606:4700:4700::1001:853#one.one.one.one
-      - tcp-tls:2606:4700:4700::1111:853#one.one.one.one
-      - tcp-tls:2620:fe::9:853#dns.quad9.net
-      - tcp-tls:2620:fe::fe:853#dns.quad9.net
+      # - tcp-tls:2606:4700:4700::1001:853#one.one.one.one
+      # - tcp-tls:2606:4700:4700::1111:853#one.one.one.one
       - tcp-tls:9.9.9.9:853#dns.quad9.net
+      - tcp-tls:149.112.112.112:853#dns.quad9.net
+      # - tcp-tls:2620:fe::9:853#dns.quad9.net
+      # - tcp-tls:2620:fe::fe:853#dns.quad9.net

@@ -1,13 +1,14 @@
 .:53 {
+    loop
     errors
     prometheus :9153
 
     kubernetes k8s.zarantonello.dev in-addr.arpa ip6.arpa {
-        pods insecure
+        pods disabled
         fallthrough in-addr.arpa ip6.arpa
         ttl 30
     }
 
+    # Forward external queries to Blocky.
     forward . 10.97.0.11
-    loop
 }

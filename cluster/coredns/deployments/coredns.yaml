@@ -65,8 +65,6 @@ spec:
             - mountPath: /etc/coredns
               name: config
       enableServiceLinks: false
-      nodeSelector:
-        node-role.kubernetes.io/control-plane: ""
       securityContext:
         runAsGroup: 19516
         runAsNonRoot: true
