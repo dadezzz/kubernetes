@@ -9,7 +9,6 @@ resources:
   - deployments/forgejo.yaml
   - http-routes/default.yaml
   - kustomization.flux.yaml
-  - kustomization.yaml
   - namespace.yaml
   - persistent-volume-claims/data.yaml
   - service-accounts/default.yml
