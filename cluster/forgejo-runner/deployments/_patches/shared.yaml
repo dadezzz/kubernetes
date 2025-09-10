@@ -26,7 +26,7 @@ spec:
               value: /certs/client
             - name: DOCKER_TLS_VERIFY
               value: "1"
-          image: code.forgejo.org/forgejo/runner:10.0.1
+          image: code.forgejo.org/forgejo/runner:10.0.1@sha256:78b5c645b3c37e68f55e64760245a945f1b43d6d73bf9010bbf744a2fd4460bb
           name: runner
           resources:
             limits:
@@ -57,7 +57,7 @@ spec:
             # network) so the daemon should be protected.
             - name: DOCKER_TLS_CERTDIR
               value: /certs
-          image: docker.io/library/docker:28.4.0-dind
+          image: docker.io/library/docker:28.4.0-dind@sha256:831644212c5bdd0b3362b5855c87b980ea39a83c9e9adcef2ce03eced99a737a
           name: docker
           resources:
             limits:
@@ -99,7 +99,7 @@ spec:
           envFrom:
             - secretRef:
                 name: forgejo-runner-env
-          image: code.forgejo.org/forgejo/runner:10.0.1
+          image: code.forgejo.org/forgejo/runner:10.0.1@sha256:78b5c645b3c37e68f55e64760245a945f1b43d6d73bf9010bbf744a2fd4460bb
           name: register
           securityContext: *runnerSecurityContext
           volumeMounts: *runnerVolumeMounts
