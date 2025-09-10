@@ -3,12 +3,6 @@ kind: Kustomization
 metadata:
   name: infra-kubernetes
 spec:
-  decryption:
-    provider: sops
-    secretRef:
-      name: infra-kubernetes-age-key
-      namespace: default
-  interval: 5m
   path: cluster/minecraft
   prune: true
   sourceRef:

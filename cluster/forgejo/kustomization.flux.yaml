@@ -7,7 +7,6 @@ spec:
     provider: sops
     secretRef:
       name: infra-kubernetes-age-key
-      namespace: default
   interval: 5m
   path: cluster/forgejo
   prune: true
