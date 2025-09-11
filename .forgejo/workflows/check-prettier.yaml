@@ -6,10 +6,10 @@ jobs:
   check-prettier:
     runs-on: srv-generic-amd64
     steps:
-      - uses: https://git.zarantonello.dev/infra/ci/git/clone@25.09.0
+      - uses: https://git.zarantonello.dev/infra/ci/git/clone@e63a75ef795e9af50e0d4433c874d6b4d1eace49 # 25.09.0
         with:
           ref: ${{ forge.head_ref }}
-      - uses: https://git.zarantonello.dev/infra/ci/prettier@25.09.0
+      - uses: https://git.zarantonello.dev/infra/ci/prettier@e63a75ef795e9af50e0d4433c874d6b4d1eace49 # 25.09.0
 
 "on":
   pull_request:
