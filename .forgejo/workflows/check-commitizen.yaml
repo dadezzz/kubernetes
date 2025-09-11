@@ -6,7 +6,7 @@ jobs:
   check-commitizen:
     runs-on: srv-generic-amd64
     steps:
-      - uses: https://git.zarantonello.dev/infra/ci/commitizen@main
+      - uses: https://git.zarantonello.dev/infra/ci/commitizen@25.09.0
 
 "on":
   pull_request:
