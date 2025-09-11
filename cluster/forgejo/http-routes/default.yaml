@@ -8,6 +8,8 @@ spec:
   parentRefs:
     - name: srv-0-fsk-hetz-public-http
       namespace: cilium
+    - name: srv-0-thi-home-tailscale-http
+      namespace: cilium
   rules:
     - backendRefs:
         - name: http
