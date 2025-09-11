@@ -1,4 +1,4 @@
-FROM git.zarantonello.dev/infra/ci/pnpm:latest@sha256:81b5a141b314b6a79449dd56a9fbf6ee7dc59fbe72a7c75a9fcac29f3bdc7e7c
+FROM git.zarantonello.dev/infra/ci/pnpm:latest@sha256:c4846d5482313b928bc4c61a9c034282eb7c286ef56ef87139b1618d207d8ee1
 
 # Add standard packages for devcontainer
 
