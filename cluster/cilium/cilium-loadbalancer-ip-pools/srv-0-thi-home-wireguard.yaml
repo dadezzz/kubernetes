@@ -1,0 +1,7 @@
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: srv-0-thi-home-wireguard
+spec:
+  blocks:
+    - cidr: 10.95.0.3/32
