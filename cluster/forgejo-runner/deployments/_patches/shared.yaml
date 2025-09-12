@@ -72,6 +72,8 @@ spec:
           volumeMounts:
             - mountPath: /certs
               name: docker-certs
+            - mountPath: /etc/docker
+              name: docker-config
             - mountPath: /var/lib/docker
               name: docker-data
             - mountPath: /var/run
@@ -114,12 +116,15 @@ spec:
           type: RuntimeDefault
       volumes:
         - configMap:
-            name: forgejo-runner-config
+            name: runner-config
           name: runner-config
         - emptyDir: {}
           name: runner-tmp
         - emptyDir: {}
           name: runner-data
+        - configMap:
+            name: docker-config
+          name: docker-config
         - emptyDir: {}
           name: docker-certs
         - emptyDir: {}
