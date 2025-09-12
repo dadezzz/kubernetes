@@ -77,6 +77,12 @@ spec:
             - mountPath: /var/run
               name: docker-var-run
       enableServiceLinks: false
+      hostAliases:
+        # Override this so that runners push directly to forgejo, without passing
+        # through Cloudflare's proxy.
+        - hostnames:
+            - git.zarantonello.dev
+          ip: 10.95.0.3
       initContainers:
         - command:
             - forgejo-runner

@@ -35,9 +35,6 @@ caching:
   prefetching: true
 customDNS:
   mapping:
-    # Override this so that runners push directly to forgejo, without passing
-    # through Cloudflare's proxy.
-    git.zarantonello.dev: 100.82.18.123
     grafana.zarantonello.net: 100.73.66.84
     igl.zarantonello.dev: 100.82.18.123
     minecraft.zarantonello.net: 100.73.66.84
