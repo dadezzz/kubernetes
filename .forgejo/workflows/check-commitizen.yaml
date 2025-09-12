@@ -6,9 +6,12 @@ jobs:
   check-commitizen:
     runs-on: srv-generic-amd64
     steps:
-      - uses: https://git.zarantonello.dev/infra/ci/commitizen@e63a75ef795e9af50e0d4433c874d6b4d1eace49 # 25.09.0
+      - run: cz check --message '${{ forge.event.pull_request.title }}'
 
 "on":
   pull_request:
     branches:
       - main
+    types:
+      - opened
+      - edited
