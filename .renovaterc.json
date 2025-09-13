@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "assignees": ["dadezzz"],
+  "assignees": ["davide"],
   "extends": [":semanticCommits", "config:best-practices"],
   "kubernetes": {
     "managerFilePatterns": ["/cluster/.+\\.yaml$/"]
