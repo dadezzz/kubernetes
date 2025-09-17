@@ -84,6 +84,11 @@ machine:
   network:
     # Causes issues in alpine pods.
     disableSearchDomain: true
+    extraHostEntries:
+      # Bypasses cloudflare proxy when pulling images.
+      - aliases:
+          - git.zarantonello.dev
+        ip: 10.95.0.3
     # Don't use Tailscale until we have an HA Blocky deployment because if the
     # node that hosts the pod goes down, the node won't come up after a reboot.
     nameservers:

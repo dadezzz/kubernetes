@@ -1,0 +1,13 @@
+# See deployments/_patches/shared.yaml for base deployment definition.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo-runner-srv-0-fsk-hetz
+spec:
+  template:
+    metadata:
+      annotations:
+        node.zarantonello.dev/arch: arm64
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-fsk-hetz
