@@ -91,7 +91,7 @@ spec:
             - register
             - --no-interactive
             - --config=/etc/runner/config.yaml
-            - --labels=$(NODE_NAME):docker://git.zarantonello.dev/infra/ci:v1.0.2,srv-generic-$(NODE_ARCH):docker://git.zarantonello.dev/infra/ci:v1.0.2
+            - --labels=$(NODE_NAME):docker://busybox,srv-generic-$(NODE_ARCH):docker://busybox
             - --instance=http://http.forgejo.svc.k8s.zarantonello.dev
             - --token=$(REGISTRATION_TOKEN)
           env:
