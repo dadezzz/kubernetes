@@ -15,7 +15,7 @@ patches:
       name: forgejo-runner-.+
 resources:
   - deployments/forgejo-runner-srv-0-cor-home.yaml
-  - deployments/forgejo-runner-srv-0-fsk-hetz-yaml
+  - deployments/forgejo-runner-srv-0-fsk-hetz.yaml
   - deployments/forgejo-runner-srv-0-thi-home.yaml
   - kustomization.flux.yaml
   - namespace.yaml
