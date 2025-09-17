@@ -4,6 +4,8 @@ concurrency:
 
 jobs:
   check-commitizen:
+    container:
+      image: git.zarantonello.dev/infra/ci:v2.0.0
     runs-on: srv-generic-amd64
     steps:
       - run: cz check --message '${{ forge.event.pull_request.title }}'
