@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: postgres
+      apps.zarantonello.dev/namespace: immich
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: postgres
+        apps.zarantonello.dev/namespace: immich
+    spec:
+      containers:
+        - envFrom:
+            - secretRef:
+                name: postgres-env
+          image: ghcr.io/tensorchord/vchord-postgres:pg17-v0.4.3
+          name: postgres
+          ports:
+            - containerPort: 5432
+              name: postgres
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: data
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: /var/run/postgresql
+              name: sockets
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-thi-home
+      securityContext:
+        fsGroup: 70
+        runAsGroup: 70
+        runAsNonRoot: true
+        runAsUser: 70
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - emptyDir: {}
+          name: tmp
+        - emptyDir: {}
+          name: sockets
+        - name: data
+          persistentVolumeClaim:
+            claimName: postgres-data

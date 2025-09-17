@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - envs:
+      - _generated/configs/immich.env
+    name: immich-env
+kind: Kustomization
+namespace: immich
+resources:
+  - deployments/immich.yaml
+  - deployments/machine-learning.yaml
+  - deployments/postgres.yaml
+  - deployments/redis.yaml
+  - http-routes/default.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - persistent-volume-claims/data.yaml
+  - persistent-volume-claims/machine-learning-cache.yaml
+  - persistent-volume-claims/postgres-data.yaml
+  - persistent-volume-claims/redis-data.yaml
+  - service-accounts/default.yaml
+  - services/http.yaml
+  - services/machine-learning-http.yaml
+  - services/postgres.yaml
+  - services/redis.yaml
+secretGenerator:
+  - envs:
+      - _generated/secrets/postgres.env
+    name: postgres-env
+  - envs:
+      - _generated/secrets/immich.env
+    name: immich-env

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: redis
+      apps.zarantonello.dev/namespace: immich
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: redis
+        apps.zarantonello.dev/namespace: immich
+    spec:
+      containers:
+        - image: docker.io/library/redis:8.2.1@sha256:cc2dfb8f5151da2684b4a09bd04b567f92d07591d91980eb3eca21df07e12760
+          name: redis
+          ports:
+            - containerPort: 6379
+              name: redis
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-thi-home
+      securityContext:
+        fsGroup: 6097
+        runAsGroup: 6097
+        runAsNonRoot: true
+        runAsUser: 6097
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: redis-data

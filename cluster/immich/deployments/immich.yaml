@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: immich
+      apps.zarantonello.dev/namespace: immich
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: immich
+        apps.zarantonello.dev/namespace: immich
+    spec:
+      containers:
+        - envFrom:
+            - secretRef:
+                name: immich-env
+            - configMapRef:
+                name: immich-env
+          image: ghcr.io/immich-app/immich-server:v1.142.0
+          name: immich
+          ports:
+            - containerPort: 2283
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /usr/src/app/upload
+              name: data
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-thi-home
+      securityContext:
+        fsGroup: 5551
+        runAsGroup: 5551
+        runAsNonRoot: true
+        runAsUser: 5551
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data

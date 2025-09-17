@@ -59,7 +59,7 @@ spec:
               subPath: blocky.yaml
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-thi-home
+        kubernetes.io/hostname: srv-0-fsk-hetz
       securityContext:
         runAsGroup: 21575
         runAsNonRoot: true

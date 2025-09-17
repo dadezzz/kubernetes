@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: machine-learning-http
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  selector:
+    apps.zarantonello.dev/name: machine-learning
+    apps.zarantonello.dev/namespace: immich
