@@ -20,7 +20,7 @@ spec:
         - envFrom:
             - secretRef:
                 name: postgres-env
-          image: ghcr.io/tensorchord/vchord-postgres:pg17-v0.4.3
+          image: ghcr.io/tensorchord/vchord-postgres:pg17-v0.4.3@sha256:7aab216e4c312efc8fead3776a7a84ded0bed418567d221cc1328d8d3849031d
           name: postgres
           ports:
             - containerPort: 5432
