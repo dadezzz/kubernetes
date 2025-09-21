@@ -2,8 +2,11 @@ cache:
   dir: /data/cache
 
 container:
-  network: host
+  # Mount host's /etc/hosts to keep the git.zarantonello.dev address override.
+  options: -v /etc/hosts:/etc/hosts
   privileged: true
+  valid_volumes:
+    - /etc/hosts
 
 host:
   workdir_parent: /data/job
@@ -14,8 +17,4 @@ log:
 
 runner:
   capacity: 1
-  envs:
-    DOCKER_CERT_PATH: /certs/client
-    DOCKER_HOST: tcp://localhost:2376
-    DOCKER_TLS_VERIFY: 1
   file: /data/registration
