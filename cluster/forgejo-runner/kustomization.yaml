@@ -3,6 +3,9 @@ configMapGenerator:
   - files:
       - _generated/configs/config.yaml
     name: runner-config
+  - files:
+      - _generated/configs/daemon.json
+    name: docker-config
 kind: Kustomization
 namespace: forgejo-runner
 patches:

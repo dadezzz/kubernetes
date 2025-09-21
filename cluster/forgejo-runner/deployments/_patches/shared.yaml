@@ -67,6 +67,8 @@ spec:
             privileged: true
             readOnlyRootFilesystem: true
           volumeMounts:
+            - mountPath: /etc/docker
+              name: docker-config
             - mountPath: /var/lib/docker
               name: docker-data
             - mountPath: /certs
@@ -117,6 +119,9 @@ spec:
           name: runner-tmp
         - emptyDir: {}
           name: runner-data
+        - configMap:
+            name: docker-config
+          name: docker-config
         - emptyDir: {}
           name: docker-data
         - emptyDir: {}

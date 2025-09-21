@@ -2,7 +2,7 @@ cache:
   dir: /data/cache
 
 container:
-  # Mount host's /etc/hosts to keep the git.zarantonello.dev address override.
+  # Mount pod's /etc/hosts to keep the git.zarantonello.dev address override.
   options: -v /etc/hosts:/etc/hosts
   privileged: true
   valid_volumes:
