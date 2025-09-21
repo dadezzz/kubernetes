@@ -4,15 +4,15 @@ name: EPHEMERAL
 provisioning:
   diskSelector:
     match: disk.dev_path == "/dev/sda"
-  maxSize: 20GiB
-  minSize: 20GiB
+  maxSize: 18GiB
+  minSize: 18GiB
 ---
 apiVersion: v1alpha1
 kind: SwapVolumeConfig
 name: swap
 provisioning:
   diskSelector:
-    match: disk.dev_path == "/dev/sda"
+    match: disk.bus_path == "/pci0000:00/0000:00:02.5/0000:06:00.0/virtio5/host0/target0:0:0/0:0:0:1"
   maxSize: 2GiB
   minSize: 2GiB
 ---
@@ -23,9 +23,9 @@ shrinkerEnabled: true
 ---
 apiVersion: v1alpha1
 kind: UserVolumeConfig
-name: longhorn-0
+name: data-0
 provisioning:
   diskSelector:
-    match: disk.dev_path == "/dev/sda"
+    match: disk.bus_path == "/pci0000:00/0000:00:02.5/0000:06:00.0/virtio5/host0/target0:0:0/0:0:0:1"
   grow: true
   minSize: 1GiB

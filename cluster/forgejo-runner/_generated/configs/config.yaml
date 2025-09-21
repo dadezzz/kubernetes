@@ -3,10 +3,7 @@ cache:
 
 container:
   network: host
-  options: -v /certs/client:/certs/client
-  valid_volumes:
-    - renovate
-    - /certs/client
+  privileged: true
 
 host:
   workdir_parent: /data/job

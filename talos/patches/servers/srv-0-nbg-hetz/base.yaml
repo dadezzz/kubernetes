@@ -1,0 +1,51 @@
+machine:
+  install:
+    disk: /dev/sda
+    image: factory.talos.dev/metal-installer/4a0d65c669d46663f377e7161e50cfd570c401f26fd9e7bda34a0216b6f1922b:v1.11.1
+  network:
+    hostname: srv-0-nbg-hetz.servers.zarantonello.dev
+    interfaces:
+      - addresses:
+          - 2a01:4f8:1c1a:3498::/64
+        # Setting ipv4 and ipv6 gateways leads to only the ipv6 one being kept.
+        # I have no idea why, so we just let dhcp handle ipv4.
+        dhcp: true
+        interface: enp1s0
+        routes:
+          - gateway: fe80::1
+            network: ::/0
+      - addresses:
+          - 10.95.0.1/24
+          - fda9:b00c:8b29:33f9::1095:1/120
+        interface: wg0
+        mtu: 1400
+        wireguard:
+          listenPort: 51000
+          peers:
+            # srv-0-cor-home
+            - allowedIPs:
+                - 10.95.0.2/32
+                - fda9:b00c:8b29:33f9::1095:2/128
+              endpoint: srv-0-cor-home.servers.zarantonello.dev:51000
+              publicKey: dNUWq6FfG7+3AGl5olQOpVel6Ntl4brufEQOlN9VPEM=
+            # srv-0-thi-home (no endpoint due to firewall restrictions)
+            - allowedIPs:
+                - 10.95.0.3/32
+                - fda9:b00c:8b29:33f9::1095:3/128
+              publicKey: j5Afx7hXJkjHHmDuzmScMrjL3oWpZxT6WL6xMIX87H0=
+          privateKey: ENC[AES256_GCM,data:EazRnE8eeBwSmlv/6rHo3J8QmdC8LsejHTBTdgYYrerwJoS+KNkFLbi1UJY=,iv:0nzO2SEV8ZCrWOPEh8QaQ9ZqL0cguNCM1OZnkoWQvOQ=,tag:Fau4lQdNWb0IyDeAaD6k8A==,type:str]
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEc2RVSkg1TlprNlBzS0E2
+        RWxPa0d5Wk95amtTZGFycVdBclMyN3lmdm1FCjI3Q2czTW5oZ252aWZENzhrMDdj
+        d0xma3FQQk15MWJDZnhnTm9rQ09ZbUUKLS0tIEtUYW9pQXFwQUFQMGJPck9HZzhk
+        L1hCOCtuazBzdDF0bjVWTTMveXVucVEKG6tMaqhThlhUVFqGQBBUCW3tJ1pcfsd/
+        F3TF2a3hFMcpz92Rfvrx6WuZ6++7UazTNssmPzDF93o0kZN0TXqq1w==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
+  encrypted_regex: privateKey
+  lastmodified: "2025-09-21T10:56:36Z"
+  mac: ENC[AES256_GCM,data:A/bRpws4dB6x+Net11I3S4h4Ohbwz02kblF1QmA2sqIko8yQXA0FbpTDmCCv6c38XnUr+XHBJZjmb/MMAg/mp6waFOiVyyCZSWDdJTHSM/0H0/sgxs4ohd3uqv7AqTg/jc4QEdJ/Aur3QwVWBnICKbxPDa8P7lwRPI+LTkKEj1g=,iv:6dbSOEzfoHb+EOGW7MUOcobNOq1DiClZ+ioxvh82JE0=,tag:W8TdF/dHmYIPDAri+MvbOA==,type:str]
+  version: 3.10.2

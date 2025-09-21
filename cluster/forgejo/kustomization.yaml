@@ -11,6 +11,7 @@ resources:
   - kustomization.flux.yaml
   - namespace.yaml
   - persistent-volume-claims/data.yaml
+  - persistent-volumes/forgejo-data.yaml
   - service-accounts/default.yml
   - services/http.yaml
 secretGenerator:

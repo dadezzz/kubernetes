@@ -6,7 +6,7 @@ spec:
   gatewayClassName: cilium
   infrastructure:
     annotations:
-      lbipam.cilium.io/ips: 100.73.66.84
+      lbipam.cilium.io/ips: 100.70.148.75,fd7a:115c:a1e0::9e01:9450
       lbipam.cilium.io/sharing-cross-namespace: "*"
       lbipam.cilium.io/sharing-key: srv-0-cor-home-tailscale
   listeners:

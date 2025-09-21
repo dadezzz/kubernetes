@@ -6,5 +6,6 @@ resources:
   - kustomization.flux.yaml
   - namespace.yaml
   - persistent-volume-claims/data.yaml
+  - persistent-volumes/minecraft-data.yaml
   - service-accounts/default.yaml
   - services/minecraft.yaml

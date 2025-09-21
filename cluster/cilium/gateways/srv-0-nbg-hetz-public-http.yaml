@@ -1,14 +1,14 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: srv-0-fsk-hetz-public-http
+  name: srv-0-nbg-hetz-public-http
 spec:
   gatewayClassName: cilium
   infrastructure:
     annotations:
-      lbipam.cilium.io/ips: "91.98.34.168,2a01:4f8:c013:315c::"
+      lbipam.cilium.io/ips: "78.47.155.111,2a01:4f8:1c1a:3498::"
       lbipam.cilium.io/sharing-cross-namespace: "*"
-      lbipam.cilium.io/sharing-key: srv-0-fsk-hetz-public
+      lbipam.cilium.io/sharing-key: srv-0-nbg-hetz-public
   listeners:
     - allowedRoutes: &allowedRoutes
         namespaces:

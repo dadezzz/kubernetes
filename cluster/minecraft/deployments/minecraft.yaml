@@ -43,7 +43,7 @@ spec:
           workingDir: /data
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-cor-home
+        kubernetes.io/hostname: srv-0-thi-home
       securityContext:
         fsGroup: 36506
         runAsGroup: 36506

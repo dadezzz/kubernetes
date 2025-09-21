@@ -9,14 +9,14 @@ resources:
   - cilium-clusterwide-network-policies/dns-visibility-blocky.yaml
   - cilium-clusterwide-network-policies/dns-visibility-coredns.yaml
   - cilium-loadbalancer-ip-pools/srv-0-cor-home-tailscale.yaml
-  - cilium-loadbalancer-ip-pools/srv-0-fsk-hetz-public.yaml
-  - cilium-loadbalancer-ip-pools/srv-0-fsk-hetz-tailscale.yaml
+  - cilium-loadbalancer-ip-pools/srv-0-nbg-hetz-public.yaml
+  - cilium-loadbalancer-ip-pools/srv-0-nbg-hetz-tailscale.yaml
   - cilium-loadbalancer-ip-pools/srv-0-thi-home-lan.yaml
   - cilium-loadbalancer-ip-pools/srv-0-thi-home-tailscale.yaml
   - cilium-loadbalancer-ip-pools/srv-0-thi-home-wireguard.yaml
   - gateways/srv-0-cor-home-tailscale-http.yaml
-  - gateways/srv-0-fsk-hetz-public-http.yaml
-  - gateways/srv-0-fsk-hetz-tailscale-http.yaml
+  - gateways/srv-0-nbg-hetz-public-http.yaml
+  - gateways/srv-0-nbg-hetz-tailscale-http.yaml
   - gateways/srv-0-thi-home-lan-http.yaml
   - gateways/srv-0-thi-home-tailscale-http.yaml
   - gateways/srv-0-thi-home-wireguard-http.yaml

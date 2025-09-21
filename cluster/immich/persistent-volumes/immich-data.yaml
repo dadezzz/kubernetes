@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: immich-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 100Gi
+  local:
+    path: /var/mnt/data-0/immich-data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - srv-0-thi-home

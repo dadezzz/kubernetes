@@ -72,10 +72,6 @@ machine:
     # Points to the CoreDNS service.
     clusterDNS:
       - 10.97.0.10
-    # Reduces bandwidth a bit since some server are on residential ISP
-    # connections with uplink speeds below 10MBit/s.
-    extraConfig:
-      nodeStatusUpdateFrequency: 1m
     # Force nodes to use the Wireguard network to communicate.
     nodeIP:
       validSubnets:
@@ -90,7 +86,7 @@ machine:
           - git.zarantonello.dev
         ip: 10.95.0.3
     # Don't use Tailscale until we have an HA Blocky deployment because if the
-    # node that hosts the pod goes down, the node won't come up after a reboot.
+    # node that hosts the pod goes down, then it won't come up after a reboot.
     nameservers:
       - 1.1.1.1
       - 1.0.0.1

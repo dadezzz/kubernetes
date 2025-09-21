@@ -17,6 +17,10 @@ resources:
   - persistent-volume-claims/machine-learning-cache.yaml
   - persistent-volume-claims/postgres-data.yaml
   - persistent-volume-claims/redis-data.yaml
+  - persistent-volumes/immich-data.yaml
+  - persistent-volumes/immich-machine-learning-cache.yaml
+  - persistent-volumes/immich-postgres-data.yaml
+  - persistent-volumes/immich-redis-data.yaml
   - service-accounts/default.yaml
   - services/http.yaml
   - services/machine-learning-http.yaml

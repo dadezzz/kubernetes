@@ -1,25 +1,17 @@
 machine:
   install:
-    disk: /dev/sdb
-    image: factory.talos.dev/metal-installer/012427dcde4d2c4eff11f55adf2f20679292fcdffb76b5700dd022c813908b07:v1.11.0
-  kubelet:
-    extraMounts:
-      - destination: /var/mnt/longhorn-0
-        options:
-          - bind
-          - rshared
-          - rw
-        source: /var/mnt/longhorn-0
-        type: bind
+    disk: /dev/nvme0n1
+    image: factory.talos.dev/metal-installer/caabb8f47d56b799eb877f23109196fb9113812c084be71e926e58ca921c5f59:v1.11.1
   network:
     hostname: srv-0-thi-home.servers.zarantonello.dev
     interfaces:
-      - addresses:
-          - 192.168.1.200/24
-        interface: enp2s0
-        routes:
-          - gateway: 192.168.1.1
-            network: 0.0.0.0/0
+      - dhcp: true
+        # - addresses:
+        #     - 192.168.1.200/24
+        interface: enp3s0
+        #   routes:
+        #     - gateway: 192.168.1.1
+        #       network: 0.0.0.0/0
       - addresses:
           - 10.95.0.3/24
           - fda9:b00c:8b29:33f9::1095:3/120
@@ -34,30 +26,25 @@ machine:
                 - fda9:b00c:8b29:33f9::1095:2/128
               endpoint: srv-0-cor-home.servers.zarantonello.dev:51000
               publicKey: dNUWq6FfG7+3AGl5olQOpVel6Ntl4brufEQOlN9VPEM=
-            # srv-0-fsk-hetz
+            # srv-0-nbg-hetz
             - allowedIPs:
                 - 10.95.0.1/32
                 - fda9:b00c:8b29:33f9::1095:1/128
-              endpoint: srv-0-fsk-hetz.servers.zarantonello.dev:51000
+              endpoint: srv-0-nbg-hetz.servers.zarantonello.dev:51000
               publicKey: BgTeLVv2UKMD86N0XyQoTjh9sKSo/SkMfYKr1VQ3VRc=
-          privateKey: ENC[AES256_GCM,data:4n6WtctVXlO+Qdnd5aD/WIppGfVpX4lwdPRBfPTSX8/AxKHeNqqwTxhmsMw=,iv:QtdTSJdP2ToxaH8FI4yChAfeeztYKpt0GuXe4oVUaKE=,tag:14g0wZ96RMFwovvSLMNXIw==,type:str]
-  nodeAnnotations:
-    # yamllint disable-line rule:quoted-strings
-    node.longhorn.io/default-disks-config: '[{ "path": "/var/mnt/longhorn-0", "allowScheduling":true }]'
-  nodeLabels:
-    node.longhorn.io/create-default-disk: config
+          privateKey: ENC[AES256_GCM,data:af6SxhNTrs2MTJKRBCzxqD+Qld8UwIT4ZHcmuTDqsDsfbi77ssVSvn0KPaY=,iv:QXTi9601U1p1cK7D6lzNeA0YvfP5dg61J12QqKMYYxU=,tag:uwfj2EiUjX88MrrtRXh6Jg==,type:str]
 sops:
   age:
     - enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGcVdJdWlvelFOWkxOUThC
-        QU5vQW0rNVBQUUo2NHNYaHhPSW53VE9UMTBRCjV2MnhLdFhjOFY3dWtzeVhJdFNL
-        V1RTNVF3TUVkd20xOENaVm1FZ2VydVkKLS0tIEc5NlhubXNXcEpTTEcrZWs4MjR5
-        ZUdJcm1FR0EwZTR6by8zNWtjekwra2MK6pS5P5DCECrkdIf+FhlwbgS7C56JzD97
-        O6vD4lW8Y3RUktogsZm1Z7LOqpkET+Eel8JPYypUYoWecBS+T++VBQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnbWFhaWNJS2wwSkQ2Tnp6
+        elhjWG8rMld6dlBkQXF3aDN2NStVb1JPSlFNCktRRFVGdy8rc2ZFRi9yd2dSQ2d0
+        ZUV0Y1NkS1VzUDJQNTJWbTRmTldtODgKLS0tIE94bzFiNzM1TklLSUx4MlhwTEhs
+        dGlsSW41WkNiTW5EVWMxdS9FVjJJaXMKOftkVMlkNmO/oOoKhmD/WUzXM1UHcbf+
+        tucJbwVXC/FClZteCO/46Y3FWqlbOBI9lHZhWaWB2jdNWB6yrbidvw==
         -----END AGE ENCRYPTED FILE-----
       recipient: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
   encrypted_regex: privateKey
-  lastmodified: "2025-09-09T21:46:04Z"
-  mac: ENC[AES256_GCM,data:L/Q+JEj6r2dr9FFww3tWqUr4QXK2gWZpVTLkU1rC4S6gGmY0mvwojdBqFz/Vc4yry/L8643cC5fdooQveU4WMzH2NKx06asri0288c/zlHHdKqtvDZbtYUeOmTg7qSVQ713kuLJ4LOK9QjNLCDMcnNLixuASoLQ84m+vHEs1UHs=,iv:ArbRMq4tPkVLQoBoqxRmm0lyfpmAU/f8rQXW1/qM/OU=,tag:eH5bMFkXmq6wbkngJ2XiNw==,type:str]
+  lastmodified: "2025-09-21T10:56:32Z"
+  mac: ENC[AES256_GCM,data:ldqi0T2utKnHSdFav5UIbU5c476NkbgjMBxTLMGC6refKHhvpQBWCRZiOvEt2newc0r+Ke34OBFaOv1CvtQ5GcHgSVWRUQPaF4uI1BHgzt9bTxjVLghdHIdLhDHF/3IqplI5km8zeG1OfMcjLBh/el+BHyA9zcTrea/n/GUjdFM=,iv:Pq2k0BcomBe+V5IiGTqeJfYKmAWOF7XZCcT7zX42HVI=,tag:BGv9pEojo/C1RNUO8DHkXw==,type:str]
   version: 3.10.2

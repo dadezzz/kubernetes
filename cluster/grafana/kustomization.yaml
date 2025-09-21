@@ -15,6 +15,7 @@ resources:
   - kustomization.flux.yaml
   - namespace.yaml
   - persistent-volume-claims/data.yaml
+  - persistent-volumes/grafana-data.yaml
   - service-accounts/default.yaml
   - services/http.yaml
 secretGenerator:

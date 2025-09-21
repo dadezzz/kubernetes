@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sftp
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: sftp
+      apps.zarantonello.dev/namespace: default
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: sftp
+        apps.zarantonello.dev/namespace: default
+    spec:
+      containers:
+        - args:
+            - serve
+            - sftp
+            - --no-auth
+            - --addr=[::]:2222
+            - /data
+          image: docker.io/rclone/rclone:1.71.0
+          name: sftp
+          ports:
+            - containerPort: 2222
+              hostPort: 2222
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /data
+              name: data
+            - mountPath: /root/.cache
+              name: cache
+      enableServiceLinks: false
+      nodeSelector:
+        node.zarantonello.dev/sftp: "true"
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - hostPath:
+            path: /var/mnt/data-0
+          name: data
+        - emptyDir: {}
+          name: cache

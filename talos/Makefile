@@ -1,4 +1,4 @@
-all: generated/srv-0-fsk-hetz.yaml generated/srv-0-cor-home.yaml generated/srv-0-thi-home.yaml
+all: generated/srv-0-nbg-hetz.yaml generated/srv-0-cor-home.yaml generated/srv-0-thi-home.yaml
 
 gen_config_shared_files = secrets.yaml patches/base.yaml patches/tailscale.yaml patches/controlplane.yaml
 
@@ -13,13 +13,13 @@ gen_config_shared_args = \
 	k8s.zarantonello.dev \
 	https://10.95.0.1:6443
 
-generated/srv-0-fsk-hetz.yaml: $(gen_config_shared_files) patches/servers/srv-0-fsk-hetz/base.yaml patches/servers/srv-0-fsk-hetz/volumes.yaml
+generated/srv-0-nbg-hetz.yaml: $(gen_config_shared_files) patches/servers/srv-0-nbg-hetz/base.yaml patches/servers/srv-0-nbg-hetz/volumes.yaml
 	@talosctl gen config \
 		$(gen_config_shared_args) \
 		--output-types controlplane \
-		--output generated/srv-0-fsk-hetz.yaml \
-		--config-patch @patches/servers/srv-0-fsk-hetz/base.yaml \
-		--config-patch @patches/servers/srv-0-fsk-hetz/volumes.yaml
+		--output generated/srv-0-nbg-hetz.yaml \
+		--config-patch @patches/servers/srv-0-nbg-hetz/base.yaml \
+		--config-patch @patches/servers/srv-0-nbg-hetz/volumes.yaml
 
 generated/srv-0-cor-home.yaml: $(gen_config_shared_files) patches/servers/srv-0-cor-home/base.yaml patches/servers/srv-0-cor-home/volumes.yaml
 	@talosctl gen config \

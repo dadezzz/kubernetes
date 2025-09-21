@@ -36,7 +36,7 @@ spec:
               name: tmp-config
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-thi-home
+        kubernetes.io/hostname: srv-0-cor-home
       securityContext:
         fsGroup: 56186
         runAsGroup: 56186

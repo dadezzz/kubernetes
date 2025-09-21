@@ -21,28 +21,20 @@ spec:
             - --config=/etc/runner/config.yaml
           env:
             - name: DOCKER_HOST
-              value: tcp://127.0.0.1:2376
-            - name: DOCKER_CERT_PATH
-              value: /certs/client
-            - name: DOCKER_TLS_VERIFY
-              value: "1"
+              value: unix:///run/podman/podman.sock
           image: code.forgejo.org/forgejo/runner:11.1.1@sha256:e435bb347f07ae0d1ed580afd993105e2470af83b3e9af3495ac6dcce7972f28
           name: runner
           resources:
             limits:
               # Restart container if caches are too big.
-              ephemeral-storage: 5Gi
+              ephemeral-storage: 2Gi
           securityContext: &runnerSecurityContext
             allowPrivilegeEscalation: false
             capabilities:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
-            # Docker daemon has to run as root so we set custom user only for
-            # runner containers.
-            runAsGroup: 13486
-            runAsNonRoot: true
-            runAsUser: 13486
+            runAsUser: 0
           volumeMounts: &runnerVolumeMounts
             - mountPath: /etc/runner
               name: runner-config
@@ -50,19 +42,19 @@ spec:
               name: runner-data
             - mountPath: /tmp
               name: runner-tmp
-            - mountPath: /certs
-              name: docker-certs
-        - env:
-            # Network namespace is shared with job containers (they use host
-            # network) so the daemon should be protected.
-            - name: DOCKER_TLS_CERTDIR
-              value: /certs
-          image: docker.io/library/docker:28.4.0-dind@sha256:831644212c5bdd0b3362b5855c87b980ea39a83c9e9adcef2ce03eced99a737a
-          name: docker
+            - mountPath: /run/podman
+              name: podman-socket
+        - command:
+            - podman
+            - system
+            - service
+            - --time=0
+          image: quay.io/podman/stable:v5.6.1
+          name: podman
           resources:
             limits:
               # Restart container if caches are too big.
-              ephemeral-storage: 5Gi
+              ephemeral-storage: 3Gi
           securityContext:
             capabilities:
               drop:
@@ -70,14 +62,16 @@ spec:
             privileged: true
             readOnlyRootFilesystem: true
           volumeMounts:
-            - mountPath: /certs
-              name: docker-certs
-            - mountPath: /etc/docker
-              name: docker-config
-            - mountPath: /var/lib/docker
-              name: docker-data
-            - mountPath: /var/run
-              name: docker-var-run
+            - mountPath: /var/cache/containers
+              name: podman-var-cache-containers
+            - mountPath: /var/tmp
+              name: podman-var-tmp
+            - mountPath: /var/lib/containers
+              name: podman-var-lib-containers
+            - mountPath: /run
+              name: podman-run
+            - mountPath: /run/podman
+              name: podman-socket
       enableServiceLinks: false
       hostAliases:
         # Override this so that runners push directly to forgejo, without passing
@@ -91,7 +85,7 @@ spec:
             - register
             - --no-interactive
             - --config=/etc/runner/config.yaml
-            - --labels=$(NODE_NAME):docker://busybox,srv-generic-$(NODE_ARCH):docker://busybox,srv-generic:docker://busybox
+            - --labels=$(NODE_NAME):docker://busybox,srv-$(NODE_TYPE):docker://busybox,srv-generic:docker://busybox
             - --instance=http://http.forgejo.svc.k8s.zarantonello.dev
             - --token=$(REGISTRATION_TOKEN)
           env:
@@ -99,11 +93,11 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-            # Each node has to set an annotation with its architecture.
-            - name: NODE_ARCH
+            # Allows to distinguish between 'large' and 'small' runners.
+            - name: NODE_TYPE
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.annotations['node.zarantonello.dev/arch']
+                  fieldPath: metadata.annotations['node.zarantonello.dev/type']
           envFrom:
             - secretRef:
                 name: forgejo-runner-env
@@ -122,12 +116,15 @@ spec:
           name: runner-tmp
         - emptyDir: {}
           name: runner-data
-        - configMap:
-            name: docker-config
-          name: docker-config
+        - emptyDir:
+            medium: Memory
+          name: podman-run
         - emptyDir: {}
-          name: docker-certs
+          name: podman-var-tmp
         - emptyDir: {}
-          name: docker-data
+          name: podman-var-lib-containers
         - emptyDir: {}
-          name: docker-var-run
+          name: podman-var-cache-containers
+        - emptyDir:
+            medium: Memory
+          name: podman-socket

@@ -7,7 +7,7 @@ spec:
   template:
     metadata:
       annotations:
-        node.zarantonello.dev/arch: amd64
+        node.zarantonello.dev/type: large
     spec:
       nodeSelector:
         kubernetes.io/hostname: srv-0-thi-home

@@ -12,6 +12,9 @@ spec:
     type: Recreate
   template:
     metadata:
+      annotations:
+        monitoring.zarantonello.dev/metrics-0-id: 57464b41-d355-4338-bf09-05a6d035aac9
+        monitoring.zarantonello.dev/metrics-0-port: "8081"
       labels:
         apps.zarantonello.dev/name: immich
         apps.zarantonello.dev/namespace: immich

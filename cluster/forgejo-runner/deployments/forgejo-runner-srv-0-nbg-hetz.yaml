@@ -2,12 +2,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: forgejo-runner-srv-0-fsk-hetz
+  name: forgejo-runner-srv-0-nbg-hetz
 spec:
   template:
     metadata:
       annotations:
-        node.zarantonello.dev/arch: arm64
+        node.zarantonello.dev/type: small
     spec:
       nodeSelector:
-        kubernetes.io/hostname: srv-0-fsk-hetz
+        kubernetes.io/hostname: srv-0-nbg-hetz
