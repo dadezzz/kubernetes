@@ -5,7 +5,7 @@
   "insecure-registries": ["git.zarantonello.dev"],
   "log-driver": "local",
   "log-opts": {
-    "max-file": "1",
+    "max-file": "2",
     "max-size": "10m"
   }
 }
