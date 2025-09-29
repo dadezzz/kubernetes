@@ -3,7 +3,7 @@ kind: VolumeConfig
 name: EPHEMERAL
 provisioning:
   diskSelector:
-    match: disk.bus_path == "/pci0000:00/0000:00:01.2/0000:02:00.0/nvme"
+    match: disk.dev_path == "/dev/nvme0n1"
   maxSize: 40GiB
   minSize: 40GiB
 ---
@@ -12,6 +12,6 @@ kind: UserVolumeConfig
 name: data-0
 provisioning:
   diskSelector:
-    match: disk.bus_path == "/pci0000:00/0000:00:01.2/0000:02:00.0/nvme"
+    match: disk.dev_path == "/dev/nvme0n1"
   grow: true
   minSize: 1GiB

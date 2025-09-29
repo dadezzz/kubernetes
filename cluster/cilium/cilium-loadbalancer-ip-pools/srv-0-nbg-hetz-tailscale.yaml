@@ -4,5 +4,5 @@ metadata:
   name: srv-0-nbg-hetz-tailscale
 spec:
   blocks:
-    - cidr: 100.127.91.39/32
-    - cidr: fd7a:115c:a1e0::fe01:5b29/128
+    - cidr: 100.102.37.31/32
+    - cidr: fd7a:115c:a1e0::2c01:251f/128

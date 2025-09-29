@@ -35,12 +35,12 @@ caching:
   prefetching: true
 customDNS:
   mapping:
-    grafana.zarantonello.net: 100.70.148.75
-    igl.zarantonello.dev: 100.86.43.76
-    minecraft.zarantonello.net: 100.86.43.76
-    photos.zarantonello.net: 100.86.43.76
-    stalwart.zarantonello.dev: 100.127.91.39
-    vault.zarantonello.net: 100.70.148.75
+    grafana.zarantonello.net: 100.92.18.24,fd7a:115c:a1e0::7b01:1249
+    igl.zarantonello.dev: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
+    minecraft.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
+    photos.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
+    stalwart.zarantonello.dev: 100.102.37.31,fd7a:115c:a1e0::2c01:251f
+    vault.zarantonello.net: 100.92.18.24,fd7a:115c:a1e0::7b01:1249
 fqdnOnly:
   enable: true
 log:

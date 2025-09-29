@@ -12,9 +12,9 @@ kind: SwapVolumeConfig
 name: swap
 provisioning:
   diskSelector:
-    match: disk.bus_path == "/pci0000:00/0000:00:02.5/0000:06:00.0/virtio5/host0/target0:0:0/0:0:0:1"
-  maxSize: 2GiB
-  minSize: 2GiB
+    match: disk.dev_path == "/dev/sda"
+  maxSize: 1GiB
+  minSize: 1GiB
 ---
 apiVersion: v1alpha1
 kind: ZswapConfig
@@ -26,6 +26,6 @@ kind: UserVolumeConfig
 name: data-0
 provisioning:
   diskSelector:
-    match: disk.bus_path == "/pci0000:00/0000:00:02.5/0000:06:00.0/virtio5/host0/target0:0:0/0:0:0:1"
+    match: disk.dev_path == "/dev/sda"
   grow: true
   minSize: 1GiB

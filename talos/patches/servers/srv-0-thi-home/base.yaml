@@ -1,17 +1,12 @@
 machine:
   install:
     disk: /dev/nvme0n1
-    image: factory.talos.dev/metal-installer/caabb8f47d56b799eb877f23109196fb9113812c084be71e926e58ca921c5f59:v1.11.1
+    image: factory.talos.dev/metal-installer/caabb8f47d56b799eb877f23109196fb9113812c084be71e926e58ca921c5f59:v1.11.2
   network:
     hostname: srv-0-thi-home.servers.zarantonello.dev
     interfaces:
       - dhcp: true
-        # - addresses:
-        #     - 192.168.1.200/24
         interface: enp3s0
-        #   routes:
-        #     - gateway: 192.168.1.1
-        #       network: 0.0.0.0/0
       - addresses:
           - 10.95.0.3/24
           - fda9:b00c:8b29:33f9::1095:3/120
@@ -32,19 +27,19 @@ machine:
                 - fda9:b00c:8b29:33f9::1095:1/128
               endpoint: srv-0-nbg-hetz.servers.zarantonello.dev:51000
               publicKey: BgTeLVv2UKMD86N0XyQoTjh9sKSo/SkMfYKr1VQ3VRc=
-          privateKey: ENC[AES256_GCM,data:af6SxhNTrs2MTJKRBCzxqD+Qld8UwIT4ZHcmuTDqsDsfbi77ssVSvn0KPaY=,iv:QXTi9601U1p1cK7D6lzNeA0YvfP5dg61J12QqKMYYxU=,tag:uwfj2EiUjX88MrrtRXh6Jg==,type:str]
+          privateKey: ENC[AES256_GCM,data:/krxoiH1vFclGvCHcWCm43bHShlrEmMQknhAhSJ1Ef3cKnHFHqCAiFQoBcM=,iv:/+ljqvVa7wAcDrakazZ6NATEi/WYr4/vnvxQqBJRbKo=,tag:YmPgN46zh9CcNWhs/7WCZQ==,type:str]
 sops:
   age:
     - enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnbWFhaWNJS2wwSkQ2Tnp6
-        elhjWG8rMld6dlBkQXF3aDN2NStVb1JPSlFNCktRRFVGdy8rc2ZFRi9yd2dSQ2d0
-        ZUV0Y1NkS1VzUDJQNTJWbTRmTldtODgKLS0tIE94bzFiNzM1TklLSUx4MlhwTEhs
-        dGlsSW41WkNiTW5EVWMxdS9FVjJJaXMKOftkVMlkNmO/oOoKhmD/WUzXM1UHcbf+
-        tucJbwVXC/FClZteCO/46Y3FWqlbOBI9lHZhWaWB2jdNWB6yrbidvw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAvbVhldHdHbzJYRGZrdjZC
+        c25Tc2dCdzRkbkdBOFJ6ZUtDekQrb0V2K1NNCi9qRXVoUGRNVTAxeDVNY1psNklE
+        cU1zbXo3RUZJWkFkMmUxaGlJMTNHSUEKLS0tIFpzeVU0cXluYmNkNUJNZGFiWTJt
+        SE1DdkZQWDRldXBGdDdpQXNoM1ZhNVkKxkDfg23Vqvy4c9exREXeJR/D1euRrRr7
+        YnlrPTPgZH0sbolb/CACYhzwihvOMMPVkft5XsGgG+KIr0ShWROIxw==
         -----END AGE ENCRYPTED FILE-----
       recipient: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
   encrypted_regex: privateKey
-  lastmodified: "2025-09-21T10:56:32Z"
-  mac: ENC[AES256_GCM,data:ldqi0T2utKnHSdFav5UIbU5c476NkbgjMBxTLMGC6refKHhvpQBWCRZiOvEt2newc0r+Ke34OBFaOv1CvtQ5GcHgSVWRUQPaF4uI1BHgzt9bTxjVLghdHIdLhDHF/3IqplI5km8zeG1OfMcjLBh/el+BHyA9zcTrea/n/GUjdFM=,iv:Pq2k0BcomBe+V5IiGTqeJfYKmAWOF7XZCcT7zX42HVI=,tag:BGv9pEojo/C1RNUO8DHkXw==,type:str]
+  lastmodified: "2025-09-29T07:59:19Z"
+  mac: ENC[AES256_GCM,data:DYWi09YoOhiBC0QKykTrfoDDSa21H7mDLGSp7IyesVb+b2Cq91N9Z6s5T718lOeTFvesIF0xO5Jb5ZAroLFTKyJ46hmzHmxJogOHO3WfASUAqcPEjqKfB4S/4RiJFVqm4V9kTL6rR2I6iuuqTMSoNNaIS6B00tZxp6WIYlWcsow=,iv:blpdHb7dL/5a3+UnplAzPlVvBSSZ68vBzD6cuzY3cUk=,tag:kSmBpDnBWYwnynmPgpeOhg==,type:str]
   version: 3.10.2

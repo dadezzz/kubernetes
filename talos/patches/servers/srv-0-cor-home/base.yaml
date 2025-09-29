@@ -1,7 +1,7 @@
 machine:
   install:
-    disk: /dev/sda
-    image: factory.talos.dev/metal-installer/334e798f530db5f67f1a4d2b9b5f6bf136d4e956035e8e1c92fdaf064dd7d755:v1.11.1
+    disk: /dev/sdb
+    image: factory.talos.dev/metal-installer/334e798f530db5f67f1a4d2b9b5f6bf136d4e956035e8e1c92fdaf064dd7d755:v1.11.2
   network:
     hostname: srv-0-cor-home.servers.zarantonello.dev
     interfaces:
@@ -26,19 +26,19 @@ machine:
                 - 10.95.0.3/32
                 - fda9:b00c:8b29:33f9::1095:3/128
               publicKey: j5Afx7hXJkjHHmDuzmScMrjL3oWpZxT6WL6xMIX87H0=
-          privateKey: ENC[AES256_GCM,data:zz5l4yU0fV/zUjYKraTxkgKiRFHNMqhq5oWYhU2job2O/RACAw2Cg1ONAOU=,iv:58DZQtov0tFBNemWQE7aCoHO1hvKOXzn3N2xFywINyM=,tag:L+DTan/JEiim9vgOGiQgLg==,type:str]
+          privateKey: ENC[AES256_GCM,data:olZEQj+gXHR97fxaDWLOBIo/lYgE0EltOMvNKTeb2uG+OnnsGUtrc4Ayp2o=,iv:kZfDB9Dba91sWzDSmhTq1sliHCYVu0xGIDYARbrRJNI=,tag:Uylen4QQo5sgGCtXV9WqBQ==,type:str]
 sops:
   age:
     - enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwamJTSTRHQkI1dGlTODMv
-        eU9USVd1RjdOZ3lidE83VkRaNlk0MHlwMDI4CkQ4dVNpQVFuR1pxRE8zQi9udHFE
-        ZS9taEZnWG9CSjU4Q0ZiOXY3UEROVG8KLS0tIEdJT0RpMVlvc095NUdZeDZ1TW84
-        Vk0yb2FKS3pHdzNhdjN0NkpUNGVGOXMKNoyzAXnOuQ0DHCCed9SxeFFVTdRK3BdA
-        ZRo613OzxAV7Wz6RZMWXU+fCtlnYaI3iverF0g0wDlh2UuPXfhXYIA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1bWZGWlFvbkNzdnE3aENz
+        NjNQMlhkeEp0cnRzNCtNbk1RdlpuZlBDa2dRCk9YMjJjYkt5SjN0WHFYdndmQWFo
+        RjNnL1d5czFCVlFJUFljZzE2a2VEV00KLS0tIGEvYlhzeWRyMmRDVGVtV2svdjVx
+        UE5oOWtxaHl1MUdtZk8wdGMwajRuTVEKSkpC7imrFLPiMBqobIxU0Nd1OzJjYAzZ
+        Knd1HyATmOVUw8dq/QvB0TeeOaxtMZ/zPBTMfaCyI6noto5ncU8QOA==
         -----END AGE ENCRYPTED FILE-----
       recipient: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
   encrypted_regex: privateKey
-  lastmodified: "2025-09-21T10:56:27Z"
-  mac: ENC[AES256_GCM,data:u1sfDAlJP8ZIqeJr35bPdqpWfWOCfNKxrsPsj8Qz2Ar49H++HPF0baKYCknra5C/VVA26NoYJWx57mFfs8GopDCsUvKfJzqMz721Uz8sKxFRVmwh9Yo/UBVWB2zrpJGqvDeLT8KTl2jiRxcjMnfZuTG/NmfBZG/wLKjGfsg0F7g=,iv:/PWfrJYInMm3C0op/IU/nQBcw3PdOLchB3x28XluEVk=,tag:GPQHGOPMMg0GV9kUUH+1KQ==,type:str]
+  lastmodified: "2025-09-29T07:59:16Z"
+  mac: ENC[AES256_GCM,data:Z98EVi8DtSO4xn6Hk2d00Xm0itutxguKrhGX0XLSf8Hi5MLWq5lmLf3r/QETbkQtGvlPb6iuiIYNsA2nKsA4P0wi8SekVY3R1SVRDS5n4elukgNuVEkkPs+traNeEuwizl9Yc+y4ba3IgiX8lDeYZfgSwi3XlW31vTXlUGKLNTM=,iv:mVoAi/6rIpDWy3nSVUlaW+e2HxmyQS5j74en9rPO/K0=,tag:2kwMCWnHq1d7nYwbxqqD2Q==,type:str]
   version: 3.10.2

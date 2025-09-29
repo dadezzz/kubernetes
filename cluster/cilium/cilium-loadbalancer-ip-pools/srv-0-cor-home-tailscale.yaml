@@ -4,5 +4,5 @@ metadata:
   name: srv-0-cor-home-tailscale
 spec:
   blocks:
-    - cidr: 100.70.148.75/32
-    - cidr: fd7a:115c:a1e0::9e01:9450/128
+    - cidr: 100.92.18.24/32
+    - cidr: fd7a:115c:a1e0::7b01:1249/128
