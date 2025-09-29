@@ -12,6 +12,8 @@ spec:
     type: Recreate
   template:
     metadata:
+      annotations:
+        monitoring.zarantonello.dev/logs: "true"
       labels:
         apps.zarantonello.dev/name: forgejo
         apps.zarantonello.dev/namespace: forgejo

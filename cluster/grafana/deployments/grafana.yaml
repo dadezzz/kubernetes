@@ -12,9 +12,6 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations:
-        monitoring.zarantonello.dev/metrics-0-id: 19245d3e-d462-4107-a630-39e83f6c67e3
-        monitoring.zarantonello.dev/metrics-0-port: "3000"
       labels:
         apps.zarantonello.dev/name: grafana
         apps.zarantonello.dev/namespace: grafana

@@ -199,6 +199,14 @@ prometheus.scrape "kubelet_pods" {
 discovery.relabel "kubelet_pods_for_logs" {
   targets = discovery.relabel.kubelet_pods.output
 
+  // Only keep pods that opt-in to log collection. This should reduce memory
+  // usage.
+  rule {
+    action = "keep"
+    source_labels = ["__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_logs"]
+    regex = "true"
+  }
+
   rule {
     action = "replace"
     replacement = "/rootfs/var/log/pods/*_$1/*.log"

@@ -23,6 +23,7 @@ spec:
             - --stability.level=experimental
             - --server.http.listen-addr=[::]:12345
             - --storage.path=/var/tmp/alloy
+            - --server.http.enable-pprof=false
             - /etc/alloy/alloy.alloy
           env:
             - name: NODE_HOSTNAME
