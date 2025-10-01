@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: actual
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: actual
+      apps.zarantonello.dev/namespace: actual
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: actual
+        apps.zarantonello.dev/namespace: actual
+    spec:
+      containers:
+        - image: docker.io/actualbudget/actual-server:latest
+          imagePullPolicy: IfNotPresent
+          name: actual
+          ports:
+            - containerPort: 5006
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      enableServiceLinks: false
+      securityContext:
+        fsGroup: 14638
+        runAsGroup: 14638
+        runAsNonRoot: true
+        runAsUser: 14638
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
