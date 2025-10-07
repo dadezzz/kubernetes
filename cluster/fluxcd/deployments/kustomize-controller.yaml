@@ -34,9 +34,6 @@ spec:
             - mountPath: /tmp
               name: tmp
       enableServiceLinks: false
-      # Keep these pods close to the api server to reduce network errors.
-      nodeSelector:
-        node-role.kubernetes.io/control-plane: ""
       securityContext:
         fsGroup: 28700
         runAsGroup: 28700

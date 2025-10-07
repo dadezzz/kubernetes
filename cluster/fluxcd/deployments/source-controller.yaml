@@ -40,9 +40,6 @@ spec:
             - mountPath: /data
               name: data
       enableServiceLinks: false
-      # Keep these pods close to the api server to reduce network errors.
-      nodeSelector:
-        node-role.kubernetes.io/control-plane: ""
       securityContext:
         fsGroup: 20791
         runAsGroup: 20791

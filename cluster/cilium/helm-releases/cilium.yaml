@@ -59,8 +59,6 @@ spec:
         clusterDomain: k8s.zarantonello.dev
       relay:
         enabled: false
-        nodeSelector:
-          node-role.kubernetes.io/control-plane: ""
         podAnnotations:
           monitoring.zarantonello.dev/metrics-0-id: 28fc59f2-8a41-43a4-9f19-afaab1c4fd52
           monitoring.zarantonello.dev/metrics-0-port: "9966"
@@ -69,8 +67,6 @@ spec:
           port: 9966
       ui:
         enabled: false
-        nodeSelector:
-          node-role.kubernetes.io/control-plane: ""
     ipam:
       mode: kubernetes
     ipv4:
@@ -81,8 +77,6 @@ spec:
     k8sServicePort: 6443
     kubeProxyReplacement: true
     operator:
-      nodeSelector:
-        node-role.kubernetes.io/control-plane: ""
       podAnnotations:
         monitoring.zarantonello.dev/metrics-0-id: ea5aa09d-948c-4fa0-a576-7381be50c2b4
         monitoring.zarantonello.dev/metrics-0-port: "9963"
