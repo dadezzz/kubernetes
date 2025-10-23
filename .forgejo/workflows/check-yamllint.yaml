@@ -5,7 +5,7 @@ concurrency:
 jobs:
   check-yamllint:
     container:
-      image: git.zarantonello.dev/infra/ci:v1.1.5@sha256:f28b7d8db92e764fbe642064bc98530abc26b748b4bd14999725e3af2e2f5bb3
+      image: git.zarantonello.dev/infra/ci:v1.1.6@sha256:8d1fcc20e6f1b95ea10427b1ab44439c502f28edca876284e61f6d57ad891d2a
     runs-on: srv-generic
     steps:
       - uses: https://data.forgejo.org/actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
