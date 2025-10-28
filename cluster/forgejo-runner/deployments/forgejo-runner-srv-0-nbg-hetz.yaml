@@ -4,10 +4,17 @@ kind: Deployment
 metadata:
   name: forgejo-runner-srv-0-nbg-hetz
 spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: forgejo-runner-srv0-nbg-hetz
+      apps.zarantonello.dev/namespace: forgejo-runner
   template:
     metadata:
       annotations:
         node.zarantonello.dev/type: small
+      labels:
+        apps.zarantonello.dev/name: forgejo-runner-srv0-nbg-hetz
+        apps.zarantonello.dev/namespace: forgejo-runner
     spec:
       nodeSelector:
         kubernetes.io/hostname: srv-0-nbg-hetz
