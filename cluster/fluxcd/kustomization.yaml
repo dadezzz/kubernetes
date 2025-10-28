@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: fluxcd
 resources:
   # Get crds from flux's github repo.
-  - https://github.com/fluxcd/flux2/manifests/crds/?ref=v2.7.2
+  - https://github.com/fluxcd/flux2/manifests/crds/?ref=v2.7.3
   - cluster-role-bindings/fluxcd-cluster-reconciler.yaml
   - cluster-role-bindings/fluxcd-crd-controller.yaml
   - cluster-roles/fluxcd-crd-controller.yaml
