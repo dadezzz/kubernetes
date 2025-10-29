@@ -30,11 +30,6 @@ spec:
             - forgejo-runner
             - daemon
             - --config=/etc/runner/config.yaml
-          env:
-            - name: DOCKER_HOST
-              value: tcp://127.0.0.1:2376
-            - name: DOCKER_CERT_PATH
-              value: /certs/client
           image: data.forgejo.org/forgejo/runner:11.2.0@sha256:85709f74716b64bf46f753676cec5299dd15010a4517fe4efdb2f84d31f4bbdd
           name: runner
           resources:
@@ -58,8 +53,8 @@ spec:
               name: runner-data
             - mountPath: /tmp
               name: runner-tmp
-            - mountPath: /certs
-              name: docker-certs
+            - mountPath: /var/run
+              name: docker-var-run
       enableServiceLinks: false
       hostAliases:
         # Override this so that runners push directly to forgejo, without passing
@@ -93,12 +88,16 @@ spec:
           name: register
           securityContext: *runnerSecurityContext
           volumeMounts: *runnerVolumeMounts
-        - image: docker.io/library/docker:28.5.1-dind@sha256:24173119fa6d1b5b4a27ab164fa7863deb66574ee5b90fef3b85dc888ef1a7e6
+        - command:
+            - dockerd
+            - --no-new-privileges
+            - --group=4880
+          image: docker.io/library/docker:28.5.1-dind@sha256:24173119fa6d1b5b4a27ab164fa7863deb66574ee5b90fef3b85dc888ef1a7e6
           name: docker
           resources:
             limits:
               # Restart container if caches are too big.
-              ephemeral-storage: 3Gi
+              ephemeral-storage: 5Gi
           restartPolicy: Always
           securityContext:
             capabilities:
@@ -111,8 +110,8 @@ spec:
               name: docker-config
             - mountPath: /var/lib/docker
               name: docker-data
-            - mountPath: /certs
-              name: docker-certs
+            - mountPath: /tmp
+              name: docker-tmp
             - mountPath: /var/run
               name: docker-var-run
       securityContext:
@@ -134,6 +133,6 @@ spec:
         - emptyDir: {}
           name: docker-data
         - emptyDir: {}
-          name: docker-certs
+          name: docker-tmp
         - emptyDir: {}
           name: docker-var-run
