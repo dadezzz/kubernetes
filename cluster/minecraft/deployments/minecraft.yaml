@@ -25,7 +25,7 @@ spec:
             - java
             - -jar
             - fabric.jar
-          image: docker.io/library/eclipse-temurin:25-jre@sha256:dbfb5253ed2fd373759dc36c0b7f2a634c72fcf35f19146d92da6c97e19f8be9
+          image: docker.io/library/eclipse-temurin:25-jre@sha256:31fb090d244e9167d22fb90755423c54934fb6b6a22edeb413e2201882259d1b
           name: minecraft
           ports:
             - containerPort: 25565
