@@ -60,14 +60,10 @@ cluster:
 debug: false
 machine:
   features:
-    apidCheckExtKeyUsage: true
-    diskQuotaSupport: false
     hostDNS:
       enabled: true
     kubePrism:
       enabled: false
-    rbac: true
-    stableHostname: true
   kubelet:
     # Points to the CoreDNS service.
     clusterDNS:
