@@ -4,4 +4,4 @@ RUN apt update && \
     apt install -y --no-install-recommends kubectl kustomize && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=docker.io/fluxcd/flux-cli:v2.7.4@sha256:b9e4f7c6bc0f92615d8b0c8376afa725f0f6a64f45593b4318ae1c125d4f4ac3 /usr/local/bin/flux /usr/local/bin/
+COPY --from=docker.io/fluxcd/flux-cli:v2.7.5@sha256:3a4f9b0a26c26db8193c476e0abe33c32187eae8ce7a0a604d38a51783544946 /usr/local/bin/flux /usr/local/bin/
