@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: cilium
 resources:
   # Get gateway api crds from the github repo.
-  - https://github.com/kubernetes-sigs/gateway-api/config/crd/?ref=v1.4.0
+  - https://github.com/kubernetes-sigs/gateway-api/config/crd/?ref=v1.4.1
   - certificates/zarantonello-dev.yaml
   - certificates/zarantonello-net.yaml
   - cilium-clusterwide-network-policies/dns-visibility-blocky.yaml
