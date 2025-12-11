@@ -8,6 +8,7 @@ resources:
   - certificates/zarantonello-net.yaml
   - cilium-clusterwide-network-policies/dns-visibility-blocky.yaml
   - cilium-clusterwide-network-policies/dns-visibility-coredns.yaml
+  - cilium-clusterwide-network-policies/host-firewall.yaml
   - cilium-loadbalancer-ip-pools/srv-0-cor-home-tailscale.yaml
   - cilium-loadbalancer-ip-pools/srv-0-nbg-hetz-public.yaml
   - cilium-loadbalancer-ip-pools/srv-0-nbg-hetz-tailscale.yaml
