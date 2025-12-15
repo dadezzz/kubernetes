@@ -3,10 +3,6 @@ kind: Kustomization
 metadata:
   name: infra-kubernetes
 spec:
-  decryption:
-    provider: sops
-    secretRef:
-      name: infra-kubernetes-age-key
   interval: 5m
   path: cluster/stalwart
   prune: true
