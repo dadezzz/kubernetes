@@ -38,9 +38,9 @@ customDNS:
     actual.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
     grafana.zarantonello.net: 100.92.18.24,fd7a:115c:a1e0::7b01:1249
     igl.zarantonello.dev: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
+    mail.zarantonello.dev: 100.72.217.52,fd7a:115c:a1e0::fe01:d942
     minecraft.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
     photos.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
-    stalwart.zarantonello.dev: 100.72.217.52,fd7a:115c:a1e0::fe01:d942
     vault.zarantonello.net: 100.92.18.24,fd7a:115c:a1e0::7b01:1249
 fqdnOnly:
   enable: true

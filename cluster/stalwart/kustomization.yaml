@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - files:
+      - _generated/configs/config.toml
+    name: stalwart-config
+kind: Kustomization
+namespace: stalwart
+resources:
+  - certificates/mail-zarantonello-dev.yaml
+  - deployments/stalwart.yaml
+  - http-routes/public.yaml
+  - http-routes/tailscale.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - persistent-volume-claims/data.yaml
+  - persistent-volumes/stalwart-data.yaml
+  - service-accounts/default.yaml
+  - services/http.yaml
+  - services/mail-external.yaml
+  - services/mail-internal.yaml

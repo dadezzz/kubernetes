@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mail-zarantonello-dev
+spec:
+  dnsNames:
+    - mail.zarantonello.dev
+  issuerRef:
+    kind: ClusterIssuer
+    name: acme-cloudflare-dns
+  secretName: mail-zarantonello-dev-tls

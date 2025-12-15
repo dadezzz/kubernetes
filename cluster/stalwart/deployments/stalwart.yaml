@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stalwart
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: stalwart
+      apps.zarantonello.dev/namespace: stalwart
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        monitoring.zarantonello.dev/metrics-0-id: 7e4df872-6cc2-4b55-827c-7d018c5c6894
+        monitoring.zarantonello.dev/metrics-0-path: /metrics/prometheus
+        monitoring.zarantonello.dev/metrics-0-port: "3000"
+      labels:
+        apps.zarantonello.dev/name: stalwart
+        apps.zarantonello.dev/namespace: stalwart
+    spec:
+      containers:
+        - image: docker.io/stalwartlabs/stalwart:v0.14.1-alpine
+          name: stalwart
+          ports:
+            - containerPort: 25
+              name: smtp
+            - containerPort: 465
+              name: submissions
+            - containerPort: 993
+              name: imaps
+            - containerPort: 80
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: /opt/stalwart/etc
+              name: config
+            - mountPath: /opt/stalwart/tls
+              name: tls
+            - mountPath: /opt/stalwart
+              name: data
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-nbg-hetz
+      securityContext:
+        fsGroup: 54815
+        runAsGroup: 54815
+        runAsNonRoot: true
+        runAsUser: 54815
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - emptyDir: {}
+          name: tmp
+        - configMap:
+            name: stalwart-config
+          name: config
+        - name: tls
+          secret:
+            secretName: mail-zarantonello-dev-tls
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
