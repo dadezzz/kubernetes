@@ -4,7 +4,8 @@ metadata:
   name: public
 spec:
   hostnames:
-    - mail.zarantonello.dev
+    - mta-sts.zarantonello.dev
+    - mta-sts.zarantonello.net
   parentRefs:
     - name: srv-0-nbg-hetz-public-http
       namespace: cilium
