@@ -35,7 +35,7 @@ spec:
           resources:
             limits:
               # Restart container if caches are too big.
-              ephemeral-storage: 2Gi
+              ephemeral-storage: 5Gi
           securityContext: &runnerSecurityContext
             allowPrivilegeEscalation: false
             capabilities:
