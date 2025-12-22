@@ -3,10 +3,11 @@ cache:
 
 container:
   # Mount pod's /etc/hosts to keep the git.zarantonello.dev address override.
-  options: -v /etc/hosts:/etc/hosts
+  options: -v /etc/hosts:/etc/hosts -v /var/run/docker.sock /var/run/docker.sock
   privileged: true
   valid_volumes:
     - /etc/hosts
+    - /var/run/docker.sock
 
 host:
   workdir_parent: /data/job
