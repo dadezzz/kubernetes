@@ -17,7 +17,7 @@ spec:
         apps.zarantonello.dev/namespace: immich
     spec:
       containers:
-        - image: docker.io/library/redis:8.4.0@sha256:3906b477e4b60250660573105110c28bfce93b01243eab37610a484daebceb04
+        - image: docker.io/library/redis:8.4.0@sha256:bbb8fbcc29cc4c12ef123a35d7de34d374e3ba7f7763ed42eddfb3746dddc393
           name: redis
           ports:
             - containerPort: 6379
