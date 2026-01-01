@@ -1,4 +1,4 @@
-FROM git.zarantonello.dev/infra/ci:v2.2.4@sha256:5088231f86965200904f3b595c708d9fbd404a4d959186d5bf6b21fe15e357f1
+FROM git.zarantonello.dev/infra/ci:v2.2.5@sha256:e82d94156b2e56b4d67a92dbd701777cf174f9428a2fa00ba0d13a8d04cb9824
 
 RUN apt update && \
     apt install -y --no-install-recommends kubectl kustomize && \
