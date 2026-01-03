@@ -1,0 +1,9 @@
+apiVersion: v1alpha1
+kind: ResolverConfig
+# We can't use blocky since DNS is required to boot the node hosting blocky.
+nameservers:
+  - address: 1.1.1.1
+  - address: 1.0.0.1
+searchDomains:
+  # Causes issues in alpine pods when enabled.
+  disableDefault: true

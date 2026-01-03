@@ -1,44 +1,4 @@
 machine:
   install:
     disk: /dev/sdb
-    image: factory.talos.dev/metal-installer/334e798f530db5f67f1a4d2b9b5f6bf136d4e956035e8e1c92fdaf064dd7d755:v1.11.2
-  network:
-    hostname: srv-0-cor-home.servers.zarantonello.dev
-    interfaces:
-      - dhcp: true
-        interface: enp2s0
-      - addresses:
-          - 10.95.0.2/24
-          - fda9:b00c:8b29:33f9::1095:2/120
-        interface: wg0
-        mtu: 1400
-        wireguard:
-          listenPort: 51000
-          peers:
-            # srv-0-nbg-hetz
-            - allowedIPs:
-                - 10.95.0.1/32
-                - fda9:b00c:8b29:33f9::1095:1/128
-              endpoint: srv-0-nbg-hetz.servers.zarantonello.dev:51000
-              publicKey: BgTeLVv2UKMD86N0XyQoTjh9sKSo/SkMfYKr1VQ3VRc=
-            # srv-0-thi-home (no endpoint due to firewall restrictions)
-            - allowedIPs:
-                - 10.95.0.3/32
-                - fda9:b00c:8b29:33f9::1095:3/128
-              publicKey: j5Afx7hXJkjHHmDuzmScMrjL3oWpZxT6WL6xMIX87H0=
-          privateKey: ENC[AES256_GCM,data:olZEQj+gXHR97fxaDWLOBIo/lYgE0EltOMvNKTeb2uG+OnnsGUtrc4Ayp2o=,iv:kZfDB9Dba91sWzDSmhTq1sliHCYVu0xGIDYARbrRJNI=,tag:Uylen4QQo5sgGCtXV9WqBQ==,type:str]
-sops:
-  age:
-    - enc: |
-        -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1bWZGWlFvbkNzdnE3aENz
-        NjNQMlhkeEp0cnRzNCtNbk1RdlpuZlBDa2dRCk9YMjJjYkt5SjN0WHFYdndmQWFo
-        RjNnL1d5czFCVlFJUFljZzE2a2VEV00KLS0tIGEvYlhzeWRyMmRDVGVtV2svdjVx
-        UE5oOWtxaHl1MUdtZk8wdGMwajRuTVEKSkpC7imrFLPiMBqobIxU0Nd1OzJjYAzZ
-        Knd1HyATmOVUw8dq/QvB0TeeOaxtMZ/zPBTMfaCyI6noto5ncU8QOA==
-        -----END AGE ENCRYPTED FILE-----
-      recipient: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
-  encrypted_regex: privateKey
-  lastmodified: "2025-09-29T07:59:16Z"
-  mac: ENC[AES256_GCM,data:Z98EVi8DtSO4xn6Hk2d00Xm0itutxguKrhGX0XLSf8Hi5MLWq5lmLf3r/QETbkQtGvlPb6iuiIYNsA2nKsA4P0wi8SekVY3R1SVRDS5n4elukgNuVEkkPs+traNeEuwizl9Yc+y4ba3IgiX8lDeYZfgSwi3XlW31vTXlUGKLNTM=,iv:mVoAi/6rIpDWy3nSVUlaW+e2HxmyQS5j74en9rPO/K0=,tag:2kwMCWnHq1d7nYwbxqqD2Q==,type:str]
-  version: 3.10.2
+    image: factory.talos.dev/metal-installer/334e798f530db5f67f1a4d2b9b5f6bf136d4e956035e8e1c92fdaf064dd7d755:v1.12.0

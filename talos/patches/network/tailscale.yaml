@@ -1,0 +1,25 @@
+apiVersion: v1alpha1
+# All variables below will be encrypted by sops, these are the clear values for
+# the non secret ones.
+# - TS_ENABLE_METRICS=true
+# Also remember to set TS_AUTHKEY.
+environment:
+  - ENC[AES256_GCM,data:NwKtIWycFf7JCjiqpYCuwjpnV5aG/Q==,iv:LwBBRVe8dwids7wdGanYC1HZYrhFAO3+JGqb7wf0Cdg=,tag:GR+75y2jY5nSmU4W7MYbJA==,type:str]
+  - ENC[AES256_GCM,data:05tUu3mM1wUbZHaeMnRpgkYxxuCRQbf6lcP3OOGO+4Q9APV9o/7emFizPTdF5WdxdsxTtG6D02/KfYn94CiHEdRMJAKD3Z6A,iv:zGjvUeEFtDIFice6/oJlhSC4eTfDrSP8LGad7WSd0ks=,tag:EgNuSSMKpHCqObiYb5XYww==,type:str]
+kind: ExtensionServiceConfig
+name: tailscale
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkTHJZNER4dHI4MW45K1Zv
+        ZFR2SGUwc0NpdGRaNXFTUnJPZmk4UjBJQmpFCmkvZytoK05rZTN4b1loV3VuRSs3
+        aVRRNFlYZm8rc3F1VDBzRUk3NFM4dTAKLS0tIEpPaVYyN2RJTVhxSDlKV3V2ekpL
+        Z3pmSjZMbTd6LzNTSXl3c2FZMTg3MGcKJufX0loQKJQUaQB24o8SJY0NyGkQda63
+        FfmeCOUq4mzTalYHjEMvzU434p+nLW3oEIphOSW+6f7HmQ4LRDYXRA==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
+  encrypted_regex: environment
+  lastmodified: "2026-01-03T12:12:15Z"
+  mac: ENC[AES256_GCM,data:7Mao1lCHnc6R5rVeqvaOIixYdoPAyTKhxvLqqHU3ltJBGaXzDd35bY0zkcmWp51k5msYY9IdUZwvtf6DzGqqGW50i9Ol9f1jLq2elPckt39bPAkenUETBlgbDRBkzUA3GV017u+M5YATeAHBmgP3rID+abUzi5jrBBJ6Dd66/ww=,iv:9diLFaTuk69HeqQcjNHFb3FMLd5+siH5k/qkZYrYeKQ=,tag:k59P6q4ST8nlLK/RkYLcmg==,type:str]
+  version: 3.11.0

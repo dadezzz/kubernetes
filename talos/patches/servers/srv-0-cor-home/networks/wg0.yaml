@@ -1,0 +1,35 @@
+addresses:
+  - address: 10.95.0.2/24
+  - address: fda9:b00c:8b29:33f9::1095:2/120
+apiVersion: v1alpha1
+kind: WireguardConfig
+listenPort: 51000
+name: wg0
+peers:
+  # srv-0-nbg-hetz
+  - allowedIPs:
+      - 10.95.0.1/32
+      - fda9:b00c:8b29:33f9::1095:1/128
+    endpoint: 78.47.155.111:51000
+    publicKey: BgTeLVv2UKMD86N0XyQoTjh9sKSo/SkMfYKr1VQ3VRc=
+  # srv-0-thi-home (no endpoint due to firewall restrictions)
+  - allowedIPs:
+      - 10.95.0.3/32
+      - fda9:b00c:8b29:33f9::1095:3/128
+    publicKey: j5Afx7hXJkjHHmDuzmScMrjL3oWpZxT6WL6xMIX87H0=
+privateKey: ENC[AES256_GCM,data:/sFJIY1b5mn6xhjJJjg3J811wuA6VP1TQUflCebzwQ0io/v3mCbnp9k4L58=,iv:ikTWjQMw13i0VTzFna5CgT4y0yrqxBAPcb8gFHVpYtQ=,tag:2foCSd8lvqbgnr5SaCH3zw==,type:str]
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWenhkTUFaeXhCSzJMR3Br
+        dlQ4VlVVYVdnN2U2eE5TT0V4cjJ4S25uZWdnCjBHU3JyemNnNFZMTUQ2SnZEUXNk
+        R3N3em55dU9YeUZzUUhSUDVSV3UyNTQKLS0tIFNqbjhXVjY0L1NZdUVRakM3UTRR
+        RC9jaU9SM21nUzBiOXVLYlNLZmJqMWMKsqktBsjaH2L3YZoSdkrh1i7lHLRKVHIq
+        W5raERl+t9UKlPlDjkAtH3uwS14UYroeJTryYnYlHLCmLnSjY4Bzdg==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
+  encrypted_regex: privateKey
+  lastmodified: "2026-01-03T12:12:30Z"
+  mac: ENC[AES256_GCM,data:pTYu8QGDMKLfgjaL91eoDTaoLtgQFLKVv6VnBEQ9RIqT6neHov5tkyUDxlmrOX0KKCUl2grOAEPYew9hPyYNGT5X8u4jK+zcEgM2ULLDZZsNR8BNRwfZsERRPSYOnuskFtr+I8bhYxjBf2fZwbBMrNgZXcXulGoRzI1SmzZDw5k=,iv:ODoKRbMYr1puXZjJHPhwoWUbP/Qa8Y+TvV7CTV+gdb4=,tag:0kd7yHv2aLR/TAzrnD0WAA==,type:str]
+  version: 3.11.0

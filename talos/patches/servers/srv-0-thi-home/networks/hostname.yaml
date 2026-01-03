@@ -1,0 +1,4 @@
+apiVersion: v1alpha1
+auto: "off"
+hostname: srv-0-thi-home.servers.zarantonello.dev
+kind: HostnameConfig

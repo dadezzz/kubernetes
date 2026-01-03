@@ -8,12 +8,12 @@ creation_rules:
     path_regex: cluster/.+/secrets/.+\.yaml
   - age: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
     encrypted_regex: environment
-    path_regex: talos/patches/tailscale\.yaml
+    path_regex: talos/patches/network/tailscale\.yaml
   - age: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
     path_regex: talos/secrets\.yaml
   - age: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
     encrypted_regex: privateKey
-    path_regex: talos/patches/servers/.+\.yaml
+    path_regex: talos/patches/servers/.+/networks/wg0\.yaml
 
 stores:
   yaml:

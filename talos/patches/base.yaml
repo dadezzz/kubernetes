@@ -73,18 +73,5 @@ machine:
       validSubnets:
         - 10.95.0.0/24
         - fda9:b00c:8b29:33f9::1095:0/120
-  network:
-    # Causes issues in alpine pods.
-    disableSearchDomain: true
-    extraHostEntries:
-      # Bypasses cloudflare proxy when pulling images.
-      - aliases:
-          - git.zarantonello.dev
-        ip: 10.95.0.3
-    # Don't use Tailscale until we have an HA Blocky deployment because if the
-    # node that hosts the pod goes down, then it won't come up after a reboot.
-    nameservers:
-      - 1.1.1.1
-      - 1.0.0.1
 persist: true
 version: v1alpha1
