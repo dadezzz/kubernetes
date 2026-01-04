@@ -3,34 +3,36 @@ addresses:
   - address: fda9:b00c:8b29:33f9::1095:3/120
 apiVersion: v1alpha1
 kind: WireguardConfig
-listenPort: 51000
+listenPort: 56680
 name: wg0
 peers:
   # srv-0-cor-home
   - allowedIPs:
       - 10.95.0.2/32
       - fda9:b00c:8b29:33f9::1095:2/128
-    endpoint: 95.232.179.210:51000
+    endpoint: 87.5.184.97:56680
+    persistentKeepaliveInterval: 1m
     publicKey: dNUWq6FfG7+3AGl5olQOpVel6Ntl4brufEQOlN9VPEM=
   # srv-0-nbg-hetz
   - allowedIPs:
       - 10.95.0.1/32
       - fda9:b00c:8b29:33f9::1095:1/128
-    endpoint: 78.47.155.111:51000
+    endpoint: 78.47.155.111:56680
+    persistentKeepaliveInterval: 1m
     publicKey: BgTeLVv2UKMD86N0XyQoTjh9sKSo/SkMfYKr1VQ3VRc=
-privateKey: ENC[AES256_GCM,data:L8W0WpChSrI6viJIay8cA6Xvo3jZZTVJ0pGz1OBUWkMz8NxVcTPSfNYNH1U=,iv:yKG51ePZ7Y713WUYmpWsrJQjIJYVLpELF2Gp7IwjRCI=,tag:8bP7OJATw4K5fyA9ugM/FQ==,type:str]
+privateKey: ENC[AES256_GCM,data:bRdyiuoRwJi0uDr4fYKEzIOeCJk94RQPajN9A1Epu9WWTag1LcPVZaoEqxk=,iv:qY4bldBmIQhp+ecYLvERGdrN9eVFTJhDqdf26D8+vRQ=,tag:5CqA5eXw5kgIVDmclKgFgA==,type:str]
 sops:
   age:
     - enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1RlpsZE8zb3JVNkxydkow
-        TDB3UXhkVUdNUnNGUlcySVR2Mkw0MWMyN1RNCmNYQjNFeTFETHBPQWRaR2FNNGd2
-        RnFwVWluNG1razJjbTFpYUtoSDJHUnMKLS0tIHZqM2Zwc1I2dzRReTFaa0gxWllx
-        L2pNdWVSSGpHN0RtZTdaMW5xQkc5MjgKzaHjS/wCcpaI6DdZBE/1pH3t285/pD+W
-        Sh1QOczpGfyFMSNhV4IpkgIxvKfDxC8Vhsh4kM0qhMiMkS7HCxWGwQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAxak1EQ21pVS9vVWdDWHpN
+        Z3ZRWVArelJobmlMNUlIS3JYRnFmd1ZiTVhjCnNJaXJHU2VLaXhBcUQ1VERmYm5H
+        TGJYRFd0N2RDcGd3ZFh6MStEaURldVUKLS0tIGxpM09Eb0FMVWZhOENNYzNhdlZy
+        aGNndWJkWG8wTW5pWEN6Tk8wcDF1ZkEKX3ndR4MsHkdE+TAsVKp6iZCF85euqUao
+        Iz2nh6RA5cTgMaCrNt7ODLcIdtxy6fL8wSHAY5B8otHYyRVNZ7GD1A==
         -----END AGE ENCRYPTED FILE-----
       recipient: age10s8xudjc20ujqjsk0asex5vgxqtm3fzrx2g3lzt5lls4rsay6cpqx6rhcc
   encrypted_regex: privateKey
-  lastmodified: "2026-01-03T12:12:30Z"
-  mac: ENC[AES256_GCM,data:mFBWyJEFFxgGXcnkNVMONDh95F0rzmxGDGIKTsC9MA2ble9JQ2ffDbhEivAi5lN8KEh6GfZvOCNAZ8RHbX7UqQrg1BkEvT00ZTAcZ5HT1Fko7cweQqDriZvauy8ndLdffqGXiQuCVQHA2Qmm0hx8tIj0iwFCbYBztftlZQYqsk8=,iv:r4kQhwZLzflS6D4AGK9doCVMe3a6udRrn26UAy2bEyY=,tag:Pk5hC+JAYNysCqTqDOqRsA==,type:str]
+  lastmodified: "2026-01-04T12:11:38Z"
+  mac: ENC[AES256_GCM,data:M88TcgCBq3HcM/WrpOI2uHpVMNr8m8t+jGmgzTiWpt5kn6Ugmp23jbcdhwbeOS7X6S0Pybamsv/8teG6dnFz7NjRULlcI9PkPQpgbA/L4V2sG/0l2HWBCE+0uOAjVYEDm9bt6wL7AMNVSlOwcYN2iWUvDshqDiQNtqe914bMayU=,iv:Ebm2dI0mFfEq+7475PRnc9kGBAx1aS9Tbu1uaySrKQk=,tag:5yln7XZzH1Iz0WYOzX+SCw==,type:str]
   version: 3.11.0
