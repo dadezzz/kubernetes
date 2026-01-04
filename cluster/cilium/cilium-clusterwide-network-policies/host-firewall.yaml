@@ -21,7 +21,7 @@ spec:
       toPorts:
         - ports:
             # Allow wireguard ingress.
-            - port: "51000"
+            - port: "56680"
               protocol: UDP
             # Allow tailscale ingress.
             - port: "41641"
