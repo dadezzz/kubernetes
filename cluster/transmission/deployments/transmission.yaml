@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: transmission
+      apps.zarantonello.dev/namespace: transmission
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        monitoring.zarantonello.dev/logs: "true"
+      labels:
+        apps.zarantonello.dev/name: transmission
+        apps.zarantonello.dev/namespace: transmission
+    spec:
+      containers:
+        - image: git.zarantonello.dev/infra/transmission:v1.0.1
+          name: transmission
+          ports:
+            - containerPort: 9091
+              name: http
+            - containerPort: 51413
+              name: bittorrent-tcp
+              protocol: TCP
+            - containerPort: 51413
+              name: bittorrent-udp
+              protocol: UDP
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /data
+              name: data
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: /.config/transmission-daemon
+              name: config
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-cor-home
+      securityContext:
+        fsGroup: 29994
+        runAsGroup: 29994
+        runAsNonRoot: true
+        runAsUser: 29994
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+        - emptyDir: {}
+          name: tmp
+        - name: config
+          persistentVolumeClaim:
+            claimName: config

@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: default
+spec:
+  hostnames:
+    - torrents.zarantonello.net
+  parentRefs:
+    - name: srv-0-cor-home-tailscale-http
+      namespace: cilium
+  rules:
+    - backendRefs:
+        - name: http
+          port: 80
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

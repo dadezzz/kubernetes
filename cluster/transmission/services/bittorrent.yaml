@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    lbipam.cilium.io/ips: 192.168.0.200
+    lbipam.cilium.io/sharing-cross-namespace: "*"
+    lbipam.cilium.io/sharing-key: srv-0-cor-home-lan
+  name: bittorrent
+spec:
+  ports:
+    - name: bittorrent-tcp
+      port: 51413
+      protocol: TCP
+      targetPort: bittorrent-tcp
+    - name: bittorrent-udp
+      port: 51413
+      protocol: UDP
+      targetPort: bittorrent-udp
+  selector:
+    apps.zarantonello.dev/name: transmission
+    apps.zarantonello.dev/namespace: transmission
+  type: LoadBalancer
