@@ -38,7 +38,7 @@ spec:
               name: data
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-cor-home
+        kubernetes.io/hostname: srv-0-thi-home
       securityContext:
         fsGroup: 29986
         runAsGroup: 29986
