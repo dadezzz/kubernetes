@@ -1,0 +1,10 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: alloy
+spec:
+  endpointSelector:
+    matchLabels:
+      apps.zarantonello.dev/name: alloy
+      apps.zarantonello.dev/namespace: alloy
+  ingress: []

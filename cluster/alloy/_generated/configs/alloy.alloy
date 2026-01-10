@@ -126,69 +126,50 @@ discovery.relabel "kubelet_pods_for_metrics" {
   }
 }
 
-discovery.relabel "kubelet_pods_for_metrics_target_0" {
-  targets = discovery.relabel.kubelet_pods_for_metrics.output
 
-  // Each TCP port on a pod is unique. Each container that wants to be monitored
-  // must expose that port on the pod.
-  // Use the `monitoring.zarantonello.dev/metrics-0-port: number` annotation to
-  // specify which port should be kept.
-  rule {
-    action = "keepequal"
-    source_labels = ["__meta_kubernetes_pod_container_port_number"]
-    target_label = "__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_0_port"
-  }
+foreach "kubelet_pods_for_metrics" {
+  collection = [0, 1]
+  var = "id"
 
-  // If pod specifies an unique id then it can be used to attest that metrics
-  // came from that pod.
-  // Useful for pods that emit metrics that have the same name, like the default
-  // golang resource usage ones.
-  rule {
-    action = "labelmap"
-    regex = "__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_0_id"
-    replacement = "podid"
-  }
+  template {
+    discovery.relabel "default" {
+      targets = discovery.relabel.kubelet_pods_for_metrics.output
 
-  // Use custom metrics path if provided.
-  rule {
-    action = "replace"
-    regex = "(.+)"
-    replacement = "$1"
-    source_labels = ["__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_0_path"]
-    target_label = "__metrics_path__"
-  }
-}
+      // Each TCP port on a pod is unique. Each container that wants to be monitored
+      // must expose that port on the pod.
+      // Use the `monitoring.zarantonello.dev/metrics-0-port: number` annotation to
+      // specify which port should be kept.
+      rule {
+        action = "keepequal"
+        source_labels = ["__meta_kubernetes_pod_container_port_number"]
+        target_label = string.join(["__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_", id, "_port"], "")
+      }
 
-// This is a copy of the config above, in case the pod has a second metrics
-// target that needs to be scraped.
-discovery.relabel "kubelet_pods_for_metrics_target_1" {
-  targets = discovery.relabel.kubelet_pods_for_metrics.output
-  rule {
-    action = "keepequal"
-    source_labels = ["__meta_kubernetes_pod_container_port_number"]
-    target_label = "__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_1_port"
-  }
-  rule {
-    action = "labelmap"
-    regex = "__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_1_id"
-    replacement = "podid"
-  }
-  rule {
-    action = "replace"
-    regex = "(.+)"
-    replacement = "$1"
-    source_labels = ["__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_1_path"]
-    target_label = "__metrics_path__"
-  }
-}
+      // If pod specifies an unique id then it can be used to attest that metrics
+      // came from that pod.
+      // Useful for pods that emit metrics that have the same name, like the default
+      // golang resource usage ones.
+      rule {
+        action = "labelmap"
+        regex = string.join(["__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_", id, "_id"], "")
+        replacement = "podid"
+      }
 
-prometheus.scrape "kubelet_pods" {
-  forward_to = [prometheus.relabel.victoriametrics.receiver]
-  // Add more entries if there is need to monitor more than 2 endpoints per pod.
-  targets = array.concat(
-    discovery.relabel.kubelet_pods_for_metrics_target_0.output,
-    discovery.relabel.kubelet_pods_for_metrics_target_1.output,
-  )
+      // Use custom metrics path if provided.
+      rule {
+        action = "replace"
+        regex = "(.+)"
+        replacement = "$1"
+        source_labels = [string.join(["__meta_kubernetes_pod_annotation_monitoring_zarantonello_dev_metrics_", id, "_path"], "")]
+        target_label = "__metrics_path__"
+      }
+    }
+
+    prometheus.scrape "default" {
+      forward_to = [prometheus.relabel.victoriametrics.receiver]
+      targets = discovery.relabel.default.output
+    }
+  }
 }
 
 ////////////////////////
@@ -276,5 +257,9 @@ loki.relabel "victorialogs" {
 loki.write "victorialogs" {
   endpoint {
     url = "http://http.victorialogs.svc.k8s.zarantonello.dev/insert/loki/api/v1/push"
+  }
+
+  wal {
+    enabled = true
   }
 }

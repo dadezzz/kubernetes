@@ -6,6 +6,7 @@ configMapGenerator:
 kind: Kustomization
 namespace: alloy
 resources:
+  - cilium-network-policies/alloy.yaml
   - cluster-role-bindings/alloy.yml
   - cluster-roles/alloy.yml
   - daemon-sets/alloy.yaml

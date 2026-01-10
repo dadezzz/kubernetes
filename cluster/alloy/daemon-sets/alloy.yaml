@@ -51,7 +51,7 @@ spec:
               subPath: alloy.alloy
             # Data is stored here if alloy cannot send it to victoria{logs,metrics}.
             - mountPath: /var/tmp/alloy
-              name: tmp
+              name: wal
             - mountPath: /rootfs
               mountPropagation: HostToContainer
               name: rootfs
@@ -68,8 +68,9 @@ spec:
         - configMap:
             name: alloy-config
           name: config
-        - emptyDir: {}
-          name: tmp
+        - hostPath:
+            path: /var/mnt/data-0/alloy-wal
+          name: wal
         - hostPath:
             path: /
           name: rootfs
