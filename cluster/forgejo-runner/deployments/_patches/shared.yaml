@@ -8,7 +8,6 @@ spec:
     matchLabels:
       apps.zarantonello.dev/name: forgejo-runner
       apps.zarantonello.dev/namespace: forgejo-runner
-  # Ephemeral storage request is quite large, so sometimes scheduling fails.
   strategy:
     type: Recreate
   template:
@@ -17,14 +16,6 @@ spec:
         apps.zarantonello.dev/name: forgejo-runner
         apps.zarantonello.dev/namespace: forgejo-runner
     spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            # Avoid having 2 runner pods on the same node.
-            - labelSelector:
-                matchLabels:
-                  apps.zarantonello.dev/namespace: forgejo-runner
-              topologyKey: kubernetes.io/hostname
       containers:
         - command:
             - forgejo-runner
@@ -57,7 +48,7 @@ spec:
               name: docker-var-run
       enableServiceLinks: false
       hostAliases:
-        # Override this so that runners push directly to forgejo, without passing
+        # Override this so that runners connect directly to forgejo, without passing
         # through Cloudflare's proxy.
         - hostnames:
             - git.zarantonello.dev
@@ -94,10 +85,6 @@ spec:
             - --group=4880
           image: docker.io/library/docker:29.1.4-dind@sha256:d95427251fd155cd69a03311a8c4edf6d0778595444afc2d2c800a156eb2ecac
           name: docker
-          resources:
-            limits:
-              # Restart container if caches are too big.
-              ephemeral-storage: 5Gi
           restartPolicy: Always
           securityContext:
             capabilities:
@@ -130,7 +117,8 @@ spec:
         - configMap:
             name: docker-config
           name: docker-config
-        - emptyDir: {}
+        - hostPath:
+            path: /var/mnt/data-0/forgejo-runner-docker-data
           name: docker-data
         - emptyDir: {}
           name: docker-tmp
