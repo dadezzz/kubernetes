@@ -6,7 +6,7 @@ spec:
   hostnames:
     - vault.zarantonello.net
   parentRefs:
-    - name: srv-0-cor-home-tailscale-http
+    - name: srv-0-nbg-hetz-tailscale-http
       namespace: cilium
   rules:
     - backendRefs:

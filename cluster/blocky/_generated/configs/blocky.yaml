@@ -42,7 +42,7 @@ customDNS:
     minecraft.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
     photos.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
     torrents.zarantonello.net: 100.92.18.24,fd7a:115c:a1e0::7b01:1249
-    vault.zarantonello.net: 100.92.18.24,fd7a:115c:a1e0::7b01:1249
+    vault.zarantonello.net: 100.72.217.52,fd7a:115c:a1e0::fe01:d942
 fqdnOnly:
   enable: true
 log:
