@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: cilium
         namespace: cilium
-      version: 1.18.1
+      version: 1.18.5
   install:
     crds: Create
   interval: 5m

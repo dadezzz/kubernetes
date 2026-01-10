@@ -2,6 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: cilium
+  namespace: cilium
 spec:
   interval: 10m
   url: https://helm.cilium.io
