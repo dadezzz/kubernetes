@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caddy
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: caddy
+      apps.zarantonello.dev/namespace: transmission
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: caddy
+        apps.zarantonello.dev/namespace: transmission
+    spec:
+      containers:
+        - args:
+            - caddy
+            - file-server
+            - --browse
+            - --root=/srv
+          image: docker.io/library/caddy:2.10.2-alpine
+          name: caddy
+          ports:
+            - containerPort: 80
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /srv
+              name: data
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-0-cor-home
+      securityContext:
+        fsGroup: 29994
+        runAsGroup: 29994
+        runAsNonRoot: true
+        runAsUser: 29994
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
