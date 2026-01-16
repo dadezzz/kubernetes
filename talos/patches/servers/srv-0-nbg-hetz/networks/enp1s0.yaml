@@ -1,11 +1,11 @@
 apiVersion: v1alpha1
 kind: DHCPv4Config
-name: eth0
+name: enp1s0
 ---
 addresses:
   - address: 2a01:4f8:1c1a:3498::/64
 apiVersion: v1alpha1
 kind: LinkConfig
-name: eth0
+name: enp1s0
 routes:
   - gateway: fe80::1

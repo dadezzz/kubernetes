@@ -1,4 +1,4 @@
 machine:
   install:
     disk: /dev/sdb
-    image: factory.talos.dev/metal-installer/334e798f530db5f67f1a4d2b9b5f6bf136d4e956035e8e1c92fdaf064dd7d755:v1.12.0
+    image: factory.talos.dev/metal-installer/334e798f530db5f67f1a4d2b9b5f6bf136d4e956035e8e1c92fdaf064dd7d755:v1.12.1
