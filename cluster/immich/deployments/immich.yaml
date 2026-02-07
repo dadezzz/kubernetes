@@ -25,7 +25,7 @@ spec:
                 name: immich-env
             - configMapRef:
                 name: immich-env
-          image: ghcr.io/immich-app/immich-server:v2.4.1@sha256:e6a6298e67ae077808fdb7d8d5565955f60b0708191576143fc02d30ab1389d1
+          image: ghcr.io/immich-app/immich-server:v2.5.5@sha256:161b1ec8af9e0478797cfd75ea857c7e55af271fa7cea103cb30ab1ba5b418d8
           name: immich
           ports:
             - containerPort: 2283
