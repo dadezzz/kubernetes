@@ -19,7 +19,7 @@ spec:
         apps.zarantonello.dev/namespace: transmission
     spec:
       containers:
-        - image: git.zarantonello.dev/infra/transmission:v1.1.2@sha256:49ae45062caf3afe1def21ca64764cbef10fe82d311c869c8c28fda03102193f
+        - image: git.zarantonello.dev/infra/transmission:v1.1.3@sha256:67b46cfe28ab7fb3ce5742b7d3683ec67039a836676799a19bfeb564ae510814
           name: transmission
           ports:
             - containerPort: 9091
