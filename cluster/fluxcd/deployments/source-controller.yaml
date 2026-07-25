@@ -21,7 +21,7 @@ spec:
             - --enable-leader-election
             - --storage-path=/data
             - --storage-adv-addr=source-controller.fluxcd.svc.k8s.zarantonello.dev
-          image: ghcr.io/fluxcd/source-controller:v1.7.4@sha256:16f21ac1795528df80ddef51ccbb14a57b78ea26e66dc8551636ef9a3cec71b3
+          image: ghcr.io/fluxcd/source-controller:v1.9.3@sha256:ff8f3c92f1bcb433e858c948040c3a3393fe73f5dd72048a4502bfaf0a4c26cd
           name: source-controller
           ports:
             - containerPort: 9090
