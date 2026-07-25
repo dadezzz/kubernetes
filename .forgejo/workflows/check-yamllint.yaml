@@ -5,11 +5,18 @@ concurrency:
 jobs:
   check-yamllint:
     container:
-      image: git.zarantonello.dev/infra/ci:v2.3.27@sha256:6eb01e9ad2b817be9f6af98650891537d3e87d1acb696ae3520136a3c4fd7ac5
+      image: git.zarantonello.dev/infra/ci-yamllint:latest@sha256:27af2ff9f1b4a2d7d04554b7c9ea2ff377824e6eb2aa4f3bc6e21eb20c782a56
+    name: Lint yaml files
     runs-on: srv-generic
     steps:
-      - uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - run: yamllint .
+      - name: Clone the repository
+        run: |
+          git clone --filter=blob:none --no-checkout https://${{ forge.token }}@git.zarantonello.dev/${{ forge.repository }} ${{ forge.workspace }};
+          git checkout --quiet ${{ forge.sha }};
+      - name: Run yamllint
+        run: yamllint .
+
+name: check-yamllint.yaml
 
 "on":
   pull_request:

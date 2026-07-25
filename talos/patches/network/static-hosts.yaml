@@ -4,4 +4,4 @@ hostnames:
   # Forgejo.
   - git.zarantonello.dev
 kind: StaticHostConfig
-name: 10.95.0.3
+name: 100.79.164.85

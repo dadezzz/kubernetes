@@ -3,6 +3,10 @@
 extends: default
 ignore: |
   talos/generated/*
+  cluster/*/_generated/secrets/*
+  cluster/*/secrets/*.yaml
+  talos/patches/network/tailscale.yaml
+  talos/secrets.yaml
 rules:
   braces:
     forbid: non-empty

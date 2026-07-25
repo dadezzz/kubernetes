@@ -17,7 +17,7 @@ spec:
         apps.zarantonello.dev/namespace: immich
     spec:
       containers:
-        - image: ghcr.io/immich-app/immich-machine-learning:v2.5.6@sha256:b213fa3c82d27a21a299c46ffbb38a091f18384db1ad67d409a3b34fe0fce556
+        - image: ghcr.io/immich-app/immich-machine-learning:v3.0.3@sha256:d76fe88b69282c09a97eac4f82dafa82cfd77bce274bc742591cde974f87dacb
           name: machine-learning
           ports:
             - containerPort: 3003
@@ -27,7 +27,10 @@ spec:
             capabilities:
               drop:
                 - ALL
+            readOnlyRootFilesystem: true
           volumeMounts:
+            - mountPath: /tmp
+              name: tmp
             - mountPath: /cache
               name: cache
             - mountPath: /.cache
@@ -36,9 +39,8 @@ spec:
               name: tmp-config
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-thi-home
+        kubernetes.io/hostname: srv-home
       securityContext:
-        fsGroup: 56186
         runAsGroup: 56186
         runAsNonRoot: true
         runAsUser: 56186
@@ -48,6 +50,8 @@ spec:
         - name: cache
           persistentVolumeClaim:
             claimName: machine-learning-cache
+        - emptyDir: {}
+          name: tmp
         - emptyDir: {}
           name: tmp-cache
         - emptyDir: {}

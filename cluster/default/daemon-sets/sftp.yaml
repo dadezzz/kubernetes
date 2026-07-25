@@ -20,7 +20,7 @@ spec:
             - --no-auth
             - --addr=[::]:2222
             - /data
-          image: docker.io/rclone/rclone:1.73.0@sha256:9f59fda717a48aced38d7f27e9ec8fd9992b5651e7a03897bebf204d3a9197d6
+          image: docker.io/rclone/rclone:1.74.4
           name: sftp
           ports:
             - containerPort: 2222

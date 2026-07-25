@@ -1,15 +1,21 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "assignees": ["davide"],
-  "extends": [":semanticCommits", "config:best-practices"],
+  "extends": [
+    "config:best-practices",
+    "customManagers:dockerfileVersions",
+    ":semanticCommits"
+  ],
   "kubernetes": {
     "managerFilePatterns": ["/cluster/.+\\.yaml$/"]
   },
   "packageRules": [
     {
       "automerge": true,
-      "matchFileNames": [".devcontainer/**", ".forgejo/**"],
-      "matchUpdateTypes": ["digest", "minor", "patch", "pin"]
+      "groupName": "CI dependencies",
+      "groupSlug": "ci",
+      "matchFileNames": [".forgejo/**"],
+      "matchUpdateTypes": ["!major"]
     }
   ]
 }

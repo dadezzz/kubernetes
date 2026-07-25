@@ -1,0 +1,12 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: TCPRoute
+metadata:
+  name: bittorrent
+spec:
+  parentRefs:
+    - name: srv-home-lan-bittorrent
+      namespace: cilium
+  rules:
+    - backendRefs:
+        - name: bittorrent
+          port: 51413

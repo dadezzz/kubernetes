@@ -5,11 +5,18 @@ concurrency:
 jobs:
   check-prettier:
     container:
-      image: git.zarantonello.dev/infra/ci:v2.3.27@sha256:6eb01e9ad2b817be9f6af98650891537d3e87d1acb696ae3520136a3c4fd7ac5
+      image: git.zarantonello.dev/infra/ci-prettier:latest@sha256:bf48b33a325292e8536c831029c21e6ac8da4813589ad493e520c4b9790c0841
+    name: Check files formatting
     runs-on: srv-generic
     steps:
-      - uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - run: prettier --check .
+      - name: Clone the repository
+        run: |
+          git clone --filter=blob:none --no-checkout https://${{ forge.token }}@git.zarantonello.dev/${{ forge.repository }} ${{ forge.workspace }};
+          git checkout --quiet ${{ forge.sha }};
+      - name: Run prettier
+        run: prettier --check .
+
+name: check-prettier.yaml
 
 "on":
   pull_request:

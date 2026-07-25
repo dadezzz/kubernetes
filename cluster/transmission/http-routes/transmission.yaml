@@ -6,13 +6,13 @@ spec:
   hostnames:
     - torrents.zarantonello.net
   parentRefs:
-    - name: srv-0-cor-home-tailscale-http
+    - name: srv-home-tailscale-https
       namespace: cilium
   rules:
     - backendRefs:
-        - name: http-transmission
+        - name: transmission-http
           port: 80
       matches:
         - path:
             type: PathPrefix
-            value: /transmission
+            value: /

@@ -38,7 +38,7 @@ cluster:
   # CoreDNS is deployed manually so that we can use Blocky as upstream.
   coreDNS:
     disabled: true
-  # Nodes should'n have problems to connect via Wireguard.
+  # Nodes shouldn't have problems to connect via Tailscale.
   discovery:
     enabled: false
   network:
@@ -68,10 +68,9 @@ machine:
     # Points to the CoreDNS service.
     clusterDNS:
       - 10.97.0.10
-    # Force nodes to use the Wireguard network to communicate.
+    # Force nodes to use the Tailscale network to communicate.
     nodeIP:
       validSubnets:
-        - 10.95.0.0/24
-        - fda9:b00c:8b29:33f9::1095:0/120
+        - 100.0.0.0/8
 persist: true
 version: v1alpha1

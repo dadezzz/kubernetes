@@ -14,12 +14,12 @@ patches:
       kind: Deployment
       name: forgejo-runner-.+
 resources:
-  - deployments/forgejo-runner-srv-0-nbg-hetz.yaml
-  - deployments/forgejo-runner-srv-0-thi-home.yaml
+  # - deployments/forgejo-runner-srv-0-nbg-hetz.yaml
+  - deployments/forgejo-runner-srv-home.yaml
   - kustomization.flux.yaml
   - namespace.yaml
   - service-accounts/default.yml
 secretGenerator:
   - envs:
-      - _generated/secrets/forgejo-runner.env
-    name: forgejo-runner-env
+      - _generated/secrets/runner.env
+    name: runner-env

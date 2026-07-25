@@ -20,7 +20,7 @@ spec:
         - envFrom:
             - secretRef:
                 name: postgres-env
-          image: ghcr.io/tensorchord/vchord-postgres:pg17-v0.4.3@sha256:7aab216e4c312efc8fead3776a7a84ded0bed418567d221cc1328d8d3849031d
+          image: ghcr.io/tensorchord/vchord-postgres:pg18-v1.1.1@sha256:700ff05ebdc7e4afd4dd8442e0684293046c3833677fec326550000a04cf8a91
           name: postgres
           ports:
             - containerPort: 5432
@@ -32,7 +32,7 @@ spec:
                 - ALL
             readOnlyRootFilesystem: true
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: /var/lib/postgresql
               name: data
             - mountPath: /tmp
               name: tmp
@@ -40,12 +40,13 @@ spec:
               name: sockets
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-thi-home
+        kubernetes.io/hostname: srv-home
       securityContext:
-        fsGroup: 70
-        runAsGroup: 70
+        runAsGroup: 999
         runAsNonRoot: true
-        runAsUser: 70
+        # User has to be 999, otherwise the container tries to chown the postgres
+        # volume but fails due to insufficient permissions.
+        runAsUser: 999
         seccompProfile:
           type: RuntimeDefault
       volumes:

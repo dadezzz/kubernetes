@@ -1,12 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    lbipam.cilium.io/ips: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
-    lbipam.cilium.io/sharing-cross-namespace: "*"
-    lbipam.cilium.io/sharing-key: srv-0-thi-home-tailscale
   name: dns
 spec:
+  # Used as upstream for coredns.
   clusterIP: 10.97.0.11
   ports:
     - name: dns-tcp
@@ -20,4 +17,3 @@ spec:
   selector:
     apps.zarantonello.dev/name: blocky
     apps.zarantonello.dev/namespace: blocky
-  type: LoadBalancer

@@ -3,7 +3,6 @@ blocking:
     default:
       # Whitelist push notification providers for mobile phones.
       - https://badblock.celenity.dev/wildcards-star/push_whitelist.txt
-      # Allow alloy and grafana telemetry data.
       - |
         stats.grafana.org
   blockType: nxDomain
@@ -35,21 +34,25 @@ caching:
   prefetching: true
 customDNS:
   mapping:
-    actual.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
-    grafana.zarantonello.net: 100.92.18.24,fd7a:115c:a1e0::7b01:1249
-    igl.zarantonello.dev: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
-    mail.zarantonello.dev: 100.72.217.52,fd7a:115c:a1e0::fe01:d942
-    minecraft.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
-    photos.zarantonello.net: 100.86.43.76,fd7a:115c:a1e0::3501:2b4c
-    torrents.zarantonello.net: 100.92.18.24,fd7a:115c:a1e0::7b01:1249
-    vault.zarantonello.net: 100.72.217.52,fd7a:115c:a1e0::fe01:d942
+    actual.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
+    grafana.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
+    igl.zarantonello.dev: 100.88.193.108,fd7a:115c:a1e0::6301:c1ac
+    llama.zarantonello.dev: 100.107.181.54
+    mail.zarantonello.dev: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
+    metrics.zarantonello.dev: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
+    photos.zarantonello.net: 100.107.181.54
+    s3.zarantonello.dev: 100.111.81.42,fd7a:115c:a1e0::8f36:512a
+    torrents.zarantonello.net: 100.107.181.54
+    vault.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
+    victorialogs.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
+    victoriametrics.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
 fqdnOnly:
   enable: true
 log:
   format: json
 ports:
   dns: 53
-  # Used for http metrics collection.
+  # Used for metrics collection.
   http: 8080
 prometheus:
   enable: true
@@ -60,9 +63,9 @@ upstreams:
     default:
       - tcp-tls:1.0.0.1:853#one.one.one.one
       - tcp-tls:1.1.1.1:853#one.one.one.one
+      - tcp-tls:149.112.112.112:853#dns.quad9.net
+      - tcp-tls:9.9.9.9:853#dns.quad9.net
       # - tcp-tls:2606:4700:4700::1001:853#one.one.one.one
       # - tcp-tls:2606:4700:4700::1111:853#one.one.one.one
-      - tcp-tls:9.9.9.9:853#dns.quad9.net
-      - tcp-tls:149.112.112.112:853#dns.quad9.net
       # - tcp-tls:2620:fe::9:853#dns.quad9.net
       # - tcp-tls:2620:fe::fe:853#dns.quad9.net

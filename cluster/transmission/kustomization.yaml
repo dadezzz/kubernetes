@@ -4,7 +4,7 @@ namespace: transmission
 resources:
   - deployments/caddy.yaml
   - deployments/transmission.yaml
-  - http-routes/default.yaml
+  - http-routes/caddy.yaml
   - http-routes/transmission.yaml
   - kustomization.flux.yaml
   - namespace.yaml
@@ -14,5 +14,7 @@ resources:
   - persistent-volumes/transmission-data.yaml
   - service-accounts/default.yaml
   - services/bittorrent.yaml
-  - services/http-caddy.yaml
-  - services/http-transmission.yaml
+  - services/caddy-http.yaml
+  - services/transmission-http.yaml
+  - tcp-routes/bittorrent.yaml
+  - udp-routes/bittorrent.yaml

@@ -1,0 +1,18 @@
+# See deployments/_patches/shared.yaml for base deployment definition.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo-runner-srv-home
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: forgejo-runner-srv-home
+      apps.zarantonello.dev/namespace: forgejo-runner
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: forgejo-runner-srv-home
+        apps.zarantonello.dev/namespace: forgejo-runner
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: srv-home

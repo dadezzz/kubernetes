@@ -6,11 +6,15 @@ spec:
   hostnames:
     - photos.zarantonello.net
   parentRefs:
-    - name: srv-0-thi-home-tailscale-http
+    - name: srv-home-tailscale-https
+      namespace: cilium
+    # App connects via http since it's lighter and encryption is provided by
+    # Tailscale.
+    - name: srv-home-tailscale-http
       namespace: cilium
   rules:
     - backendRefs:
-        - name: http
+        - name: server-http
           port: 80
       matches:
         - path:

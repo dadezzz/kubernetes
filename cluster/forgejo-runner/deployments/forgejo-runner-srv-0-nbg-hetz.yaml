@@ -10,8 +10,6 @@ spec:
       apps.zarantonello.dev/namespace: forgejo-runner
   template:
     metadata:
-      annotations:
-        node.zarantonello.dev/type: small
       labels:
         apps.zarantonello.dev/name: forgejo-runner-srv0-nbg-hetz
         apps.zarantonello.dev/namespace: forgejo-runner

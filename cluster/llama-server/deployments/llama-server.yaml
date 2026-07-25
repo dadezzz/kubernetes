@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llama-server
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: llama-server
+      apps.zarantonello.dev/namespace: llama-server
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: llama-server
+        apps.zarantonello.dev/namespace: llama-server
+    spec:
+      containers:
+        - args:
+            - --models-max
+            - "1"
+            - -lv
+            - "4"
+            - --models-preset
+            - /etc/llama-server/models.ini
+          image: ghcr.io/ggml-org/llama.cpp:server-vulkan@sha256:183bb52880f9b1d95cae147b14d5843e8f13dff68f3602a15b409b69875a9b1f
+          name: llama-server
+          ports:
+            - containerPort: 8080
+              name: http
+          securityContext:
+            # allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: true
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /var/lib/llama-server
+              name: data
+            - mountPath: /etc/llama-server
+              name: config
+            - mountPath: /dev/dri
+              name: dev-dri
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-home
+      securityContext:
+        runAsGroup: 9221
+        runAsNonRoot: true
+        runAsUser: 9221
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+        - configMap:
+            name: llama-server-config
+          name: config
+        - hostPath:
+            path: /dev/dri
+            type: Directory
+          name: dev-dri

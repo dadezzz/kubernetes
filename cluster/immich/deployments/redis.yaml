@@ -17,7 +17,7 @@ spec:
         apps.zarantonello.dev/namespace: immich
     spec:
       containers:
-        - image: docker.io/library/redis:8.6.0@sha256:7b6fb55d8b0adcd77269dc52b3cfffe5f59ca5d43dec3c90dbe18aacce7942e1
+        - image: docker.io/library/redis:8.8.0@sha256:234c902a2db49461a129e2d4aeff85b28cf20187ed274a67f6e50995fa713c7b
           name: redis
           ports:
             - containerPort: 6379
@@ -33,9 +33,8 @@ spec:
               name: data
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-thi-home
+        kubernetes.io/hostname: srv-home
       securityContext:
-        fsGroup: 6097
         runAsGroup: 6097
         runAsNonRoot: true
         runAsUser: 6097

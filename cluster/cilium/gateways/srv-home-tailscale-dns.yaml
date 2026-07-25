@@ -1,0 +1,26 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: srv-home-tailscale-dns
+spec:
+  addresses:
+    - type: IPAddress
+      value: 100.107.181.54
+    - type: IPAddress
+      value: fd7a:115c:a1e0::2d36:b538
+  gatewayClassName: cilium
+  infrastructure:
+    annotations:
+      lbipam.cilium.io/sharing-cross-namespace: "*"
+      lbipam.cilium.io/sharing-key: srv-home-tailscale
+  listeners:
+    - allowedRoutes: &allowedRoutes
+        namespaces:
+          from: All
+      name: dns-tcp
+      port: 53
+      protocol: TCP
+    - allowedRoutes: *allowedRoutes
+      name: dns-udp
+      port: 53
+      protocol: UDP

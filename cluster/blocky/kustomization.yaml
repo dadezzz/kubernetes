@@ -11,3 +11,5 @@ resources:
   - namespace.yaml
   - service-accounts/default.yaml
   - services/dns.yaml
+  - tcp-routes/dns.yaml
+  - udp-routes/dns.yaml
