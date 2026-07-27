@@ -23,7 +23,7 @@ spec:
           envFrom:
             - secretRef:
                 name: grafana-env
-          image: docker.io/grafana/grafana:12.4.6@sha256:dc91df727e7a90043b74ed4e2df7e4302f0eb3ad8f1e9fe278b0f7a7689d3432
+          image: docker.io/grafana/grafana:13.1.1@sha256:7cb8c64c4d57a57e734073f3cc94620adb24a0acb929bd80ba9f14017e3a975b
           name: grafana
           ports:
             - containerPort: 3000
