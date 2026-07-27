@@ -17,7 +17,7 @@ spec:
         apps.zarantonello.dev/namespace: actual
     spec:
       containers:
-        - image: docker.io/actualbudget/actual-server:latest@sha256:c34346f87725b9cce5dca5af1a2a9b989127d592cc4c6af5cf4652d4a86def90
+        - image: docker.io/actualbudget/actual-server:latest@sha256:e18b7fbfec6157a368fad4146563f397502e9da70a120aeaeac63b4977405d1c
           imagePullPolicy: IfNotPresent
           name: actual
           ports:
