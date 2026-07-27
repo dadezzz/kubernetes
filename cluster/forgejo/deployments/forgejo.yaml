@@ -24,7 +24,7 @@ spec:
                 name: forgejo-env
             - secretRef:
                 name: forgejo-env
-          image: codeberg.org/forgejo/forgejo:14.0.2-rootless@sha256:5552c9e25f353760420b8ac7a7f0f0a788ff571bbfd8e2c1e93503d3e2e1b87a
+          image: codeberg.org/forgejo/forgejo:16.0.1-rootless@sha256:71863f6b6c5837a27b3a2d133c3161c78a432aa878d57798d74b1d917ff842be
           name: forgejo
           ports:
             - containerPort: 3000
