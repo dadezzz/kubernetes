@@ -5,7 +5,7 @@ concurrency:
 jobs:
   check-commitizen:
     container:
-      image: git.zarantonello.dev/infra/ci-commitizen:latest@sha256:2dc2e59b050422c4b4380be8b490eb6050c55c2c5aead92fd91ef48df3fef8aa
+      image: git.zarantonello.dev/infra/ci-commitizen:latest@sha256:2786d16aede65a591e388d2c1240eddd4f334413d4cc5d03346d9afbce1b7c9d
     name: Check the PR title
     runs-on: srv-generic
     steps:
