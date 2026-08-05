@@ -1,4 +1,4 @@
 apiVersion: v1alpha1
 auto: "off"
-hostname: srv-0-cor-home.servers.zarantonello.dev
+hostname: srv-hetz-nbg-0.servers.zarantonello.dev
 kind: HostnameConfig

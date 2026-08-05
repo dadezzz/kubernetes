@@ -1,4 +1,0 @@
-apiVersion: v1alpha1
-auto: "off"
-hostname: srv-0-nbg-hetz.servers.zarantonello.dev
-kind: HostnameConfig

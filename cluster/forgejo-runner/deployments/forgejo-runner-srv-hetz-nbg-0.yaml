@@ -2,16 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: forgejo-runner-srv-home
+  name: forgejo-runner-srv-hetz-nbg-0
 spec:
   selector:
     matchLabels:
-      apps.zarantonello.dev/name: forgejo-runner-srv-home
+      apps.zarantonello.dev/name: forgejo-runner-srv-hetz-nbg-0
       apps.zarantonello.dev/namespace: forgejo-runner
   template:
     metadata:
       labels:
-        apps.zarantonello.dev/name: forgejo-runner-srv-home
+        apps.zarantonello.dev/name: forgejo-runner-srv-hetz-nbg-0
         apps.zarantonello.dev/namespace: forgejo-runner
     spec:
       containers:
@@ -20,11 +20,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: RUNNER_UUID
-                  name: srv-home-env
+                  name: srv-hetz-nbg-0-env
           name: runner
       nodeSelector:
-        kubernetes.io/hostname: srv-home
+        kubernetes.io/hostname: srv-hetz-nbg-0
       volumes:
         - name: runner-token
           secret:
-            secretName: srv-home-env
+            secretName: srv-hetz-nbg-0-env

@@ -44,7 +44,7 @@ spec:
               name: tmp
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-thi-home
+        kubernetes.io/hostname: srv-hetz-nbg-0
       securityContext:
         # Forgejo expects to run as user git.
         fsGroup: 1000

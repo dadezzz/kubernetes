@@ -1,0 +1,12 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: TCPRoute
+metadata:
+  name: imaps
+spec:
+  parentRefs:
+    - name: srv-hetz-nbg-0-tailscale-mail
+      namespace: cilium
+  rules:
+    - backendRefs:
+        - name: stalwart
+          port: 993

@@ -1,4 +1,4 @@
-all: generated/srv-0-nbg-hetz.yaml generated/srv-0-thi-home.yaml
+all: generated/srv-hetz-nbg-0.yaml generated/srv-home.yaml
 
 ENCRYPTED_TARGETS := \
 	./patches/network/tailscale.yaml \
@@ -19,19 +19,18 @@ GEN_CONFIG_SHARED_ARGS := \
 	k8s.zarantonello.dev \
 	https://100.107.181.54:6443
 
-# GEN_CONFIG_SRV_0_NBG_HETZ_PATCHES := \
-# 	$(GEN_CONFIG_SHARED_PATCHES) \
-# 	patches/servers/srv-0-nbg-hetz/base.yaml \
-# 	patches/servers/srv-0-nbg-hetz/volumes.yaml \
-# 	$(wildcard patches/servers/srv-0-nbg-hetz/networks/*)
+GEN_CONFIG_SRV_HETZ_NBG_0_PATCHES := \
+	$(GEN_CONFIG_SHARED_PATCHES) \
+	patches/servers/srv-hetz-nbg-0/base.yaml \
+	patches/servers/srv-hetz-nbg-0/volumes.yaml \
+	$(wildcard patches/servers/srv-hetz-nbg-0/networks/*)
 
-# generated/srv-0-nbg-hetz.yaml: secrets.yaml $(GEN_CONFIG_SHARED_CONTROLPLANE_PATCHES) $(GEN_CONFIG_SRV_0_NBG_HETZ_PATCHES)
-# 	@talosctl gen config \
-# 		$(GEN_CONFIG_SHARED_ARGS) \
-# 		--output generated/srv-0-nbg-hetz.yaml \
-# 		--output-types controlplane \
-# 		$(addprefix --config-patch-control-plane=, $(GEN_CONFIG_SHARED_CONTROLPLANE_PATCHES)) \
-# 		$(addprefix --config-patch=, $(GEN_CONFIG_SRV_0_NBG_HETZ_PATCHES))
+generated/srv-hetz-nbg-0.yaml: secrets.yaml $(GEN_CONFIG_SHARED_CONTROLPLANE_PATCHES) $(GEN_CONFIG_SRV_HETZ_NBG_0_PATCHES)
+	@talosctl gen config \
+		$(GEN_CONFIG_SHARED_ARGS) \
+		--output generated/srv-hetz-nbg-0.yaml \
+		--output-types worker \
+		$(addprefix --config-patch=, $(GEN_CONFIG_SRV_HETZ_NBG_0_PATCHES))
 
 GEN_CONFIG_SRV_HOME_PATCHES := \
 	$(GEN_CONFIG_SHARED_PATCHES) \

@@ -1,4 +1,0 @@
-{
-  "insecure-registries": ["git.zarantonello.dev"],
-  "log-driver": "local"
-}

@@ -6,7 +6,7 @@ spec:
   hostnames:
     - actual.zarantonello.net
   parentRefs:
-    - name: srv-0-thi-home-tailscale-http
+    - name: srv-hetz-nbg-0-tailscale-https
       namespace: cilium
   rules:
     - backendRefs:

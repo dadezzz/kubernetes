@@ -6,7 +6,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 1Gi
+    storage: 10Mi
   local:
     path: /var/mnt/data-0/actual-data
   nodeAffinity:
@@ -16,4 +16,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - srv-0-thi-home
+                - srv-hetz-nbg-0

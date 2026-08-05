@@ -6,11 +6,15 @@ spec:
   hostnames:
     - git.zarantonello.dev
   parentRefs:
-    - name: srv-0-nbg-hetz-public-http
+    - name: srv-hetz-nbg-0-public-https
       namespace: cilium
-    - name: srv-0-thi-home-wireguard-http
+    - name: srv-hetz-nbg-0-tailscale-https
       namespace: cilium
-    - name: srv-0-thi-home-tailscale-http
+    - name: srv-hetz-nbg-0-tailscale-http
+      namespace: cilium
+    - name: srv-hetz-nbg-0-internal-https
+      namespace: cilium
+    - name: srv-hetz-nbg-0-internal-http
       namespace: cilium
   rules:
     - backendRefs:

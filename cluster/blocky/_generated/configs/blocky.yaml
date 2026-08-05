@@ -34,18 +34,18 @@ caching:
   prefetching: true
 customDNS:
   mapping:
-    actual.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
-    grafana.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
+    actual.zarantonello.net: 100.105.222.83
+    grafana.zarantonello.net: 100.105.222.83
     igl.zarantonello.dev: 100.88.193.108,fd7a:115c:a1e0::6301:c1ac
     llama.zarantonello.dev: 100.107.181.54
-    mail.zarantonello.dev: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
-    metrics.zarantonello.dev: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
+    mail.zarantonello.dev: 100.105.222.83
+    metrics.zarantonello.dev: 100.105.222.83
     photos.zarantonello.net: 100.107.181.54
     s3.zarantonello.dev: 100.111.81.42,fd7a:115c:a1e0::8f36:512a
     torrents.zarantonello.net: 100.107.181.54
-    vault.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
-    victorialogs.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
-    victoriametrics.zarantonello.net: 100.79.164.85,fd7a:115c:a1e0::ab01:a48a
+    vault.zarantonello.net: 100.105.222.83
+    victorialogs.zarantonello.net: 100.105.222.83
+    victoriametrics.zarantonello.net: 100.105.222.83
 fqdnOnly:
   enable: true
 log:

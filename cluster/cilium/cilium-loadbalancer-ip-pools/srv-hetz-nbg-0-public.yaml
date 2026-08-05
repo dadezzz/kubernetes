@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumLoadBalancerIPPool
 metadata:
-  name: srv-0-nbg-hetz-public
+  name: srv-hetz-nbg-0-public
 spec:
   blocks:
     - cidr: 78.47.155.111/32

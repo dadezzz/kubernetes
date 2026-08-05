@@ -2,7 +2,8 @@
 
 ENCRYPTED_TARGETS = \
 	./cert-manager/secrets/acme-cloudflare-dns-api-token.yaml \
-	./forgejo-runner/_generated/secrets/runner.env \
+	./forgejo-runner/_generated/secrets/srv-hetz-nbg-0.env \
+	./forgejo-runner/_generated/secrets/srv-home.env \
 	./forgejo/_generated/secrets/forgejo.env \
 	./grafana/_generated/secrets/grafana.env \
 	./immich/_generated/secrets/postgres.env \

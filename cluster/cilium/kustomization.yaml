@@ -9,23 +9,23 @@ resources:
   # - cilium-clusterwide-network-policies/dns-visibility-blocky.yaml
   # - cilium-clusterwide-network-policies/dns-visibility-coredns.yaml
   # - cilium-clusterwide-network-policies/host-firewall.yaml
+  - cilium-loadbalancer-ip-pools/srv-hetz-nbg-0-public.yaml
+  - cilium-loadbalancer-ip-pools/srv-hetz-nbg-0-tailscale.yaml
   - cilium-loadbalancer-ip-pools/srv-home-lan.yaml
   - cilium-loadbalancer-ip-pools/srv-home-tailscale.yaml
-  # - cilium-loadbalancer-ip-pools/srv-0-nbg-hetz-public.yaml
-  # - cilium-loadbalancer-ip-pools/srv-0-nbg-hetz-tailscale.yaml
-  # - cilium-loadbalancer-ip-pools/srv-0-thi-home-lan.yaml
-  # - cilium-loadbalancer-ip-pools/srv-0-thi-home-tailscale.yaml
-  # - cilium-loadbalancer-ip-pools/srv-0-thi-home-wireguard.yaml
+  - gateways/srv-hetz-nbg-0-public-https.yaml
+  - gateways/srv-hetz-nbg-0-public-mail.yaml
+  - gateways/srv-hetz-nbg-0-tailscale-dns.yaml
+  - gateways/srv-hetz-nbg-0-tailscale-http.yaml
+  - gateways/srv-hetz-nbg-0-tailscale-https.yaml
+  - gateways/srv-hetz-nbg-0-internal-http.yaml
+  - gateways/srv-hetz-nbg-0-internal-https.yaml
+  - gateways/srv-hetz-nbg-0-tailscale-mail.yaml
   - gateways/srv-home-lan-bittorrent.yaml
   - gateways/srv-home-lan-dns.yaml
   - gateways/srv-home-tailscale-dns.yaml
   - gateways/srv-home-tailscale-http.yaml
   - gateways/srv-home-tailscale-https.yaml
-  # - gateways/srv-0-nbg-hetz-public-http.yaml
-  # - gateways/srv-0-nbg-hetz-tailscale-http.yaml
-  # - gateways/srv-0-thi-home-lan-http.yaml
-  # - gateways/srv-0-thi-home-tailscale-http.yaml
-  # - gateways/srv-0-thi-home-wireguard-http.yaml
   - helm-releases/cilium.yaml
   - helm-repositories/cilium.yaml
   - kustomization.flux.yaml

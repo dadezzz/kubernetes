@@ -21,7 +21,7 @@ spec:
         apps.zarantonello.dev/namespace: stalwart
     spec:
       containers:
-        - image: docker.io/stalwartlabs/stalwart:v0.15.4-alpine@sha256:a99c020d6059584101908e027e7505eef87758eb9b21f7c7c1211f0b43c1276e
+        - image: docker.io/stalwartlabs/stalwart:v0.16.15-alpine
           name: stalwart
           ports:
             - containerPort: 25
@@ -43,17 +43,14 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp
-            - mountPath: /opt/stalwart/etc
+            - mountPath: /etc/stalwart
               name: config
-            - mountPath: /opt/stalwart/tls
-              name: tls
-            - mountPath: /opt/stalwart
+            - mountPath: /var/lib/stalwart
               name: data
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-nbg-hetz
+        kubernetes.io/hostname: srv-hetz-nbg-0
       securityContext:
-        fsGroup: 54815
         runAsGroup: 54815
         runAsNonRoot: true
         runAsUser: 54815
@@ -65,9 +62,6 @@ spec:
         - configMap:
             name: stalwart-config
           name: config
-        - name: tls
-          secret:
-            secretName: mail-zarantonello-dev-tls
         - name: data
           persistentVolumeClaim:
             claimName: data

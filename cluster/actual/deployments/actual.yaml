@@ -33,8 +33,9 @@ spec:
             - mountPath: /data
               name: data
       enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-hetz-nbg-0
       securityContext:
-        fsGroup: 14638
         runAsGroup: 14638
         runAsNonRoot: true
         runAsUser: 14638

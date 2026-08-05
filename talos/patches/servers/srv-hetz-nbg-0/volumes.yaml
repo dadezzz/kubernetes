@@ -4,22 +4,12 @@ name: EPHEMERAL
 provisioning:
   diskSelector:
     match: disk.dev_path == "/dev/sda"
-  maxSize: 18GiB
-  minSize: 18GiB
----
-apiVersion: v1alpha1
-kind: SwapVolumeConfig
-name: swap
-provisioning:
-  diskSelector:
-    match: disk.dev_path == "/dev/sda"
-  maxSize: 1GiB
-  minSize: 1GiB
+  maxSize: 30GiB
+  minSize: 30GiB
 ---
 apiVersion: v1alpha1
 kind: ZswapConfig
 maxPoolPercent: 25
-shrinkerEnabled: true
 ---
 apiVersion: v1alpha1
 kind: UserVolumeConfig

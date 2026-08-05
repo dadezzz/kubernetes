@@ -7,11 +7,11 @@ spec:
     - mta-sts.zarantonello.dev
     - mta-sts.zarantonello.net
   parentRefs:
-    - name: srv-0-nbg-hetz-public-http
+    - name: srv-hetz-nbg-0-public-https
       namespace: cilium
   rules:
     - backendRefs:
-        - name: http
+        - name: stalwart
           port: 80
       matches:
         - path:

@@ -1,8 +1,0 @@
-apiVersion: cilium.io/v2
-kind: CiliumLoadBalancerIPPool
-metadata:
-  name: srv-0-nbg-hetz-tailscale
-spec:
-  blocks:
-    - cidr: 100.72.217.52/32
-    - cidr: fd7a:115c:a1e0::fe01:d942/128

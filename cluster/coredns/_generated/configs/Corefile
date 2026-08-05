@@ -3,6 +3,8 @@
     errors
     prometheus :9153
 
+    rewrite name git.zarantonello.dev cilium-gateway-srv-hetz-nbg-0-internal-https.cilium.svc.k8s.zarantonello.dev
+
     kubernetes k8s.zarantonello.dev in-addr.arpa ip6.arpa {
         pods disabled
         fallthrough in-addr.arpa ip6.arpa

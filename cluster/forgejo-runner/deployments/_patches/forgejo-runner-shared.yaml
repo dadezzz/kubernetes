@@ -20,7 +20,7 @@ spec:
         - command:
             - forgejo-runner
             - daemon
-            - --url=https://git.zarantonello.dev
+            - --url=http://http.forgejo.svc.k8s.zarantonello.dev
             - --uuid=$(RUNNER_UUID)
             - --token-url=file:///data/token
             - --label=$(NODE_NAME):docker://busybox
@@ -31,17 +31,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-            - name: RUNNER_UUID
-              valueFrom:
-                secretKeyRef:
-                  key: RUNNER_UUID
-                  name: runner-env
           image: data.forgejo.org/forgejo/runner:12.13.2@sha256:eb6e7bc21973382d261e6eb883dbd27b8cb56939d33a3bfd79a1352b7f9a33a0
           name: runner
           resources:
             limits:
               # Restart container if caches are too big.
-              ephemeral-storage: 5Gi
+              ephemeral-storage: 10Gi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -78,8 +73,6 @@ spec:
             privileged: true
             readOnlyRootFilesystem: true
           volumeMounts:
-            - mountPath: /etc/docker
-              name: docker-config
             - mountPath: /var/lib/docker
               name: docker-data
             - mountPath: /tmp
@@ -87,12 +80,6 @@ spec:
             - mountPath: /var/run
               name: docker-var-run
       enableServiceLinks: false
-      hostAliases:
-        # Override this so that runners connect directly to forgejo, without passing
-        # through Cloudflare's proxy.
-        - hostnames:
-            - git.zarantonello.dev
-          ip: 100.79.164.85
       securityContext:
         seccompProfile:
           type: RuntimeDefault
@@ -106,9 +93,6 @@ spec:
           name: runner-tmp
         - emptyDir: {}
           name: runner-data
-        - configMap:
-            name: docker-config
-          name: docker-config
         - hostPath:
             path: /var/mnt/data-0/forgejo-runner-docker-data
           name: docker-data
@@ -116,6 +100,3 @@ spec:
           name: docker-tmp
         - emptyDir: {}
           name: docker-var-run
-        - name: runner-token
-          secret:
-            secretName: runner-env

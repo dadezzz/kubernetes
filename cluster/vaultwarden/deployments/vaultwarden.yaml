@@ -27,10 +27,6 @@ spec:
           ports:
             - containerPort: 3000
               name: http
-          readinessProbe:
-            exec:
-              command:
-                - /healthcheck.sh
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -42,9 +38,8 @@ spec:
               name: data
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-nbg-hetz
+        kubernetes.io/hostname: srv-hetz-nbg-0
       securityContext:
-        fsGroup: 53382
         runAsGroup: 53382
         runAsNonRoot: true
         runAsUser: 53382
