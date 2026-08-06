@@ -11,5 +11,6 @@ spec:
     metadata:
       labels:
         apps.zarantonello.dev/variant: srv-home
+    spec:
       nodeSelector:
         kubernetes.io/hostname: srv-home

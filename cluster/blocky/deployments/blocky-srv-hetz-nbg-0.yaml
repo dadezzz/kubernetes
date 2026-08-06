@@ -11,5 +11,6 @@ spec:
     metadata:
       labels:
         apps.zarantonello.dev/variant: srv-hetz-nbg-0
+    spec:
       nodeSelector:
         kubernetes.io/hostname: srv-hetz-nbg-0
