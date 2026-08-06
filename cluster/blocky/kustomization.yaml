@@ -5,6 +5,11 @@ configMapGenerator:
     name: blocky-config
 kind: Kustomization
 namespace: blocky
+patches:
+  - path: deployments/_patches/blocky-shared.yaml
+    target:
+      kind: Deployment
+      name: blocky-.+
 resources:
   - deployments/blocky.yaml
   - kustomization.flux.yaml

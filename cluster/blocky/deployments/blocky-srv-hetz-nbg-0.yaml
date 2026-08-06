@@ -1,0 +1,15 @@
+# See deployments/_patches/shared.yaml for base deployment definition.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blocky-srv-hetz-nbg-0
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/variant: srv-hetz-nbg-0
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/variant: srv-hetz-nbg-0
+      nodeSelector:
+        kubernetes.io/hostname: srv-hetz-nbg-0

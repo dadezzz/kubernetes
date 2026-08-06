@@ -1,0 +1,15 @@
+# See deployments/_patches/shared.yaml for base deployment definition.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blocky-srv-home
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/variant: srv-home
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/variant: srv-home
+      nodeSelector:
+        kubernetes.io/hostname: srv-home

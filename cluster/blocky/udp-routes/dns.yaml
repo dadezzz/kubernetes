@@ -8,6 +8,8 @@ spec:
       namespace: cilium
     - name: srv-home-tailscale-dns
       namespace: cilium
+    - name: srv-hetz-nbg-0-tailscale-dns
+      namespace: cilium
   rules:
     - backendRefs:
         - name: dns

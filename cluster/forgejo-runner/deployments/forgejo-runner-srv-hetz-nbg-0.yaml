@@ -6,13 +6,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      apps.zarantonello.dev/name: forgejo-runner-srv-hetz-nbg-0
-      apps.zarantonello.dev/namespace: forgejo-runner
+      apps.zarantonello.dev/variant: srv-hetz-nbg-0
   template:
     metadata:
       labels:
-        apps.zarantonello.dev/name: forgejo-runner-srv-hetz-nbg-0
-        apps.zarantonello.dev/namespace: forgejo-runner
+        apps.zarantonello.dev/variant: srv-hetz-nbg-0
     spec:
       containers:
         - env:

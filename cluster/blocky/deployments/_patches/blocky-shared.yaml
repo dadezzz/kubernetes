@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  # Kustomize requires a name here, but it isn't used.
   name: blocky
 spec:
   selector:
@@ -16,18 +17,6 @@ spec:
         apps.zarantonello.dev/name: blocky
         apps.zarantonello.dev/namespace: blocky
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            # Avoid having more than one blocky instance per node, replicas are
-            # meant to be distributed across regions.
-            - podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    apps.zarantonello.dev/name: blocky
-                    apps.zarantonello.dev/namespace: blocky
-                topologyKey: kubernetes.io/hostname
-              weight: 50
       containers:
         - image: ghcr.io/0xerr0r/blocky:v0.34.0@sha256:595136fb127f4c952b621113e668c09acdcf15ac054d96ee6d4c51a76c35f5fd
           name: blocky
