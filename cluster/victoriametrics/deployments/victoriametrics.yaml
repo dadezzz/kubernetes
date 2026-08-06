@@ -38,9 +38,8 @@ spec:
               name: data
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-thi-home
+        kubernetes.io/hostname: srv-hetz-nbg-0
       securityContext:
-        fsGroup: 29986
         runAsGroup: 29986
         runAsNonRoot: true
         runAsUser: 29986
