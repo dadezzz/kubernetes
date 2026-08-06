@@ -40,11 +40,6 @@ spec:
               protocol: UDP
             - containerPort: 8080
               name: http
-          readinessProbe:
-            exec:
-              command:
-                - /app/blocky
-                - healthcheck
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -53,6 +48,11 @@ spec:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
+          startupProbe:
+            exec:
+              command:
+                - /app/blocky
+                - healthcheck
           volumeMounts:
             - mountPath: /app/config.yml
               name: config

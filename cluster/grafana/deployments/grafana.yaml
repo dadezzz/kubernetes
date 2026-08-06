@@ -28,18 +28,18 @@ spec:
           ports:
             - containerPort: 3000
               name: http
-          readinessProbe:
-            httpGet:
-              httpHeaders:
-                - name: host
-                  value: grafana.zarantonello.net
-              port: 3000
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
+          startupProbe:
+            httpGet:
+              httpHeaders:
+                - name: host
+                  value: grafana.zarantonello.net
+              port: 3000
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: data
@@ -52,9 +52,8 @@ spec:
               name: tmp
       enableServiceLinks: false
       nodeSelector:
-        kubernetes.io/hostname: srv-0-cor-home
+        kubernetes.io/hostname: srv-hetz-nbg-0
       securityContext:
-        fsGroup: 56186
         runAsGroup: 56186
         runAsNonRoot: true
         runAsUser: 56186
