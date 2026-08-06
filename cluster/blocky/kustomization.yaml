@@ -11,7 +11,8 @@ patches:
       kind: Deployment
       name: blocky-.+
 resources:
-  - deployments/blocky.yaml
+  - deployments/blocky-srv-hetz-nbg-0.yaml
+  - deployments/blocky-srv-home.yaml
   - kustomization.flux.yaml
   - namespace.yaml
   - service-accounts/default.yaml
