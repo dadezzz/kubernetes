@@ -2,11 +2,10 @@ cache:
   dir: /data/cache
 
 container:
-  # Mount pod's /etc/hosts to keep the git.zarantonello.dev address override.
-  options: -v /etc/hosts:/etc/hosts
+  # Point git.zarantonello.dev to the caddy proxy.
+  options: --add-host git.zarantonello.dev:host-gateway
   privileged: true
   valid_volumes:
-    - /etc/hosts
     - forgejo-runner-cache-*
 
 host:

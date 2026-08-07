@@ -1,0 +1,4 @@
+git.zarantonello.dev {
+    tls /etc/caddy/tls/git.zarantonello.dev/tls.crt /etc/caddy/tls/git.zarantonello.dev/tls.key
+    reverse_proxy http.forgejo.svc.k8s.zarantonello.dev
+}

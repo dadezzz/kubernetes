@@ -18,8 +18,6 @@ resources:
   - gateways/srv-hetz-nbg-0-tailscale-dns.yaml
   - gateways/srv-hetz-nbg-0-tailscale-http.yaml
   - gateways/srv-hetz-nbg-0-tailscale-https.yaml
-  - gateways/srv-hetz-nbg-0-internal-http.yaml
-  - gateways/srv-hetz-nbg-0-internal-https.yaml
   - gateways/srv-hetz-nbg-0-tailscale-mail.yaml
   - gateways/srv-home-lan-bittorrent.yaml
   - gateways/srv-home-lan-dns.yaml

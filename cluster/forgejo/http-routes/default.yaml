@@ -12,10 +12,6 @@ spec:
       namespace: cilium
     - name: srv-hetz-nbg-0-tailscale-http
       namespace: cilium
-    - name: srv-hetz-nbg-0-internal-https
-      namespace: cilium
-    - name: srv-hetz-nbg-0-internal-http
-      namespace: cilium
   rules:
     - backendRefs:
         - name: http
