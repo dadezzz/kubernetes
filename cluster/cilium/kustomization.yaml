@@ -9,10 +9,12 @@ resources:
   # - cilium-clusterwide-network-policies/dns-visibility-blocky.yaml
   # - cilium-clusterwide-network-policies/dns-visibility-coredns.yaml
   # - cilium-clusterwide-network-policies/host-firewall.yaml
+  - cilium-gateway-class-configs/access-logs.yaml
   - cilium-loadbalancer-ip-pools/srv-hetz-nbg-0-public.yaml
   - cilium-loadbalancer-ip-pools/srv-hetz-nbg-0-tailscale.yaml
   - cilium-loadbalancer-ip-pools/srv-home-lan.yaml
   - cilium-loadbalancer-ip-pools/srv-home-tailscale.yaml
+  - gateway-classes/cilium-access-logs.yaml
   - gateways/srv-hetz-nbg-0-public-https.yaml
   - gateways/srv-hetz-nbg-0-public-mail.yaml
   - gateways/srv-hetz-nbg-0-tailscale-dns.yaml

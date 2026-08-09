@@ -1,7 +1,0 @@
-apiVersion: v1alpha1
-hostnames:
-  # Makes cluster nodes bypass the Cloudflare proxy when pulling images from
-  # Forgejo.
-  - git.zarantonello.dev
-kind: StaticHostConfig
-name: 100.105.222.83

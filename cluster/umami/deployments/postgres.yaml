@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: postgres
+      apps.zarantonello.dev/namespace: umami
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: postgres
+        apps.zarantonello.dev/namespace: umami
+    spec:
+      containers:
+        - envFrom:
+            - secretRef:
+                name: postgres-env
+          image: docker.io/library/postgres:18.4@sha256:3a82e1f56c8f0f5616a11103ac3d47e632c3938698946a7ad26da0df1334744a
+          name: postgres
+          ports:
+            - containerPort: 5432
+              name: postgres
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /var/lib/postgresql
+              name: data
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: /var/run/postgresql
+              name: sockets
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-hetz-nbg-0
+      securityContext:
+        runAsGroup: 70
+        runAsNonRoot: true
+        # User has to be 70, otherwise the container tries to chown the postgres
+        # volume but fails due to insufficient permissions.
+        runAsUser: 70
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - emptyDir: {}
+          name: tmp
+        - emptyDir: {}
+          name: sockets
+        - name: data
+          persistentVolumeClaim:
+            claimName: postgres-data

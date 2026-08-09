@@ -8,7 +8,7 @@ spec:
       value: 78.47.155.111
     - type: IPAddress
       value: "2a01:4f8:1c1a:3498::"
-  gatewayClassName: cilium
+  gatewayClassName: cilium-access-logs
   infrastructure:
     annotations:
       lbipam.cilium.io/sharing-cross-namespace: "*"
