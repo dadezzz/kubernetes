@@ -16,11 +16,12 @@ resources:
   - cilium-loadbalancer-ip-pools/srv-home-tailscale.yaml
   - gateway-classes/cilium-access-logs.yaml
   - gateways/srv-hetz-nbg-0-public-https.yaml
-  - gateways/srv-hetz-nbg-0-public-mail.yaml
+  - gateways/srv-hetz-nbg-0-public-smtp.yaml
   - gateways/srv-hetz-nbg-0-tailscale-dns.yaml
   - gateways/srv-hetz-nbg-0-tailscale-http.yaml
   - gateways/srv-hetz-nbg-0-tailscale-https.yaml
-  - gateways/srv-hetz-nbg-0-tailscale-mail.yaml
+  - gateways/srv-hetz-nbg-0-tailscale-imaps.yaml
+  - gateways/srv-hetz-nbg-0-tailscale-submissions.yaml
   - gateways/srv-home-lan-bittorrent.yaml
   - gateways/srv-home-lan-dns.yaml
   - gateways/srv-home-tailscale-dns.yaml
