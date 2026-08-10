@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: srv-hetz-nbg-0-public-smtp
+spec:
+  addresses:
+    - type: IPAddress
+      value: 78.47.155.111
+    - type: IPAddress
+      value: "2a01:4f8:1c1a:3498::"
+  gatewayClassName: cilium
+  infrastructure:
+    annotations:
+      lbipam.cilium.io/sharing-cross-namespace: "*"
+      lbipam.cilium.io/sharing-key: srv-hetz-nbg-0-public
+  listeners:
+    - allowedRoutes:
+        namespaces:
+          from: All
+      name: smtp
+      port: 25
+      protocol: TCP

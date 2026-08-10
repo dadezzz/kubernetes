@@ -4,7 +4,7 @@ metadata:
   name: imaps
 spec:
   parentRefs:
-    - name: srv-hetz-nbg-0-tailscale-mail
+    - name: srv-hetz-nbg-0-tailscale-imaps
       namespace: cilium
   rules:
     - backendRefs:

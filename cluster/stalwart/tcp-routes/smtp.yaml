@@ -4,7 +4,7 @@ metadata:
   name: smtp
 spec:
   parentRefs:
-    - name: srv-hetz-nbg-0-public-mail
+    - name: srv-hetz-nbg-0-public-smtp
       namespace: cilium
   rules:
     - backendRefs:

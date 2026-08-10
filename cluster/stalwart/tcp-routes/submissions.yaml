@@ -4,7 +4,7 @@ metadata:
   name: submissions
 spec:
   parentRefs:
-    - name: srv-hetz-nbg-0-tailscale-mail
+    - name: srv-hetz-nbg-0-tailscale-submissions
       namespace: cilium
   rules:
     - backendRefs:

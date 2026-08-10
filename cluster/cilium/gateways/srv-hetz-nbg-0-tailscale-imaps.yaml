@@ -1,7 +1,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: srv-hetz-nbg-0-tailscale-mail
+  name: srv-hetz-nbg-0-tailscale-imaps
 spec:
   addresses:
     - type: IPAddress
@@ -14,13 +14,9 @@ spec:
       lbipam.cilium.io/sharing-cross-namespace: "*"
       lbipam.cilium.io/sharing-key: srv-hetz-nbg-0-tailscale
   listeners:
-    - allowedRoutes: &allowedRoutes
+    - allowedRoutes:
         namespaces:
           from: All
       name: submissions
-      port: 465
-      protocol: TCP
-    - allowedRoutes: *allowedRoutes
-      name: imaps
       port: 993
       protocol: TCP
