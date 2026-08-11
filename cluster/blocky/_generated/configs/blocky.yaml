@@ -11,16 +11,16 @@ blocking:
       - default
   denylists:
     default:
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/dyndns.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/gambling.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/hoster-onlydomains.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/native.samsung.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/native.tiktok.extended.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/native.winoffice.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/native.xiaomi.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/tif.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/dyndns.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/fake-onlydomains.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/gambling.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/hoster-onlydomains.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/native.samsung.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/native.tiktok.extended.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/native.winoffice.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/native.xiaomi.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/pro.plus.txt
+      - https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/tif.txt
   loading:
     concurrency: 2
     downloads:
@@ -40,7 +40,6 @@ customDNS:
     mail.zarantonello.dev: 100.105.222.83
     metrics.zarantonello.dev: 100.105.222.83
     photos.zarantonello.net: 100.107.181.54
-    s3.zarantonello.dev: 100.111.81.42,fd7a:115c:a1e0::8f36:512a
     torrents.zarantonello.net: 100.107.181.54
     vault.zarantonello.net: 100.105.222.83
 fqdnOnly:
