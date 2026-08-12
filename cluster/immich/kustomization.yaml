@@ -3,9 +3,6 @@ configMapGenerator:
   - envs:
       - _generated/configs/immich.env
     name: server-env
-  - files:
-      - _generated/configs/ffmpeg
-    name: server-ffmpeg
 kind: Kustomization
 namespace: immich
 resources:

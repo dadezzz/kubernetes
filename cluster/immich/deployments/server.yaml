@@ -45,20 +45,20 @@ spec:
             - containerPort: 2283
               name: http
           securityContext:
+            allowPrivilegeEscalation: false
             capabilities:
               drop:
                 - ALL
-            # Needed for the GPU.
-            privileged: true
             readOnlyRootFilesystem: true
+          startupProbe:
+            httpGet:
+              httpHeaders:
+                - name: host
+                  value: photos.zarantonello.net
+              port: 2283
           volumeMounts:
             - mountPath: /usr/src/app/upload
               name: data
-            - mountPath: /dev/dri
-              name: dev-dri
-            - mountPath: /usr/local/bin/ffmpeg
-              name: ffmpeg
-              subPath: ffmpeg
       enableServiceLinks: false
       nodeSelector:
         kubernetes.io/hostname: srv-home
@@ -72,11 +72,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: server-data
-        - hostPath:
-            path: /dev/dri
-            type: Directory
-          name: dev-dri
-        - configMap:
-            defaultMode: 0777
-            name: server-ffmpeg
-          name: ffmpeg
