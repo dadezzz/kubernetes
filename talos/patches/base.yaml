@@ -28,7 +28,7 @@ cluster:
     # The default SAN for the endpoint will be added by `talosctl gen config`.
     # These additional ones are used to connect to the API server via tailscale.
     certSANs:
-      - 100.111.94.27
+      - srv-home.gentoo-sargas.ts.net
   controllerManager:
     extraArgs:
       # Use same node subnet size for both IPv4 and IPv6 since pods would need
@@ -71,6 +71,7 @@ machine:
     # Force nodes to use the Tailscale network to communicate.
     nodeIP:
       validSubnets:
-        - 100.0.0.0/8
+        - 10.95.0.0/24
+        - fda9:b00c:8b29:33f9::1095:0/120
 persist: true
 version: v1alpha1

@@ -2,7 +2,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: cilium
-  namespace: cilium
 spec:
   chart:
     spec:
@@ -73,9 +72,11 @@ spec:
       enabled: true
     ipv6:
       enabled: true
-    k8sServiceHost: 100.107.181.54
+    k8sServiceHost: 10.95.0.1
     k8sServicePort: 6443
     kubeProxyReplacement: true
+    loadBalancer:
+      serviceTopology: true
     operator:
       replicas: 1
     podAnnotations:

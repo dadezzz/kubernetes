@@ -1,25 +1,20 @@
 apiVersion: v1alpha1
-# All variables below will be encrypted by sops, these are the clear values for
-# the non secret ones.
-# - TS_ENABLE_METRICS=true
-# Also remember to set TS_AUTHKEY.
 environment:
-  - ENC[AES256_GCM,data:D0LB5DKni8Idk2ZGNjeU4T2xkqc1jg==,iv:izBrkzpKgji8P9pFm1+gohEYUJvH67EEwsnfhDNgdfs=,tag:l59/Z5E5LPVGa1xaWARK1A==,type:str]
-  - ENC[AES256_GCM,data:vX3pv4TxeYsy8TMgiCzXekv1f+3R8YoDh3qoxffJqNzY88jfkCn+4mYlBzPMXRyla+2KLA9KZIFA19iknlZ31ATdBzegPZfe8A==,iv:bAHVKY1xistNZSM9+pEHd3zjmxLDn/caxH2Ku2IbrVY=,tag:FIsIUmQsjyUmUvnYR3tbHg==,type:str]
+  - ENC[AES256_GCM,data:b5vWFk5qLnwYdoXMvh93MiQhzGOxghzgh+/po60OgaHYH0anCMYeChBBQxTRHQMcMDdvnlA63d6BY2/RJ5F44HnrLVvoqqf+XQ==,iv:f15vOgpyKa7+nerZBoVIVgni3WUemUuz0j0eoQuWnXo=,tag:LpaDDz0WFFcfT1D3TiE23A==,type:str]
 kind: ExtensionServiceConfig
 name: tailscale
 sops:
   age:
     - enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBka25JTW1aZG5lWVU4RTlI
-        MUhESWhWbng4MndVd1pjZTRRL21nYlRSY1RZCmlPVktRQ05MTEVxb3RvN2daUm1W
-        NUlXYVl0MHdmVldTbXZ5UU9tQll0b3MKLS0tIHNjTlR2KzB4anZsd1dJdzhvNFJI
-        aVlvRGQxdzFCUDVkTlJhc3N4RTArcncKB3kuc6MnBkIR1fklOvdBKL3M5o2WGnxu
-        iq04JiKFI8u9M9kzLUMayhyUx04ksjjE3Mt7PbUYEUIiLG97DJ3SBA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuMEtkYmZJdlBIU25rTTND
+        Tlc2dmxzWUhBUHl4a0ZhWS81dWFrU2VudTNZCk1JR3dreEI2NmxIakxJK0NLMUJV
+        UUNTOGVGNG8zaXM3UmlvbXQrc1lpbjgKLS0tIGR4MFBiS2QvUnpBNHhWOEQwOWJm
+        akR3QW5YbWRDNUhwK2VrTGRtVjU2bjAKt8bHycKG6HDjMiEL579oPhYMzWGrEsWN
+        ZiiAdYLKwyS2o8pjq0/c7c1+zfd0eHCh0e7TA6dxsjHVi0QqCittGg==
         -----END AGE ENCRYPTED FILE-----
       recipient: age1cyyv047n8zvzhadswewg7vdfzna0eslhvajwn782sypnpnks5u5svgjswh
   encrypted_regex: environment
-  lastmodified: "2026-07-25T10:14:24Z"
-  mac: ENC[AES256_GCM,data:Yl7hAXSVO2BD507ZZGljtZNphoRrkVGMrIvwir9Z4AvL+eXu/Y+z8enMC2Hr0sAfGcJp28UCyxX7WeLn4lbbvgUbtUexIK+/X86Q3tri9QuGl9DIb6n+WQQHVM0mKXKlIPi4tSUV6yAwBXZ9XXOzYoYTc3VPrlDqQB0B2TtVDq8=,iv:+/xCUy+Q90EBSLCl74I6llGpIhqaScp4nk5x6I/0Gt4=,tag:jV0+ZxzjGDL3ShxEGTq18Q==,type:str]
+  lastmodified: "2026-08-16T15:53:13Z"
+  mac: ENC[AES256_GCM,data:6AgzLj4t/q0s62pP6CDga+x9f98zx1JQEmbt2HqDZr/Ehc0W3c2o6NcSfKIYKeMvdcfENRhRyeLWzVxjToVFcSiQpQiwk8NEybKGNJ1wSK/c8VhDFK0sJfW44FEepb5FBz2bqLs9D/oxoCMXKRcw5+42ExVrTofHI2y8mDA9uT4=,iv:yXHwrxe8hcjgIbsgXrcXaeL01MyBsnhhkRZ5zqpog58=,tag:/3w6HRcdwodJIdImGCqCZg==,type:str]
   version: 3.13.2

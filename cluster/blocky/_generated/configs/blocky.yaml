@@ -3,8 +3,7 @@ blocking:
     default:
       # Whitelist push notification providers for mobile phones.
       - https://badblock.celenity.dev/wildcards-star/push_whitelist.txt
-      - |
-        stats.grafana.org
+      - stats.grafana.org
   blockType: nxDomain
   clientGroupsBlock:
     default:
@@ -34,14 +33,14 @@ caching:
   prefetching: true
 customDNS:
   mapping:
-    actual.zarantonello.net: 100.105.222.83
-    grafana.zarantonello.net: 100.105.222.83
-    llama.zarantonello.dev: 100.107.181.54
-    mail.zarantonello.dev: 100.105.222.83
-    metrics.zarantonello.dev: 100.105.222.83
-    photos.zarantonello.net: 100.107.181.54
-    torrents.zarantonello.net: 100.107.181.54
-    vault.zarantonello.net: 100.105.222.83
+    actual.zarantonello.net: 100.83.193.88
+    grafana.zarantonello.net: 100.83.193.88
+    llama.zarantonello.dev: 100.107.198.103
+    mail.zarantonello.dev: 100.83.193.88
+    metrics.zarantonello.dev: 100.83.193.88
+    photos.zarantonello.net: 100.107.198.103
+    torrents.zarantonello.net: 100.107.198.103
+    vault.zarantonello.net: 100.83.193.88
 fqdnOnly:
   enable: true
 log:

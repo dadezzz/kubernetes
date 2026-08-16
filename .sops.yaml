@@ -10,6 +10,9 @@ creation_rules:
     encrypted_regex: environment
     path_regex: talos/patches/network/tailscale\.yaml
   - age: age1cyyv047n8zvzhadswewg7vdfzna0eslhvajwn782sypnpnks5u5svgjswh
+    encrypted_regex: privateKey
+    path_regex: talos/patches/servers/.+/networks/wg0\.yaml
+  - age: age1cyyv047n8zvzhadswewg7vdfzna0eslhvajwn782sypnpnks5u5svgjswh
     path_regex: talos/secrets\.yaml
 
 stores:

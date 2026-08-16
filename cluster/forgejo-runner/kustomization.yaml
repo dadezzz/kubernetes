@@ -3,9 +3,6 @@ configMapGenerator:
   - files:
       - _generated/configs/config.yaml
     name: runner-config
-  - files:
-      - _generated/configs/Caddyfile
-    name: caddy-config
 kind: Kustomization
 namespace: forgejo-runner
 patches:
@@ -14,7 +11,6 @@ patches:
       kind: Deployment
       name: forgejo-runner-.+
 resources:
-  - certificates/git-zarantonello-dev.yaml
   - deployments/forgejo-runner-srv-hetz-nbg-0.yaml
   - deployments/forgejo-runner-srv-home.yaml
   - kustomization.flux.yaml

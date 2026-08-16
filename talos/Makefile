@@ -1,12 +1,13 @@
 all: generated/srv-hetz-nbg-0.yaml generated/srv-home.yaml
 
 ENCRYPTED_TARGETS := \
-	./patches/network/tailscale.yaml \
-	./secrets.yaml
+	$(wildcard patches/servers/*/networks/wg0.yaml) \
+	patches/network/tailscale.yaml \
+	secrets.yaml
 
 GEN_CONFIG_SHARED_PATCHES := \
-	patches/base.yaml \
-	$(wildcard patches/network/*)
+	$(wildcard patches/network/*) \
+	patches/base.yaml
 
 GEN_CONFIG_SHARED_CONTROLPLANE_PATCHES := \
 	patches/controlplane.yaml \
@@ -17,7 +18,7 @@ GEN_CONFIG_SHARED_ARGS := \
 	--with-examples=false \
 	--with-secrets=secrets.yaml \
 	k8s.zarantonello.dev \
-	https://100.107.181.54:6443
+	https://10.95.0.1:6443
 
 GEN_CONFIG_SRV_HETZ_NBG_0_PATCHES := \
 	$(GEN_CONFIG_SHARED_PATCHES) \

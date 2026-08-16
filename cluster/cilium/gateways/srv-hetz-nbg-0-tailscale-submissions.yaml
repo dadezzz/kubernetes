@@ -5,9 +5,9 @@ metadata:
 spec:
   addresses:
     - type: IPAddress
-      value: 100.105.222.83
+      value: 100.83.193.88
     - type: IPAddress
-      value: fd7a:115c:a1e0::cd36:de54
+      value: fd7a:115c:a1e0::d136:c159
   gatewayClassName: cilium
   infrastructure:
     annotations:

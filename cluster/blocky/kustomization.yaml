@@ -13,6 +13,7 @@ patches:
 resources:
   - deployments/blocky-srv-hetz-nbg-0.yaml
   - deployments/blocky-srv-home.yaml
+  - pod-disruption-budgets/blocky.yaml
   - kustomization.flux.yaml
   - namespace.yaml
   - service-accounts/default.yaml

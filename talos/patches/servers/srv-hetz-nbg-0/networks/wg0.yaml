@@ -1,0 +1,29 @@
+addresses:
+  - address: 10.95.0.2/24
+  - address: fda9:b00c:8b29:33f9::1095:2/120
+apiVersion: v1alpha1
+kind: WireguardConfig
+listenPort: 51820
+mtu: 1420
+name: wg0
+peers:
+  - allowedIPs:
+      - 10.95.0.1/32
+      - fda9:b00c:8b29:33f9::1095:1/128
+    publicKey: HRZOnISyoJC6h4zKVVP9i89Cj5AhgtmR/sLP2mXrxQU=
+privateKey: ENC[AES256_GCM,data:RP9mXHAjTQQR+63hf4RlhzrNejv7S2k9Cl4Bp94DNxIs7PNphN8Yfdk+R3A=,iv:7A74WOnVzxE3sDNUPz0pmsVQQqxZEETi/DnZONj31ew=,tag:KKdAFmEtgOsBqNi+rUWBtA==,type:str]
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjcUU5RWFYM3ZzR1pyTVN6
+        TmxKTjROU0ZzSWVNOHgwNGlkdWJOT1hiV2c4Ci9JUVBUZmZoZ3VKZ0w1dXpvTmZC
+        NldZdW5kcGhsYlRWMEVLek9Qc2l2NnMKLS0tIEZCc2N4czNWcFRKcEFYNkxJcHBk
+        UXNDZzV4OEpEZXoyWnJoQkIzODZRVzgKr9SR9NeIP7xJ+QeiknbOcVXr43oAdkci
+        e5ra+/asdNlZKHd1l2KOLBkk9shJGDJSNu0OjueI9xrv2i1H9OZJ4A==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age1cyyv047n8zvzhadswewg7vdfzna0eslhvajwn782sypnpnks5u5svgjswh
+  encrypted_regex: privateKey
+  lastmodified: "2026-08-16T15:53:44Z"
+  mac: ENC[AES256_GCM,data:LxgLzPw9gMLvsjMNLto/TKt9bqbaDh6HM7y/fyURN8BQMKacQjpjsWyEioA0dyU5G18zzIcAdIBcqjUXfdID4sxrddcZ0ubqi+FeSeit9z1VISy2UYWcskJHWLu1r4Cvxnig8FF4MeTWEGSv4Ks68ZB5LpbWXF9ZXf5kJ95U880=,iv:tMSHyz1hN/0aiQcSTTFxinG3UZm7VEePlk+eMKa2IbA=,tag:SjXEvCVKKDbPUzhC5klkmQ==,type:str]
+  version: 3.13.2

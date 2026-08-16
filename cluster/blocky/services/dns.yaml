@@ -17,3 +17,6 @@ spec:
   selector:
     apps.zarantonello.dev/name: blocky
     apps.zarantonello.dev/namespace: blocky
+  # Use same node since for now each one has a dns server. If we expand it would
+  # be better to set zones.
+  trafficDistribution: PreferSameNode

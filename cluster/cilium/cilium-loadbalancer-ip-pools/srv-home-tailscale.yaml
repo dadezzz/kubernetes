@@ -4,5 +4,5 @@ metadata:
   name: srv-home-tailscale
 spec:
   blocks:
-    - cidr: 100.107.181.54/32
-    - cidr: fd7a:115c:a1e0::2d36:b538/128
+    - cidr: 100.107.198.103/32
+    - cidr: fd7a:115c:a1e0::1836:c668/128
