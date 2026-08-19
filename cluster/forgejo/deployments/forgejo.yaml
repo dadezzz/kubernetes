@@ -49,6 +49,7 @@ spec:
         kubernetes.io/hostname: srv-hetz-nbg-0
       securityContext:
         # Forgejo expects to run as user git.
+        fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
         runAsUser: 1000
