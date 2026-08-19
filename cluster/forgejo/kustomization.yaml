@@ -18,3 +18,7 @@ secretGenerator:
   - envs:
       - _generated/secrets/forgejo.env
     name: forgejo-env
+  - files:
+      - _generated/secrets/signing.ed25519
+      - _generated/secrets/signing.ed25519.pub
+    name: forgejo-signing-key

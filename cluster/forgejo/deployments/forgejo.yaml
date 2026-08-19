@@ -37,7 +37,9 @@ spec:
             readOnlyRootFilesystem: true
           volumeMounts:
             - mountPath: /var/lib/gitea/custom/conf
-              name: tmp-config
+              name: config
+            - mountPath: /var/lib/gitea/ssh
+              name: signing-key
             - mountPath: /var/lib/gitea
               name: data
             - mountPath: /tmp
@@ -47,7 +49,6 @@ spec:
         kubernetes.io/hostname: srv-hetz-nbg-0
       securityContext:
         # Forgejo expects to run as user git.
-        fsGroup: 1000
         runAsGroup: 1000
         runAsNonRoot: true
         runAsUser: 1000
@@ -57,7 +58,11 @@ spec:
         - emptyDir: {}
           name: tmp
         - emptyDir: {}
-          name: tmp-config
+          name: config
         - name: data
           persistentVolumeClaim:
             claimName: data
+        - name: signing-key
+          secret:
+            defaultMode: 0600
+            secretName: forgejo-signing-key
