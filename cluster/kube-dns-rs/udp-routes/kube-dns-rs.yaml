@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: UDPRoute
+metadata:
+  name: kube-dns-rs
+spec:
+  parentRefs:
+    - name: srv-home-lan-dns
+      namespace: cilium
+    - name: srv-home-tailscale-dns
+      namespace: cilium
+    - name: srv-hetz-nbg-0-tailscale-dns
+      namespace: cilium
+  rules:
+    - backendRefs:
+        - name: kube-dns-rs
+          port: 53

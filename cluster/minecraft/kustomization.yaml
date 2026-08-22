@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: minecraft
 resources:
   - deployments/minecraft.yaml
+  - dnsrecord.yaml
   - kustomization.flux.yaml
   - namespace.yaml
   - persistent-volume-claims/data.yaml

@@ -1,0 +1,14 @@
+apiVersion: zarantonello.dev/v1
+kind: DnsRecord
+metadata:
+  name: minecraft-zarantonello-dev
+  namespace: minecraft
+spec:
+  data:
+    - A:
+        addresses:
+          - 100.107.198.103
+    - AAAA:
+        addresses:
+          - fd7a:115c:a1e0::1836:c668
+  fqdn: minecraft.zarantonello.dev

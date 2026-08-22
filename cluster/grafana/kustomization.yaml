@@ -11,6 +11,7 @@ kind: Kustomization
 namespace: grafana
 resources:
   - deployments/grafana.yaml
+  - dnsrecord.yaml
   - http-routes/default.yaml
   - kustomization.flux.yaml
   - namespace.yaml

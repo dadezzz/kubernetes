@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: actual
 resources:
   - deployments/actual.yaml
+  - dnsrecord.yaml
   - http-routes/default.yaml
   - kustomization.flux.yaml
   - namespace.yaml

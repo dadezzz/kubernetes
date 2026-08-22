@@ -6,8 +6,9 @@ configMapGenerator:
 kind: Kustomization
 namespace: umami
 resources:
-  - deployments/server.yaml
   - deployments/postgres.yaml
+  - deployments/server.yaml
+  - dnsrecord.yaml
   - http-routes/public.yaml
   - http-routes/tailscale.yaml
   - kustomization.flux.yaml

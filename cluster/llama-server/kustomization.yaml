@@ -7,6 +7,7 @@ kind: Kustomization
 namespace: llama-server
 resources:
   - deployments/llama-server.yaml
+  - dnsrecord.yaml
   - http-routes/default.yaml
   - kustomization.flux.yaml
   - namespace.yaml

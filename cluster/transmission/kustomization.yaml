@@ -4,6 +4,7 @@ namespace: transmission
 resources:
   - deployments/caddy.yaml
   - deployments/transmission.yaml
+  - dnsrecord.yaml
   - http-routes/caddy.yaml
   - http-routes/transmission.yaml
   - kustomization.flux.yaml

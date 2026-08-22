@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - files:
+      - _generated/configs/config.yaml
+    name: kube-dns-rs-config
+kind: Kustomization
+namespace: kube-dns-rs
+resources:
+  - cluster-role-bindings/kube-dns-rs.yaml
+  - cluster-roles/kube-dns-rs.yaml
+  - deployments/kube-dns-rs.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - service-accounts/default.yaml
+  - service-accounts/kube-dns-rs.yaml
+  - services/kube-dns-rs.yaml
+  - tcp-routes/kube-dns-rs.yaml
+  - udp-routes/kube-dns-rs.yaml
