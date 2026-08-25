@@ -1,0 +1,11 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: docker-system-prune-srv-hezt-ngb-0
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          nodeSelector:
+            kubernetes.io/hostname: srv-hetz-nbg-0

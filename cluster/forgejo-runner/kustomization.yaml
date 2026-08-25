@@ -10,7 +10,13 @@ patches:
     target:
       kind: Deployment
       name: forgejo-runner-.+
+  - path: cron-jobs/_patches/docker-system-prune-shared.yaml
+    target:
+      kind: CronJob
+      name: docker-system-prune-.+
 resources:
+  - cron-jobs/docker-system-prune-srv-hetz-nbg-0.yaml
+  - cron-jobs/docker-system-prune-srv-home.yaml
   - deployments/forgejo-runner-srv-hetz-nbg-0.yaml
   - deployments/forgejo-runner-srv-home.yaml
   - kustomization.flux.yaml

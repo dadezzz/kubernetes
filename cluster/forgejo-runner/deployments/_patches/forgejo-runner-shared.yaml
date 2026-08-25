@@ -96,5 +96,6 @@ spec:
           name: docker-data
         - emptyDir: {}
           name: docker-tmp
-        - emptyDir: {}
+        - hostPath:
+            path: /var/mnt/data-0/forgejo-runner-docker-run
           name: docker-var-run

@@ -2,7 +2,6 @@ cache:
   dir: /data/cache
 
 container:
-  options: --add-host git.zarantonello.dev:100.83.193.88
   privileged: true
   valid_volumes:
     - forgejo-runner-cache-*

@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  # Kustomize requires a name here, but it isn't used.
+  name: docker-system-prune
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - command:
+                - docker
+                - system
+                - prune
+                - -fa
+                - --volumes
+              image: docker.io/library/docker:29.7.2-dind@sha256:12e683a161823b2a839aeea999b9d960e6e1f9a97b1679ad6b441982e2d9cf07
+              name: prune
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
+                readOnlyRootFilesystem: true
+              volumeMounts:
+                - mountPath: /var/run
+                  name: docker-var-run
+          enableServiceLinks: false
+          restartPolicy: OnFailure
+          securityContext:
+            runAsGroup: 4880
+            runAsNonRoot: true
+            runAsUser: 4880
+            seccompProfile:
+              type: RuntimeDefault
+          volumes:
+            - hostPath:
+                path: /var/mnt/data-0/forgejo-runner-docker-data
+              name: docker-data
+            - emptyDir: {}
+              name: docker-tmp
+            - hostPath:
+                path: /var/mnt/data-0/forgejo-runner-docker-run
+              name: docker-var-run
+  schedule: 0 2 */5 * * # Every 5 days at 2:00.
+  successfulJobsHistoryLimit: 1
