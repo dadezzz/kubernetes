@@ -2,7 +2,6 @@ apiVersion: zarantonello.dev/v1
 kind: DnsRecord
 metadata:
   name: vault-zarantonello-net
-  namespace: vaultwarden
 spec:
   data:
     - A:

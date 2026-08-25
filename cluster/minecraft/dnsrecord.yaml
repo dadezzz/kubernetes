@@ -2,7 +2,6 @@ apiVersion: zarantonello.dev/v1
 kind: DnsRecord
 metadata:
   name: minecraft-zarantonello-dev
-  namespace: minecraft
 spec:
   data:
     - A:

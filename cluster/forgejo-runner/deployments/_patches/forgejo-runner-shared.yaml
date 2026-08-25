@@ -56,11 +56,6 @@ spec:
             - mountPath: /var/run
               name: docker-var-run
       enableServiceLinks: false
-      # Needed so that docker can pull images through the caddy proxy.
-      hostAliases:
-        - hostnames:
-            - git.zarantonello.dev
-          ip: 100.83.193.88
       initContainers:
         - command:
             - dockerd

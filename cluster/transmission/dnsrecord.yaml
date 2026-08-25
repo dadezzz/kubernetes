@@ -2,7 +2,6 @@ apiVersion: zarantonello.dev/v1
 kind: DnsRecord
 metadata:
   name: torrents-zarantonello-net
-  namespace: transmission
 spec:
   data:
     - A:

@@ -2,7 +2,6 @@ apiVersion: zarantonello.dev/v1
 kind: DnsRecord
 metadata:
   name: photos-zarantonello-net
-  namespace: immich
 spec:
   data:
     - A:

@@ -2,7 +2,6 @@ apiVersion: zarantonello.dev/v1
 kind: DnsRecord
 metadata:
   name: actual-zarantonello-net
-  namespace: actual
 spec:
   data:
     - A:
