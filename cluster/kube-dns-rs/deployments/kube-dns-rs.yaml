@@ -46,6 +46,11 @@ spec:
           volumeMounts:
             - mountPath: /etc/kube-dns-rs
               name: config
+      dnsConfig:
+        nameservers:
+          - 1.1.1.1
+          - 1.0.0.1
+      dnsPolicy: None
       enableServiceLinks: false
       securityContext:
         runAsGroup: 3146
