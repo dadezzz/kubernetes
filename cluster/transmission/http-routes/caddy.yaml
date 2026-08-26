@@ -12,7 +12,7 @@ spec:
       namespace: cilium
   rules:
     - backendRefs:
-        - name: caddy-http
+        - name: caddy
           port: 80
       matches:
         - path:

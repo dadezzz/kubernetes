@@ -10,7 +10,7 @@ spec:
       namespace: cilium
   rules:
     - backendRefs:
-        - name: http
+        - name: vaultwarden
           port: 80
       matches:
         - path:

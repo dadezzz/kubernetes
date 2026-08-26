@@ -12,7 +12,7 @@ spec:
       namespace: cilium
   rules:
     - backendRefs:
-        - name: http
+        - name: llama-server
           port: 80
       matches:
         - path:

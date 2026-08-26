@@ -10,7 +10,7 @@ spec:
       namespace: cilium
   rules:
     - backendRefs:
-        - name: transmission-http
+        - name: transmission
           port: 80
       matches:
         - path:
