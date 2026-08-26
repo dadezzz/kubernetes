@@ -6,4 +6,4 @@ spec:
   interval: 10m
   ref:
     branch: main
-  url: http://http.forgejo.svc.k8s.zarantonello.dev/infra/kubernetes.git
+  url: http://forgejo.forgejo.svc.k8s.zarantonello.dev/infra/kubernetes.git

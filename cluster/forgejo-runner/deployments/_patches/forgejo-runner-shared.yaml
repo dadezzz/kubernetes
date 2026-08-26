@@ -20,7 +20,7 @@ spec:
         - command:
             - forgejo-runner
             - daemon
-            - --url=http://http.forgejo.svc.k8s.zarantonello.dev
+            - --url=http://forgejo.forgejo.svc.k8s.zarantonello.dev
             - --uuid=$(RUNNER_UUID)
             - --token-url=file:///data/token
             - --label=$(NODE_NAME):docker://busybox
