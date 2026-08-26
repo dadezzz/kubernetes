@@ -15,7 +15,7 @@ resources:
   - persistent-volumes/transmission-data.yaml
   - service-accounts/default.yaml
   - services/bittorrent.yaml
-  - services/caddy-http.yaml
-  - services/transmission-http.yaml
+  - services/caddy.yaml
+  - services/transmission.yaml
   - tcp-routes/bittorrent.yaml
   - udp-routes/bittorrent.yaml

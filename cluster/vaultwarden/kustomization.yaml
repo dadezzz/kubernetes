@@ -14,7 +14,7 @@ resources:
   - persistent-volume-claims/data.yaml
   - persistent-volumes/vaultwarden-data.yaml
   - service-accounts/default.yml
-  - services/http.yaml
+  - services/vaultwarden.yaml
 secretGenerator:
   - envs:
       - _generated/secrets/vaultwarden.env

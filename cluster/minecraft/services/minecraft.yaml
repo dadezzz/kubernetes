@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: minecraft
 spec:
+  ipFamilyPolicy: RequireDualStack
   ports:
     - name: minecraft
       port: 25565

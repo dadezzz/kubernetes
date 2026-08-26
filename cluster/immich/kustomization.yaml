@@ -23,10 +23,10 @@ resources:
   - persistent-volumes/immich-redis-data.yaml
   - persistent-volumes/immich-server-data.yaml
   - service-accounts/default.yaml
-  - services/machine-learning-http.yaml
+  - services/machine-learning.yaml
   - services/postgres.yaml
   - services/redis.yaml
-  - services/server-http.yaml
+  - services/server.yaml
 secretGenerator:
   - envs:
       - _generated/secrets/postgres.env

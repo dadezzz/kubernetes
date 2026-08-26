@@ -14,4 +14,4 @@ resources:
   - persistent-volume-claims/data.yaml
   - persistent-volumes/llama-server-data.yaml
   - service-accounts/default.yaml
-  - services/http.yaml
+  - services/llama-server.yaml

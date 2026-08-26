@@ -14,7 +14,7 @@ resources:
   - persistent-volume-claims/data.yaml
   - persistent-volumes/forgejo-data.yaml
   - service-accounts/default.yml
-  - services/http.yaml
+  - services/forgejo.yaml
 secretGenerator:
   - envs:
       - _generated/secrets/forgejo.env

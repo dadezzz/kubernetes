@@ -4,6 +4,7 @@ metadata:
   name: kube-dns-rs
 spec:
   clusterIP: 10.97.0.10
+  ipFamilyPolicy: RequireDualStack
   ports:
     - name: dns-tcp
       port: 53
