@@ -7,7 +7,4 @@ spec:
     - A:
         addresses:
           - 100.83.193.88
-    - AAAA:
-        addresses:
-          - fd7a:115c:a1e0::d136:c159
   fqdn: metrics.zarantonello.dev

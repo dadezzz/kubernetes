@@ -230,7 +230,7 @@ prometheus.relabel "victoriametrics" {
   forward_to = [prometheus.remote_write.victoriametrics.receiver]
 
   rule {
-    action = "replace" 
+    action = "replace"
     replacement = sys.env("NODE_HOSTNAME")
     target_label = "instance"
   }
@@ -239,7 +239,7 @@ prometheus.relabel "victoriametrics" {
 
 prometheus.remote_write "victoriametrics" {
   endpoint {
-    url = "http://http.victoriametrics.svc.k8s.zarantonello.dev/api/v1/write"
+    url = "http://victoriametrics.victoriametrics.svc.k8s.zarantonello.dev/api/v1/write"
   }
 }
 
@@ -256,7 +256,7 @@ loki.relabel "victorialogs" {
 
 loki.write "victorialogs" {
   endpoint {
-    url = "http://http.victorialogs.svc.k8s.zarantonello.dev/insert/loki/api/v1/push"
+    url = "http://victoriametrics.victorialogs.svc.k8s.zarantonello.dev/insert/loki/api/v1/push"
   }
 
   wal {

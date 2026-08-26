@@ -5,6 +5,6 @@ datasources:
     isDefault: false
     name: VictoriaLogs
     type: victoriametrics-logs-datasource
-    url: http://http.victorialogs.svc.k8s.zarantonello.dev
+    url: http://victorialogs.victorialogs.svc.k8s.zarantonello.dev
 
 prune: true

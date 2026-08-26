@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: vaultwarden
 spec:
-  ipFamilyPolicy: RequireDualStack
   ports:
     - name: http
       port: 80

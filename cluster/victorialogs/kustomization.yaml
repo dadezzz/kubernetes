@@ -8,4 +8,4 @@ resources:
   - persistent-volume-claims/data.yaml
   - persistent-volumes/victorialogs-data.yaml
   - service-accounts/default.yaml
-  - services/http.yaml
+  - services/victorialogs.yaml

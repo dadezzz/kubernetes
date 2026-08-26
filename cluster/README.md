@@ -38,9 +38,8 @@ are stored inside the `_generated` subdirectory of each app.
 # 1. Get first node running.
 # 2. Install cilium. (values are taken from the helmrelease file)
 helm install -n cilium cilium cilium/cilium --values v.yaml
-# 3. Apply coredns.
+# 3. Apply kube-dns-rs.
 # 4. Apply fluxcd.
-# 5. Apply blocky.
 # 6. Apply cert-manager.
 # 7. Apply cilium.
 # 8. Repeat last steps until all circular dependencies are resolved.

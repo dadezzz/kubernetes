@@ -7,7 +7,4 @@ spec:
     - A:
         addresses:
           - 100.107.198.103
-    - AAAA:
-        addresses:
-          - fd7a:115c:a1e0::1836:c668
   fqdn: photos.zarantonello.net

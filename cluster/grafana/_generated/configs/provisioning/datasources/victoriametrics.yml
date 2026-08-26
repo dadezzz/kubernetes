@@ -5,6 +5,6 @@ datasources:
     isDefault: true
     name: VictoriaMetrics
     type: victoriametrics-metrics-datasource
-    url: http://http.victoriametrics.svc.k8s.zarantonello.dev
+    url: http://victoriametrics.victoriametrics.svc.k8s.zarantonello.dev
 
 prune: true
