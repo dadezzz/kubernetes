@@ -22,3 +22,11 @@ spec:
         - path:
             type: Exact
             value: /robots.txt
+        # Link URLs.
+        - path:
+            type: PathPrefix
+            value: /q/
+        # Pixel URLs.
+        - path:
+            type: PathPrefix
+            value: /p/
