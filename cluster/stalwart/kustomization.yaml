@@ -16,6 +16,7 @@ resources:
   - persistent-volumes/stalwart-data.yaml
   - service-accounts/default.yaml
   - services/stalwart.yaml
+  - services/stalwart-http.yaml
   - tcp-routes/imaps.yaml
   - tcp-routes/smtp.yaml
   - tcp-routes/submissions.yaml
