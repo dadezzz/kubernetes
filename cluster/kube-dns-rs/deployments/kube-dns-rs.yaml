@@ -25,7 +25,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 50
       containers:
-        - image: git.zarantonello.dev/projects/kube-dns-rs:v1.0.4@sha256:b9dd88f0d717ecd0a3c76dd539ab53730d5e9ead5183efe97b0109c8ef6dbabe
+        - image: git.zarantonello.dev/projects/kube-dns-rs:v1.2.0@sha256:181005761295f629c062f33c0e398aebd860bbd310109cdf94f631f4023c94fb
           name: kube-dns-rs
           ports:
             - containerPort: 1053
