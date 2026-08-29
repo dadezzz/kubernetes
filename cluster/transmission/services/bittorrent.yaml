@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: bittorrent
 spec:
-  ipFamilyPolicy: RequireDualStack
   ports:
     - name: bittorrent-tcp
       port: 51413

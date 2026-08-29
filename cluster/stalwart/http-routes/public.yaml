@@ -6,14 +6,18 @@ spec:
   hostnames:
     - mta-sts.zarantonello.dev
     - mta-sts.zarantonello.net
+    - mail.zarantonello.dev
   parentRefs:
     - name: srv-hetz-nbg-0-public-https
       namespace: cilium
   rules:
     - backendRefs:
-        - name: stalwart
+        - name: stalwart-http
           port: 80
       matches:
         - path:
             type: Exact
             value: /.well-known/mta-sts.txt
+        - path:
+            type: Exact
+            value: /robots.txt

@@ -10,7 +10,7 @@ spec:
       namespace: cilium
   rules:
     - backendRefs:
-        - name: stalwart
+        - name: stalwart-http
           port: 80
       matches:
         - path:

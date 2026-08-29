@@ -5,9 +5,6 @@ metadata:
 spec:
   ipFamilyPolicy: RequireDualStack
   ports:
-    - name: http
-      port: 80
-      targetPort: http
     - name: smtp
       port: 25
       targetPort: smtp

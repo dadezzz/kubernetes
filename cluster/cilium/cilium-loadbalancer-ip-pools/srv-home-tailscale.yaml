@@ -5,4 +5,3 @@ metadata:
 spec:
   blocks:
     - cidr: 100.107.198.103/32
-    - cidr: fd7a:115c:a1e0::1836:c668/128

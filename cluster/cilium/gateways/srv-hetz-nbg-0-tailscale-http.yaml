@@ -6,8 +6,6 @@ spec:
   addresses:
     - type: IPAddress
       value: 100.83.193.88
-    - type: IPAddress
-      value: fd7a:115c:a1e0::d136:c159
   gatewayClassName: cilium-access-logs
   infrastructure:
     annotations:
