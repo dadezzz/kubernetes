@@ -34,3 +34,21 @@ spec:
         certificateRefs:
           - kind: Secret
             name: zarantonello-dev-tls
+    - allowedRoutes: *allowedRoutes
+      hostname: zarantonello.net
+      name: https-root-zarantonello-net
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: zarantonello-net-tls
+    - allowedRoutes: *allowedRoutes
+      hostname: zarantonello.dev"
+      name: https-root-zarantonello-dev
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: zarantonello-dev-tls
