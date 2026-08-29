@@ -44,7 +44,7 @@ spec:
           - kind: Secret
             name: zarantonello-net-tls
     - allowedRoutes: *allowedRoutes
-      hostname: zarantonello.dev"
+      hostname: zarantonello.dev
       name: https-root-zarantonello-dev
       port: 443
       protocol: HTTPS
