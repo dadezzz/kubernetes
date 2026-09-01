@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: fluxcd
 resources:
-  - https://github.com/fluxcd/source-controller/config/crd/?ref=v1.9.4
+  - https://github.com/fluxcd/source-controller/config/crd/?ref=v1.9.5
   - https://github.com/fluxcd/helm-controller/config/crd/?ref=v1.6.3
   - https://github.com/fluxcd/kustomize-controller/config/crd/?ref=v1.9.4
   - cluster-role-bindings/fluxcd-cluster-reconciler.yaml
