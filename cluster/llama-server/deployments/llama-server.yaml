@@ -24,7 +24,7 @@ spec:
             - "4"
             - --models-preset
             - /etc/llama-server/models.ini
-          image: ghcr.io/ggml-org/llama.cpp:server-vulkan@sha256:889cc04c53f7cbdb904ad6d3bb51767af952ee1da874e4ad833794aac4dce77b
+          image: ghcr.io/ggml-org/llama.cpp:server-vulkan@sha256:b02593dec625633d5b296a283f953b41607c036b5ff117b623554748094207aa
           name: llama-server
           ports:
             - containerPort: 8080
