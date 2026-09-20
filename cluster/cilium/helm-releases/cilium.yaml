@@ -72,8 +72,8 @@ spec:
       enabled: true
     ipv6:
       enabled: true
-    k8sServiceHost: 10.95.0.1
-    k8sServicePort: 6443
+    k8sServiceHost: localhost
+    k8sServicePort: 7445
     kubeProxyReplacement: true
     loadBalancer:
       serviceTopology: true

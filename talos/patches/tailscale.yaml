@@ -1,0 +1,20 @@
+apiVersion: v1alpha1
+environment:
+  - ENC[AES256_GCM,data:SQIaZKckjrmyi1coNimoqU4x++uAGNFlROD9BIyu+bkJ6NloGnPNF4yHs1ymd+QJzo3WPV4cLjax1P+loIa6G3AFZJ/7Yh4pMQ==,iv:6DsaYALtPqOSEzW5jgELUB+LO9mq4Jnzmnaz8xXGqtA=,tag:DMFxv8F3g1vU/F2tnumrCg==,type:str]
+kind: ExtensionServiceConfig
+name: tailscale
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBYN3JNWjRpbms4aXZrRG92
+        eUhIWDVFNlNlWjhJUjlFNk9yejhYYm53UkcwCkZwbk5LekJ5ZnlncjlIK3lUQldI
+        SkdTeFJwREFlSUZTNzR0dnNNOGhKbzQKLS0tIGxZaGduRTR2YVFQenJpMUF2dXhH
+        VEdyQVY0N294S0NLaGZRTEVhTjArcFUKm3gq2vTaG95/e1RxFE6e7xJLMxDPe8XZ
+        5SxAk1cY8ZFUKRsSnvPl800W5puuX3TBBHiDOmnRQ/PY7JuW4v/tOg==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age1cyyv047n8zvzhadswewg7vdfzna0eslhvajwn782sypnpnks5u5svgjswh
+  encrypted_regex: environment
+  lastmodified: "2026-09-20T23:36:33Z"
+  mac: ENC[AES256_GCM,data:C1iLIAqtnXO3B55LSc0DN6vkLgmqD16n7b9qj4xnwv7tQ7FBhW9Jhf4uC7y6/oJicZ67nmtoSwvh/YnLorxirio6f4qstGndyK0UlkHiIa93fuITgOkuLOOivPavGNxO+rY8CkK+Br8mUYPszR1Z0KyTNygyNGBohNb3yvGCI30=,iv:RCNLMj7pgZtQzwHq8HZCbv6vfgU5t0EgAM+vL5yMHhc=,tag:5jS00y1v0UmncM+VdQKXJw==,type:str]
+  version: 3.13.2

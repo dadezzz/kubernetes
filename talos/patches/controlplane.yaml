@@ -1,5 +1,57 @@
-cluster:
-  etcd:
-    advertisedSubnets:
-      - 10.95.0.0/24
-      - fda9:b00c:8b29:33f9::1095:0/120
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+# Allow load balancers to control plane nodes.
+labels:
+  node.kubernetes.io/exclude-from-external-load-balancers:
+    $patch: delete
+# Allow scheduling on control plane nodes.
+taints:
+  node-role.kubernetes.io/control-plane:
+    $patch: delete
+---
+apiVersion: v1alpha1
+# This additional one is used to connect to the API server via tailscale.
+certExtraSANs:
+  - srv-home.gentoo-sargas.ts.net
+kind: KubeAPIServerConfig
+---
+apiVersion: v1alpha1
+configuration:
+  apiVersion: pod-security.admission.config.k8s.io/v1alpha1
+  defaults:
+    audit: restricted
+    audit-version: latest
+    enforce: restricted
+    enforce-version: latest
+    warn: restricted
+    warn-version: latest
+  exemptions:
+    # kube-system is added automatically by talosctl gen config.
+    namespaces: []
+kind: KubeAdmissionControlConfig
+name: PodSecurity
+---
+apiVersion: v1alpha1
+# For now this is disabled, until I configure alloy to collect logs and
+# figure out how to rotate them so that they don't fill the disk.
+configuration:
+  apiVersion: audit.k8s.io/v1
+  kind: Policy
+  rules:
+    - level: None
+kind: KubeAuditPolicyConfig
+---
+apiVersion: v1alpha1
+# Replaced by kube-dns-rs.
+enabled: false
+kind: KubeCoreDNSConfig
+---
+apiVersion: v1alpha1
+# Replaced by cilium's kube-proxy.
+enabled: false
+kind: KubeProxyConfig
+---
+# Disable since we use cilium
+$patch: delete
+apiVersion: v1alpha1
+kind: KubeFlannelCNIConfig

@@ -1,7 +1,6 @@
 customization:
   bootloader: sd-boot
   extraKernelArgs:
-    - ttm.pages_limit=7864320
     - kernel.kexec_load_disabled=1
   systemExtensions:
     officialExtensions:

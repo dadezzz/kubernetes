@@ -1,12 +1,11 @@
 all: generated/srv-hetz-nbg-0.yaml generated/srv-home.yaml
 
 ENCRYPTED_TARGETS := \
-	$(wildcard patches/servers/*/networks/wg0.yaml) \
-	patches/network/tailscale.yaml \
+	patches/tailscale.yaml \
 	secrets.yaml
 
 GEN_CONFIG_SHARED_PATCHES := \
-	$(wildcard patches/network/*) \
+	$(wildcard patches/tailscale.yaml) \
 	patches/base.yaml
 
 GEN_CONFIG_SHARED_CONTROLPLANE_PATCHES := \
@@ -14,19 +13,15 @@ GEN_CONFIG_SHARED_CONTROLPLANE_PATCHES := \
 
 GEN_CONFIG_SHARED_ARGS := \
 	--force \
-	--with-docs=false \
-	--with-examples=false \
 	--with-secrets=secrets.yaml \
 	k8s.zarantonello.dev \
-	https://10.95.0.1:6443
+	https://[fdb6:fb2a:15d:5f02:a97:98ff:fe83:ae69]:6443
 
 GEN_CONFIG_SRV_HETZ_NBG_0_PATCHES := \
 	$(GEN_CONFIG_SHARED_PATCHES) \
-	patches/servers/srv-hetz-nbg-0/base.yaml \
-	patches/servers/srv-hetz-nbg-0/volumes.yaml \
-	$(wildcard patches/servers/srv-hetz-nbg-0/networks/*)
+	patches/servers/srv-hetz-nbg-0/base.yaml
 
-generated/srv-hetz-nbg-0.yaml: secrets.yaml $(GEN_CONFIG_SHARED_CONTROLPLANE_PATCHES) $(GEN_CONFIG_SRV_HETZ_NBG_0_PATCHES)
+generated/srv-hetz-nbg-0.yaml: Makefile secrets.yaml $(GEN_CONFIG_SRV_HETZ_NBG_0_PATCHES)
 	@talosctl gen config \
 		$(GEN_CONFIG_SHARED_ARGS) \
 		--output generated/srv-hetz-nbg-0.yaml \
@@ -35,11 +30,9 @@ generated/srv-hetz-nbg-0.yaml: secrets.yaml $(GEN_CONFIG_SHARED_CONTROLPLANE_PAT
 
 GEN_CONFIG_SRV_HOME_PATCHES := \
 	$(GEN_CONFIG_SHARED_PATCHES) \
-	patches/servers/srv-home/base.yaml \
-	patches/servers/srv-home/volumes.yaml \
-	$(wildcard patches/servers/srv-home/networks/*)
+	patches/servers/srv-home/base.yaml
 
-generated/srv-home.yaml: secrets.yaml $(GEN_CONFIG_SRV_HOME_PATCHES)
+generated/srv-home.yaml: Makefile secrets.yaml $(GEN_CONFIG_SRV_HOME_PATCHES) $(GEN_CONFIG_SHARED_CONTROLPLANE_PATCHES)
 	@talosctl gen config \
 		$(GEN_CONFIG_SHARED_ARGS) \
 		--output generated/srv-home.yaml \

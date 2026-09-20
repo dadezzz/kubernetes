@@ -1,4 +1,38 @@
-machine:
-  install:
-    disk: /dev/sda
-    image: factory.talos.dev/hcloud-installer/4a0d65c669d46663f377e7161e50cfd570c401f26fd9e7bda34a0216b6f1922b:v1.13.8
+apiVersion: v1alpha1
+auto: "off"
+hostname: srv-hetz-nbg-0.servers.zarantonello.dev
+kind: HostnameConfig
+---
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/sda"
+  maxSize: 30GiB
+  minSize: 30GiB
+---
+apiVersion: v1alpha1
+kind: ZswapConfig
+maxPoolPercent: 25
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: data-0
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/sda"
+  grow: true
+  minSize: 1GiB
+---
+apiVersion: v1alpha1
+kind: DHCPv4Config
+name: enp1s0
+---
+addresses:
+  - address: 2a01:4f8:1c1a:3498::/64
+apiVersion: v1alpha1
+kind: LinkConfig
+name: enp1s0
+routes:
+  - gateway: fe80::1

@@ -1,0 +1,6 @@
+apiVersion: v1alpha
+image: factory.talos.dev/metal-installer/5118acf64b15e7518ed261b35ce412338bba669a6110cf51db2de60cdc75eb35:v1.14.1
+kind: UnattendedInstallConfig
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/nvme0n1"

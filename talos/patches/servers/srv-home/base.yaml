@@ -1,4 +1,26 @@
-machine:
-  install:
-    disk: /dev/nvme0n1
-    image: factory.talos.dev/metal-installer/91c31139e5527d6b14fd6666f3a3c4f0a04928cf79f7c75a7f9754cbd87d28f9:v1.13.8
+apiVersion: v1alpha1
+auto: "off"
+hostname: srv-home.servers.zarantonello.dev
+kind: HostnameConfig
+---
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/nvme0n1"
+  maxSize: 40GiB
+  minSize: 40GiB
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: data-0
+provisioning:
+  diskSelector:
+    match: disk.dev_path == "/dev/nvme0n1"
+  grow: true
+  minSize: 1GiB
+---
+apiVersion: v1alpha1
+kind: DHCPv4Config
+name: enp3s0
