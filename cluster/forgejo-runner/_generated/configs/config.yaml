@@ -2,6 +2,8 @@ cache:
   dir: /data/cache
 
 container:
+  # Points git.zarantonello.dev to the caddy proxy.
+  options: --add-host git.zarantonello.dev:host-gateway
   privileged: true
   valid_volumes:
     - forgejo-runner-cache-*

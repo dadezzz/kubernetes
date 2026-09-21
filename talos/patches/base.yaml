@@ -16,8 +16,11 @@ apiVersion: v1alpha1
 kind: KubeNodeConfig
 nodeIP:
   validSubnets:
-    - 100.64.0.0/10
-    - fd7a:115c:a1e0::/48
+    - 0.0.0.0/0
+    - ::/0
+    # Exclude tailscale ips.
+    - "!100.64.0.0/10"
+    - "!fd7a:115c:a1e0::/48"
 ---
 apiVersion: v1alpha1
 dnsDomain: k8s.zarantonello.dev
@@ -46,7 +49,11 @@ filters:
   endpoints:
     - 0.0.0.0/0
     - ::/0
-    # Don't create wireguard tunnels encapsulated in tailscale tunnel.
+    # Don't create Wireguard tunnels encapsulated in Tailscale tunnel.
     - "!100.64.0.0/10"
     - "!fd7a:115c:a1e0::/48"
+  excludeAdvertisedNetworks:
+    # And don't encapsulate Tailscale traffic into Wireguard.
+    - 100.64.0.0/10
+    - fd7a:115c:a1e0::/48
 kind: KubeSpanConfig

@@ -19,12 +19,21 @@ spec:
   upgrade:
     crds: Create
   values:
+    # Override the autodetected one. Cilium's devices include tailscale, and
+    # that would bring the MTU to 1280. But if we avoid having egress traffic
+    # from pods to Tailscale hosts then we can ignore the interfaace and raise
+    # the MTU to Kubespan's.
+    MTU: 1420
     bpf:
-      datapathMode: netkit
+      # Only one that works with hostLegacyRouting.
+      datapathMode: veth
+      # Needed by kubespan to add its fwmarks.
+      hostLegacyRouting: true
       masquerade: true
     bpfClockProbe: true
     # Cgroup mount is already provided by talos, so we can reuse it.
     cgroup:
+      # Already mounted by Talos.
       autoMount:
         enabled: false
       hostRoot: /sys/fs/cgroup
@@ -57,7 +66,7 @@ spec:
       peerService:
         clusterDomain: k8s.zarantonello.dev
       relay:
-        enabled: false
+        enabled: true
         podAnnotations:
           monitoring.zarantonello.dev/metrics-0-id: 28fc59f2-8a41-43a4-9f19-afaab1c4fd52
           monitoring.zarantonello.dev/metrics-0-port: "9966"
