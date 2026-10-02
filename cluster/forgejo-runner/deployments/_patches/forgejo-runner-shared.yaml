@@ -66,7 +66,7 @@ spec:
             - dockerd
             - --no-new-privileges
             - --group=4880
-          image: docker.io/library/docker:29.8.2-dind@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb
+          image: docker.io/library/docker:29.8.2-dind@sha256:7dcdfc4a20246236f558175182ccace1eb15a41bd3eb119dd2284f393498b7c1
           name: docker
           restartPolicy: Always
           securityContext:
