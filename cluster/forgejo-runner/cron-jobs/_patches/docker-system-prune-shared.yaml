@@ -26,6 +26,12 @@ spec:
                     - ALL
                 readOnlyRootFilesystem: true
               volumeMounts:
+                - mountPath: /var/lib/docker
+                  name: docker-data
+                - mountPath: /tmp
+                  name: docker-tmp
+                - mountPath: /etc/docker
+                  name: docker-config
                 - mountPath: /var/run
                   name: docker-var-run
           enableServiceLinks: false
@@ -42,6 +48,9 @@ spec:
               name: docker-data
             - emptyDir: {}
               name: docker-tmp
+            - configMap:
+                name: docker-config
+              name: docker-config
             - hostPath:
                 path: /var/mnt/data-0/forgejo-runner-docker-run
               name: docker-var-run

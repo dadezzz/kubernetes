@@ -6,6 +6,9 @@ configMapGenerator:
   - files:
       - _generated/configs/Caddyfile
     name: caddy-config
+  - files:
+      - _generated/configs/daemon.json
+    name: docker-config
 kind: Kustomization
 namespace: forgejo-runner
 patches:
