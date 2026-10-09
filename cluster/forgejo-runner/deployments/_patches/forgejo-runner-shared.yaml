@@ -65,9 +65,12 @@ spec:
         # Sometimes the daemon fails to start because files are left over from
         # the previous pod.
         - command:
-            - rm
-            - -r
-            - /var/run/*
+            - find
+            - /var/run/
+            - -not
+            - -wholename
+            - /var/run/
+            - -delete
           image: docker.io/library/docker:29.8.2-dind@sha256:7dcdfc4a20246236f558175182ccace1eb15a41bd3eb119dd2284f393498b7c1
           name: clean-docker-run
           securityContext:
