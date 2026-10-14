@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 configMapGenerator:
   - files:
-      - _generated/configs/alloy.alloy
+      - _generated/configs/config.alloy
     name: alloy-config
 kind: Kustomization
 namespace: alloy

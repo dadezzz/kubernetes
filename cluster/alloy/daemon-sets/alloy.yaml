@@ -24,7 +24,7 @@ spec:
             - --server.http.listen-addr=[::]:12345
             - --storage.path=/var/tmp/alloy
             - --server.http.enable-pprof=false
-            - /etc/alloy/alloy.alloy
+            - /etc/alloy/config.alloy
           env:
             - name: NODE_HOSTNAME
               valueFrom:
@@ -46,9 +46,9 @@ spec:
                 - ALL
             readOnlyRootFilesystem: true
           volumeMounts:
-            - mountPath: /etc/alloy/alloy.alloy
+            - mountPath: /etc/alloy/config.alloy
               name: config
-              subPath: alloy.alloy
+              subPath: config.alloy
             # Data is stored here if alloy cannot send it to victoria{logs,metrics}.
             - mountPath: /var/tmp/alloy
               name: wal

@@ -7,4 +7,5 @@ spec:
     matchLabels:
       apps.zarantonello.dev/name: alloy
       apps.zarantonello.dev/namespace: alloy
+  # Disallow all ingress.
   ingress: []
