@@ -11,6 +11,8 @@ nameservers:
 searchDomains:
   # Causes issues in alpine pods when enabled.
   disableDefault: true
+  # Also causes issues if DHCP sends hostnames.
+  domains: []
 ---
 apiVersion: v1alpha1
 kind: KubeNodeConfig
