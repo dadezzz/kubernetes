@@ -6,6 +6,9 @@
     "customManagers:dockerfileVersions",
     ":semanticCommits"
   ],
+  "flux": {
+    "managerFilePatterns": ["/cluster/.+\\.yaml$/"]
+  },
   "kubernetes": {
     "managerFilePatterns": ["/cluster/.+\\.yaml$/"]
   },
