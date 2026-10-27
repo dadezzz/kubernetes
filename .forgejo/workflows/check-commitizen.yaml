@@ -5,12 +5,12 @@ concurrency:
 jobs:
   check-commitizen:
     container:
-      image: git.zarantonello.dev/infra/ci-commitizen:v1.0.17@sha256:cd0a4918c74caac1febfe9948043f280599ee396d8c5f6b4c9fcac7087b20d1a
+      image: git.zarantonello.dev/infra/ci-commitizen:v1.0.15@sha256:a1bc9589881996d1ba8883ef0798cb80a4441e33bda5008f13eb153d5bb749c8
     name: Check the PR title
     runs-on: srv-generic
     steps:
       - name: Run commitizen
-        run: cz check --message '${{ forge.event.pull_request.title }}'
+        run: cz check --message '${{ forge.event.pull_request.title }}' >> $FORGEJO_STEP_SUMMARY
 
 name: check-commitizen.yaml
 

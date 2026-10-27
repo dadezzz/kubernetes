@@ -8,7 +8,6 @@ servers being in different physical locations with different environment, some
 individual adjustments need to be made.
 
 To create your own cluster:
-
 1. Navigate to the `talos` directory.
 2. Generate a different set of secrets with `talosctl gen secrets`. This will
    overwrite the `secrets.yaml` file

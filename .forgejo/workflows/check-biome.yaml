@@ -3,20 +3,20 @@ concurrency:
   group: ${{ forge.ref }}-${{ forge.workflow }}
 
 jobs:
-  check-prettier:
+  check-biome:
     container:
-      image: git.zarantonello.dev/infra/ci-prettier:v1.0.12@sha256:edd28eea343e395e208e1d3835ac7fd3fedd9f3d66d049d5a6aabf862df71df8
-    name: Check files formatting
+      image: git.zarantonello.dev/infra/ci-biome:v1.0.0
+    name: Check files with biome
     runs-on: srv-generic
     steps:
       - name: Clone the repository
         run: |
           git clone --filter=blob:none --no-checkout https://${{ forge.token }}@git.zarantonello.dev/${{ forge.repository }} ${{ forge.workspace }};
           git checkout --quiet ${{ forge.sha }};
-      - name: Run prettier
-        run: prettier --check .
+      - name: Run biome
+        run: biome ci --reporter summary >> $FORGEJO_STEP_SUMMARY
 
-name: check-prettier.yaml
+name: check-biome.yaml
 
 "on":
   pull_request:
