@@ -5,7 +5,7 @@ concurrency:
 jobs:
   check-biome:
     container:
-      image: git.zarantonello.dev/infra/ci-biome:v1.0.1@sha256:6c8e86b0f978d1735e08c6178c54138c3537891901f4a59fae3a9ece6c7e6296
+      image: git.zarantonello.dev/infra/ci-biome:v1.0.2@sha256:b8eac01b848a8dfb4b6208a2f94cfae450784ea564bff4e92bd46bd255c652f4
     name: Check files with biome
     runs-on: srv-generic
     steps:
