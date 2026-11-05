@@ -54,14 +54,14 @@ spec:
       enabled: true
       metrics:
         enabled:
-          - dns:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
-          - drop:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
-          - tcp:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
-          - flow:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
-          - flows-to-world:any-drop=true;port=true;sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
-          - port-distribution:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
-          - icmp:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
-          - httpV2:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
+          #- dns:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
+          #- drop:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
+          #- tcp:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
+          #- flow:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
+          #- flows-to-world:any-drop=true;port=true;sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
+          #- port-distribution:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
+          #- icmp:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
+          #- httpV2:sourceContext=reserved-identity;destinationContext=reserved-identity;labelsContext=source_ip,source_namespace,source_pod,destination_ip,destination_namespace,destination_pod,traffic_direction
         port: 9965
       peerService:
         clusterDomain: k8s.zarantonello.dev
