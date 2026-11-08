@@ -87,7 +87,7 @@ spec:
         # Proxies git.zarantonello.dev bypassing envoy, removing the need to
         # connect to the remote node via Tailscale (low MTU issues) or Kubespan
         # (only dynamic ipv6 address).
-        - image: docker.io/library/caddy:2.11.9-alpine@sha256:71d41fe4b1ae92a058abc87afe614178b996d8a6b96d0f4c71ae30606e5927e3
+        - image: docker.io/library/caddy:2.11.9-alpine@sha256:0bbb055bda6793c999bde78b1b5ce3e89f829fb031af2cf50056ea1246559fee
           name: caddy
           ports:
             - containerPort: 80
