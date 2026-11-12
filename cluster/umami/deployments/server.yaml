@@ -20,6 +20,8 @@ spec:
           envFrom:
             - secretRef:
                 name: postgres-env
+            - secretRef:
+                name: server-env
             - configMapRef:
                 name: server-env
           image: ghcr.io/umami-software/umami:3.5.0@sha256:b64f40400d77bcadd39cf5c62a1e368c99524ca442024f96e1133355a19a5dbc

@@ -22,3 +22,6 @@ secretGenerator:
   - envs:
       - _generated/secrets/postgres.env
     name: postgres-env
+  - envs:
+      - _generated/secrets/server.env
+    name: server-env
