@@ -209,10 +209,11 @@ loki.source.file "kubelet_pods" {
 // Re-add labels from discovery to log entries.
 loki.enrich "kubelet_pods" {
   forward_to = [loki.process.kubelet_pods.receiver]
-  target_match_label = "__path__"
+  target_to_log_match  = {
+    "__path__" = "filename",
+  }
   labels_to_copy = ["pod", "job"]
   targets = local.file_match.kubelet_pods.targets
-  logs_match_label = "filename"
 }
 
 loki.process "kubelet_pods" {
