@@ -22,8 +22,8 @@ spec:
     # Override the autodetected one. Cilium's devices include tailscale, and
     # that would bring the MTU to 1280. But if we avoid having egress traffic
     # from pods to Tailscale hosts then we can ignore the interfaace and raise
-    # the MTU to Kubespan's.
-    MTU: 1420
+    # the MTU to Kubespan's - 50 for vxlan.
+    MTU: 1370
     bpf:
       # Only one that works with hostLegacyRouting.
       datapathMode: veth
