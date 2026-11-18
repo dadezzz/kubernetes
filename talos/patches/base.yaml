@@ -59,3 +59,22 @@ filters:
     - 100.64.0.0/10
     - fd7a:115c:a1e0::/48
 kind: KubeSpanConfig
+---
+# Tailscale breaks connectivity between pods that make requests to a proxied
+# service across nodes (e.g. forgejo-runner to forgejo or immich to pocketid).
+# This is caused by an fwmark conflict between Cilium and Tailscale that affetcs
+# Kubespan:
+#
+# - Cilium marks packets destined to envoy proxy with a mark conflicting with
+#   Tailscales's;
+# - Tailscale's default rules have a higher priority than Kubespans;
+# - Tailscale sees the mark and thinks the packet is one of its own and so it
+#   routes it through the external interface.
+# - The packet never reaches Kubespan interface since it was 'stolen' by Tailscale.
+action: unicast
+apiVersion: v1alpha1
+fwMark: 0x40 # 0x40
+fwMask: 0x60 # 0x60
+kind: RoutingRuleConfig
+name: "5200" # It must sit before Tailscale's 5210
+table: "180" # KubeSpan's routing table
