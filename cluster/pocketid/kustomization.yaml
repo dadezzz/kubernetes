@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+  - envs:
+      - _generated/configs/pocketid.env
+    name: pocketid-env
+kind: Kustomization
+namespace: pocketid
+resources:
+  - deployments/pocketid.yaml
+  - dnsrecord.yaml
+  - http-routes/default.yaml
+  - kustomization.flux.yaml
+  - namespace.yaml
+  - persistent-volume-claims/data.yaml
+  - persistent-volumes/pocketid-data.yaml
+  - service-accounts/default.yaml
+  - services/pocketid.yaml
+secretGenerator:
+  - envs:
+      - _generated/secrets/pocketid.env
+    name: pocketid-env

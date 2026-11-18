@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pocketid-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 100Mi
+  local:
+    path: /var/mnt/data-0/pocketid-data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - srv-hetz-nbg-0

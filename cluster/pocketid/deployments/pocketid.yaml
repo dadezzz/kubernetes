@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pocketid
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: pocketid
+      apps.zarantonello.dev/namespace: pocketid
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: pocketid
+        apps.zarantonello.dev/namespace: pocketid
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: pocketid-env
+            - secretRef:
+                name: pocketid-env
+          image: ghcr.io/pocket-id/pocket-id:v2.19.3-distroless
+          name: pocketid
+          ports:
+            - containerPort: 1411
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /app/data
+              name: data
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-hetz-nbg-0
+      securityContext:
+        runAsGroup: 1365
+        runAsNonRoot: true
+        runAsUser: 1365
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data

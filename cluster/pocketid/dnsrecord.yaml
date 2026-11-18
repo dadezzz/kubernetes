@@ -1,0 +1,15 @@
+# Use internal DNS address because my applications were flagged as bots by
+# Cloudflare's protection.
+apiVersion: zarantonello.dev/v1
+kind: DnsRecord
+metadata:
+  name: id-zarantonello-dev
+spec:
+  clients:
+    - 10.96.0.0/16
+    - fda9:b00c:8b29:33f9::1096:0/112
+  data:
+    - A:
+        addresses:
+          - 100.83.193.88
+  fqdn: id.zarantonello.dev
