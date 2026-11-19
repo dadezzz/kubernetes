@@ -1,11 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "assignees": ["davide"],
-  "extends": [
-    "config:best-practices",
-    "customManagers:dockerfileVersions",
-    ":semanticCommits"
-  ],
   "flux": {
     "managerFilePatterns": ["/cluster/.+\\.yaml$/"]
   },
@@ -17,11 +12,8 @@
       "automerge": true,
       "groupName": "CI dependencies",
       "groupSlug": "ci",
-      "matchFileNames": [".forgejo/**"],
+      "matchFileNames": [".forgejo/**", "biome.jsonc"],
       "matchUpdateTypes": ["!major"]
     }
-  ],
-  // Raise limit or there are situations where we can't keep up with the number
-  // of deps to update.
-  "prHourlyLimit": 6
+  ]
 }
