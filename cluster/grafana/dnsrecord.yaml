@@ -6,5 +6,5 @@ spec:
   data:
     - A:
         addresses:
-          - 100.83.193.88
+          - 100.107.198.103
   fqdn: grafana.zarantonello.net

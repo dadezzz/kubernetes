@@ -16,4 +16,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - srv-hetz-nbg-0
+                - srv-home

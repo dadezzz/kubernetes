@@ -6,7 +6,7 @@ spec:
   hostnames:
     - grafana.zarantonello.net
   parentRefs:
-    - name: srv-hetz-nbg-0-tailscale-https
+    - name: srv-home-tailscale-https
       namespace: cilium
   rules:
     - backendRefs:
