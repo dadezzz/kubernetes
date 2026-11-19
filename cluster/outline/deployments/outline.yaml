@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: outline
+spec:
+  selector:
+    matchLabels:
+      apps.zarantonello.dev/name: outline
+      apps.zarantonello.dev/namespace: outline
+  # Persistent volume cannot be read by 2 replicas.
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps.zarantonello.dev/name: outline
+        apps.zarantonello.dev/namespace: outline
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_URL
+              value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres.outline.svc.k8s.zarantonello.dev:5432/$(POSTGRES_DB)
+          envFrom:
+            - secretRef:
+                name: postgres-env
+            - secretRef:
+                name: outline-env
+            - configMapRef:
+                name: outline-env
+          image: outlinewiki/outline:1.13.0
+          name: outline
+          ports:
+            - containerPort: 3000
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+      enableServiceLinks: false
+      nodeSelector:
+        kubernetes.io/hostname: srv-hetz-nbg-0
+      securityContext:
+        runAsGroup: 3508
+        runAsNonRoot: true
+        runAsUser: 3508
+        seccompProfile:
+          type: RuntimeDefault

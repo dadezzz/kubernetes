@@ -1,0 +1,10 @@
+apiVersion: zarantonello.dev/v1
+kind: DnsRecord
+metadata:
+  name: docs-zarantonello-dev
+spec:
+  data:
+    - A:
+        addresses:
+          - 100.83.193.88
+  fqdn: docs.zarantonello.dev
