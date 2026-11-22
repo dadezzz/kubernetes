@@ -19,7 +19,7 @@ spec:
       containers:
         - args:
             - --enable-leader-election
-          image: ghcr.io/fluxcd/helm-controller:v1.7.1@sha256:54526cc6ed1202d71d44c310676448065664f3255ad671d9a69ac26f904e617a
+          image: ghcr.io/fluxcd/helm-controller:v1.7.2@sha256:cc944eff709767f9a4d22de6b52dfa330f872962465868ed7787320b056b84f8
           name: helm-controller
           ports:
             - containerPort: 8080
