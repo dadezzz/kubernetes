@@ -20,7 +20,7 @@ spec:
         - envFrom:
             - secretRef:
                 name: postgres-env
-          image: docker.io/library/postgres:18.7@sha256:f5cbc081c25690710f3fc6f4c61a7565382bae01ca0d0f2028a53d7926b85a20
+          image: docker.io/library/postgres:18.7@sha256:c699303802144847d238196173655dbbecf7a96aeca1565f2b02eb671a1f0b6b
           name: postgres
           ports:
             - containerPort: 5432
