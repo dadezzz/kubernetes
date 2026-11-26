@@ -21,7 +21,7 @@ spec:
         apps.zarantonello.dev/namespace: stalwart
     spec:
       containers:
-        - image: docker.io/stalwartlabs/stalwart:v1.2.0-alpine@sha256:2b7dfee66dfd116a903607826e03e4f8af8841207fae28098aa908c568ca919a
+        - image: docker.io/stalwartlabs/stalwart:v1.2.1-alpine@sha256:df0f4ce1e2b500b8e83b93198676503182f083e66120dcfc1b483182e9ab57c7
           name: stalwart
           ports:
             - containerPort: 25
